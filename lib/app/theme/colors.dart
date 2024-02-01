@@ -24,7 +24,6 @@ abstract class CustomColor {
   static Color greyColor = const Color(0xFFBCBACD);
   static Color darkGreyColor = const Color(0xFFB5B5B5);
   static Color backgroundColor = const Color(0xFFf2f2f2);
-  static Color likeColor = const Color.fromARGB(255, 238, 238, 238);
 
   static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
   static Color onLoadingColor = const Color(0xFFd9d9d9);
