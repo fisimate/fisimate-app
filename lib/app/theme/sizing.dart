@@ -1,16 +1,14 @@
 import 'package:get/get.dart';
 
-
-
 abstract class CustomSize {
-final maxWidth = Get.width;
-final maxHeight = Get.height;
+  static final maxWidth = Get.width;
+  static final maxHeight = Get.height;
 
-final marginSmall = 12.0;
-final marginMedium = 16.0;
-final marginLarge = 24.0;
+  static const marginSmall = 12.0;
+  static const marginMedium = 16.0;
+  static const marginLarge = 24.0;
 
-final roundedSmall = 8.0;
-final roundedMedium = 12.0;
-final roundedLarge = 16.0;
+  static const roundedSmall = 8.0;
+  static const roundedMedium = 12.0;
+  static const roundedLarge = 16.0;
 }

@@ -11,21 +11,21 @@ import 'package:flutter/services.dart';
 // );
 
 abstract class CustomColor {
-  Color errorColor = const Color(0xffE21D12);
-  Color successColor = const Color(0xff158444);
+  static Color errorColor = const Color(0xffE21D12);
+  static Color successColor = const Color(0xff158444);
 
-  Color blueColor = const Color(0xff072DF4);
-  Color lightBlueColor = const Color(0xff00C0FF);
-  Color greenColor = const Color(0xff60E000);
-  Color orangeColor = const Color(0xffFFD80A);
-  Color yellowColor = const Color(0xffFFE769);
-  Color whiteColor = const Color(0xffFFFFFF);
-  Color blackColor = const Color(0xFF18191A);
-  Color greyColor = const Color(0xFFBCBACD);
-  Color darkGreyColor = const Color(0xFFB5B5B5);
-  Color backgroundColor = const Color(0xFFf2f2f2);
-  Color likeColor = const Color.fromARGB(255, 238, 238, 238);
+  static Color blueColor = const Color(0xff072DF4);
+  static Color lightBlueColor = const Color(0xff00C0FF);
+  static Color greenColor = const Color(0xff60E000);
+  static Color orangeColor = const Color(0xffFFD80A);
+  static Color yellowColor = const Color(0xffFFE769);
+  static Color whiteColor = const Color(0xffFFFFFF);
+  static Color blackColor = const Color(0xFF18191A);
+  static Color greyColor = const Color(0xFFBCBACD);
+  static Color darkGreyColor = const Color(0xFFB5B5B5);
+  static Color backgroundColor = const Color(0xFFf2f2f2);
+  static Color likeColor = const Color.fromARGB(255, 238, 238, 238);
 
-  Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
-  Color onLoadingColor = const Color(0xFFd9d9d9);
+  static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
+  static Color onLoadingColor = const Color(0xFFd9d9d9);
 }
