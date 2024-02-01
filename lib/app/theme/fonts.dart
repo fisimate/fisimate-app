@@ -41,7 +41,7 @@ TextStyle headingMedium = poppinsMedium.copyWith(
   fontSize: 16.0,
 );
 
-TextStyle subHeadingBold = poppinsRegular.copyWith(
+TextStyle subHeadingBold = poppinsBold.copyWith(
   fontSize: 13.0,
 );
 
@@ -53,7 +53,7 @@ TextStyle subHeadingMedium = poppinsMedium.copyWith(
   fontSize: 13.0,
 );
 
-TextStyle subHeadingRegular = poppinsBold.copyWith(
+TextStyle subHeadingRegular = poppinsRegular.copyWith(
   fontSize: 13.0,
   height: 1.5,
 );
