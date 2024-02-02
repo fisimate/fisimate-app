@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fisimate/app/config/api/urls.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/connectivity_helper.dart';
+import 'package:fisimate/app/helpers/secure_storage_helper.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -69,11 +70,13 @@ class RegisterController extends GetxController {
 
         if (response.statusCode == 200) {
           state = ResultState.hasData;
-          Get.snackbar('Success', jsonResponse['message']);
-          Get.offNamed(Routes.HOME);
+          Get.snackbar('Register Berhasil!', jsonResponse['message']);
+          SecureStorageHelper()
+              .writeData(key: 'isUserRegistered', value: 'true');
+          Get.offNamed(Routes.LOGIN, arguments: emailController.text);
         } else if (response.statusCode == 400) {
           state = ResultState.error;
-          Get.snackbar('Error', jsonResponse['message']);
+          Get.snackbar('Terjadi Kesalahan', jsonResponse['message']);
         }
       }
     } catch (e) {

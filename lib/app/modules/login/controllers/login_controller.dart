@@ -26,6 +26,11 @@ class LoginController extends GetxController {
     getEmailFromStorage('email').then((value) {
       if (value != null) {
         emailController.text = value;
+      } else {
+        final emailFromRegister = Get.arguments;
+        if (emailFromRegister != null) {
+          emailController.text = emailFromRegister as String;
+        }
       }
     });
     super.onReady();
