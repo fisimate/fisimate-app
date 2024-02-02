@@ -3,7 +3,6 @@ import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -27,7 +26,7 @@ class HomeView extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Hai Nabila!',
+                      'Hai Rafi!',
                       style: poppinsBold.copyWith(
                         fontSize: 30,
                         color: CustomColor.blackColor,
@@ -181,8 +180,8 @@ class HomeView extends GetView<HomeController> {
                     description: topics[index]['description'],
                     iconPath: topics[index]['iconPath'],
                     isMaterialAvailable: topics[index]['isMaterialAvailable'],
-                    isExperimentAvailable:
-                        topics[index]['isExperimentAvailable'],
+                    isExperimentAvailable: topics[index]
+                        ['isExperimentAvailable'],
                     isQuizAvailable: topics[index]['isQuizAvailable'],
                   );
                 },
@@ -261,18 +260,24 @@ class HomeView extends GetView<HomeController> {
                   spacing: 5,
                   runSpacing: 5,
                   children: <Widget>[
-                    isMaterialAvailable == true ? _buildAvaibilityItem(
-                      label: 'Materi',
-                      color: CustomColor.blueColor,
-                    ) : const SizedBox.shrink(),
-                    isExperimentAvailable == true ? _buildAvaibilityItem(
-                      label: 'Percobaan',
-                      color: const Color(0xFFFB9055),
-                    ) : const SizedBox.shrink(),
-                    isQuizAvailable == true ? _buildAvaibilityItem(
-                      label: 'Kuis',
-                      color: CustomColor.orangeColor,
-                    ) : const SizedBox.shrink(),
+                    isMaterialAvailable == true
+                        ? _buildAvaibilityItem(
+                            label: 'Materi',
+                            color: CustomColor.blueColor,
+                          )
+                        : const SizedBox.shrink(),
+                    isExperimentAvailable == true
+                        ? _buildAvaibilityItem(
+                            label: 'Percobaan',
+                            color: const Color(0xFFFB9055),
+                          )
+                        : const SizedBox.shrink(),
+                    isQuizAvailable == true
+                        ? _buildAvaibilityItem(
+                            label: 'Kuis',
+                            color: CustomColor.orangeColor,
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 )
               ],

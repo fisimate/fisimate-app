@@ -23,108 +23,133 @@ class RegisterView extends GetView<RegisterController> {
           padding: const EdgeInsets.symmetric(
             horizontal: CustomSize.marginLarge,
           ),
-          child: Form(
-            // key: controller.formKey,
-            child: Column(children: [
-              SizedBox(
-                width: CustomSize.maxWidth,
-                child: Text(
-                  'Selamat Datang!',
-                  style: poppinsBold.copyWith(fontSize: 28),
-                  textAlign: TextAlign.start,
+          child: Obx(
+            () => Form(
+              key: controller.formKey,
+              child: Column(children: [
+                Gap(
+                  MediaQuery.of(context).padding.top,
                 ),
-              ),
-              const Gap(40.0),
-              CustomTextField(
-                controller: controller.nameController,
-                hintText: 'Nama Lengkap',
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  return ValidationHelper.validateName(value!);
-                },
-              ),
-              const Gap(20.0),
-              CustomTextField(
-                controller: controller.nomorIndukController,
-                hintText: 'Nomor Induk Siswa',
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  return ValidationHelper.validateNomorInduk(value!);
-                },
-              ),
-              const Gap(20.0),
-              CustomTextField(
-                controller: controller.emailController,
-                hintText: 'Email',
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  return ValidationHelper.validateEmail(value!);
-                },
-              ),
-              const Gap(20.0),
-              CustomTextField(
-                controller: controller.passwordController,
-                hintText: 'Password',
-                obscureText: true,
-                textInputAction: TextInputAction.next,
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.visibility,
-                    color: CustomColor.darkGreyColor,
+                SizedBox(
+                  width: CustomSize.maxWidth,
+                  child: Text(
+                    'Selamat Datang!',
+                    style: poppinsBold.copyWith(fontSize: 28),
+                    textAlign: TextAlign.start,
                   ),
                 ),
-                validator: (value) {
-                  return ValidationHelper.validatePassword(value!);
-                },
-              ),
-              const Gap(20.0),
-              CustomTextField(
-                controller: controller.confirmPasswordController,
-                hintText: 'Konfirmasi Password',
-                obscureText: true,
-                textInputAction: TextInputAction.done,
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.visibility,
-                    color: CustomColor.darkGreyColor,
+                const Gap(27.0),
+                CustomTextField(
+                  controller: controller.nameController,
+                  hintText: 'Nama Lengkap',
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    return ValidationHelper.validateName(value!);
+                  },
+                ),
+                const Gap(20.0),
+                CustomTextField(
+                  controller: controller.nomorIndukController,
+                  hintText: 'Nomor Induk Siswa',
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    return ValidationHelper.validateNomorInduk(value!);
+                  },
+                ),
+                const Gap(20.0),
+                CustomTextField(
+                  controller: controller.emailController,
+                  hintText: 'Email',
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    return ValidationHelper.validateEmail(value!);
+                  },
+                ),
+                const Gap(20.0),
+                CustomTextField(
+                  controller: controller.passwordController,
+                  hintText: 'Password',
+                  obscureText: controller.isObscurePassword.value,
+                  textInputAction: TextInputAction.next,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.toggleObscurePassword();
+                    },
+                    icon: Icon(
+                      controller.isObscurePassword.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: CustomColor.darkGreyColor,
+                    ),
+                  ),
+                  validator: (value) {
+                    return ValidationHelper.validatePassword(value!);
+                  },
+                ),
+                const Gap(20.0),
+                CustomTextField(
+                  controller: controller.confirmPasswordController,
+                  hintText: 'Konfirmasi Password',
+                  obscureText: controller.isObscurePasswordConf.value,
+                  textInputAction: TextInputAction.done,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.toggleObscurePasswordConf();
+                    },
+                    icon: Icon(
+                      controller.isObscurePasswordConf.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: CustomColor.darkGreyColor,
+                    ),
+                  ),
+                  validator: (value) {
+                    return ValidationHelper.validateConfirmPassword(
+                      confirmPassword: value!,
+                      password: controller.passwordController.text,
+                    );
+                  },
+                ),
+                const Gap(17.0),
+                _buildAlreadyHaveAccountComponents(),
+                const Gap(60.0),
+                CustomFilledButton(
+                  text: 'Daftar',
+                  onTap: () {
+                    if (controller.formKey.currentState != null &&
+                        controller.formKey.currentState!.validate()) {
+                      FocusNode().unfocus();
+                      controller.registerWithEmail();
+                    }
+                  },
+                ),
+                const Gap(23.0),
+                Text(
+                  'Atau masuk menggunakan',
+                  style: subHeadingMedium.copyWith(
+                    color: const Color(0xff6E7191),
                   ),
                 ),
-                validator: (value) {
-                  return ValidationHelper.validateConfirmPassword(
-                    confirmPassword: value!,
-                    password: controller.passwordController.text,
-                  );
-                },
-              ),
-              const Gap(17.0),
-              _buildAlreadyHaveAccountComponents(),
-              const Gap(60.0),
-              const CustomFilledButton(text: 'Daftar'),
-              const Gap(23.0),
-              Text(
-                'Atau masuk menggunakan',
-                style: subHeadingMedium.copyWith(
-                  color: const Color(0xff6E7191),
+                const Gap(13.0),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomAssetButton(
+                      assetPath: 'assets/icons/google.png',
+                    ),
+                    Gap(18.0),
+                    CustomAssetButton(
+                      assetPath: 'assets/icons/facebook.png',
+                    ),
+                  ],
                 ),
-              ),
-              const Gap(13.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomAssetButton(
-                    assetPath: 'assets/icons/google.png',
-                  ),
-                  Gap(18.0),
-                  CustomAssetButton(
-                    assetPath: 'assets/icons/facebook.png',
-                  ),
-                ],
-              ),
-            ]),
+                Gap(
+                  MediaQuery.of(context).padding.top,
+                ),
+              ]),
+            ),
           ),
         )),
       ),
@@ -150,7 +175,8 @@ Row _buildAlreadyHaveAccountComponents() {
           controller.emailController.clear();
           controller.passwordController.clear();
           controller.confirmPasswordController.clear();
-          Get.toNamed(Routes.LOGIN);
+
+          Get.offAllNamed(Routes.LOGIN);
         },
         child: Text(
           'Masuk',

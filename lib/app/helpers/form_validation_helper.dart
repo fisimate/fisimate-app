@@ -22,14 +22,6 @@ class ValidationHelper {
       return 'Masukkan kata sandi';
     } else if (value.contains(' ')) {
       return 'Password tidak boleh mengandung spasi';
-    } else if (!GetUtils.isLengthGreaterThan(value, 7)) {
-      return 'Minimal 8 kata';
-    } else if (!RegExp(r"^(?=.*[a-z])").hasMatch(value)) {
-      return "Masukkan 1 huruf kecil";
-    } else if (!RegExp(r"^(?=.*[A-Z])").hasMatch(value)) {
-      return "Masukkan 1 huruf besar";
-    } else if (!RegExp(r"^(?=.*\d)").hasMatch(value)) {
-      return "Masukkan setidaknya 1 angka";
     } else {
       return null;
     }
