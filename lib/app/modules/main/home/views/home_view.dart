@@ -144,6 +144,7 @@ class HomeView extends GetView<HomeController> {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               child: ListView.builder(
                 itemCount: 3,
+                physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(5),
                 itemBuilder: (context, index) {
                   List<Map<String, dynamic>> topics = [
