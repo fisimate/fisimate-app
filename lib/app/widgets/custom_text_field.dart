@@ -1,3 +1,4 @@
+import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,9 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
   const CustomTextField({
     super.key,
     this.height,
@@ -17,12 +21,15 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.textInputAction,
+    this.keyboardType,
+    this.validator,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? CustomSize.maxHeight / 13.5,
+      height: height,
       width: width ?? CustomSize.maxWidth,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -70,10 +77,17 @@ class CustomTextField extends StatelessWidget {
         ),
         obscureText: obscureText,
         textInputAction: textInputAction,
+        keyboardType: keyboardType,
+        validator: validator,
+        controller: controller,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           fillColor: const Color(0xffEFEFF0),
           filled: true,
           hintText: hintText,
+          errorStyle: subHeadingRegular.copyWith(
+            color: CustomColor.errorColor,
+          ),
           hintStyle: subHeadingRegular.copyWith(
             color: const Color(0xff999999),
           ),
