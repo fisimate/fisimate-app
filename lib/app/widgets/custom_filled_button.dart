@@ -16,18 +16,21 @@ class CustomFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width ?? CustomSize.maxWidth,
-      height: height ?? CustomSize.maxHeight / 13.5,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(75.0),
-        color: CustomColor.blueColor,
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: headingBold.copyWith(
-            color: CustomColor.whiteColor,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: width ?? CustomSize.maxWidth,
+        height: height ?? CustomSize.maxHeight / 13.5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(75.0),
+          color: CustomColor.blueColor,
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: headingBold.copyWith(
+              color: CustomColor.whiteColor,
+            ),
           ),
         ),
       ),
