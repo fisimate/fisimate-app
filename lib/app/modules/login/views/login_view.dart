@@ -1,3 +1,4 @@
+import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/form_validation_helper.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
@@ -19,74 +20,96 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-            child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: CustomSize.marginLarge,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: CustomSize.marginLarge,
+            ),
+            child: Obx(
+              () {
+                if (controller.state == ResultState.loading) {
+                  showLoadingDialog(context);
+                  return Container();
+                }
+                return Form(
+                  key: controller.formKey,
+                  child: Column(children: [
+                    SizedBox(
+                      width: CustomSize.maxWidth,
+                      child: Text(
+                        'Selamat Datang Kembali!',
+                        style: poppinsBold.copyWith(fontSize: 28),
+                      ),
+                    ),
+                    const Gap(40.0),
+                    CustomTextField(
+                      hintText: 'Email',
+                      controller: controller.emailController,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        return ValidationHelper.validateEmail(value!);
+                      },
+                    ),
+                    const Gap(20.0),
+                    CustomTextField(
+                      hintText: 'Password',
+                      controller: controller.passwordController,
+                      obscureText: controller.isObscurePassword.value,
+                      textInputAction: TextInputAction.done,
+                      validator: (value) {
+                        return ValidationHelper.validatePassword(value!);
+                      },
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.toggleObscurePassword();
+                        },
+                        icon: Icon(
+                          controller.isObscurePassword.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: CustomColor.darkGreyColor,
+                        ),
+                      ),
+                    ),
+                    const Gap(17.0),
+                    _buildRegisterHereComponents(),
+                    const Gap(60.0),
+                    CustomFilledButton(
+                      text: 'Masuk',
+                      onTap: () {
+                        if (controller.formKey.currentState != null &&
+                            controller.formKey.currentState!.validate()) {
+                          FocusNode().unfocus();
+                          controller.loginWithEmail();
+                        }
+                      },
+                    ),
+                    const Gap(105.0),
+                    Text(
+                      'Atau masuk menggunakan',
+                      style: subHeadingMedium.copyWith(
+                        color: const Color(0xff6E7191),
+                      ),
+                    ),
+                    const Gap(13.0),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomAssetButton(
+                          assetPath: 'assets/icons/google.png',
+                        ),
+                        Gap(18.0),
+                        CustomAssetButton(
+                          assetPath: 'assets/icons/facebook.png',
+                        ),
+                      ],
+                    ),
+                  ]),
+                );
+              },
+            ),
           ),
-          child: Form(
-            // key: controller.formKey,
-            child: Column(children: [
-              SizedBox(
-                width: CustomSize.maxWidth,
-                child: Text(
-                  'Selamat Datang Kembali!',
-                  style: poppinsBold.copyWith(fontSize: 28),
-                ),
-              ),
-              const Gap(40.0),
-              CustomTextField(
-                hintText: 'Email',
-                controller: controller.emailController,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  return ValidationHelper.validateEmail(value!);
-                },
-              ),
-              const Gap(20.0),
-              CustomTextField(
-                hintText: 'Password',
-                controller: controller.passwordController,
-                obscureText: true,
-                textInputAction: TextInputAction.done,
-                validator: (value) {
-                  return ValidationHelper.validatePassword(value!);
-                },
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.visibility,
-                    color: CustomColor.darkGreyColor,
-                  ),
-                ),
-              ),
-              const Gap(17.0),
-              _buildRegisterHereComponents(),
-              const Gap(60.0),
-              const CustomFilledButton(text: 'Masuk'),
-              const Gap(105.0),
-              Text(
-                'Atau masuk menggunakan',
-                style: subHeadingMedium.copyWith(
-                  color: const Color(0xff6E7191),
-                ),
-              ),
-              const Gap(13.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomAssetButton(
-                    assetPath: 'assets/icons/google.png',
-                  ),
-                  Gap(18.0),
-                  CustomAssetButton(
-                    assetPath: 'assets/icons/facebook.png',
-                  ),
-                ],
-              ),
-            ]),
-          ),
-        )),
+        ),
       ),
     );
   }
@@ -105,7 +128,7 @@ class LoginView extends GetView<LoginController> {
           onPressed: () {
             controller.emailController.clear();
             controller.passwordController.clear();
-            Get.toNamed(Routes.REGISTER);
+            Get.offAllNamed(Routes.REGISTER);
           },
           child: Text(
             'Daftar di sini',
@@ -118,4 +141,25 @@ class LoginView extends GetView<LoginController> {
       ],
     );
   }
+}
+
+void showLoadingDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return const PopScope(
+        canPop: false,
+        child: AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text("Loading..."),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
