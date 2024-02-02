@@ -22,8 +22,6 @@ class ValidationHelper {
       return 'Masukkan kata sandi';
     } else if (value.contains(' ')) {
       return 'Password tidak boleh mengandung spasi';
-    } else if (!GetUtils.isLengthGreaterThan(value, 7)) {
-      return 'Minimal 8 kata';
     } else {
       return null;
     }

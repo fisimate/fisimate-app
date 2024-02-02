@@ -175,6 +175,7 @@ Row _buildAlreadyHaveAccountComponents() {
           controller.emailController.clear();
           controller.passwordController.clear();
           controller.confirmPasswordController.clear();
+
           Get.offAllNamed(Routes.LOGIN);
         },
         child: Text(
