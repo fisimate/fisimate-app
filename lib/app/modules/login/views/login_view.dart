@@ -128,7 +128,6 @@ class LoginView extends GetView<LoginController> {
           onPressed: () {
             controller.emailController.clear();
             controller.passwordController.clear();
-            
             Get.offAllNamed(Routes.REGISTER);
           },
           child: Text(
