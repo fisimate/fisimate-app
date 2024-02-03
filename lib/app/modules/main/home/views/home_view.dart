@@ -11,6 +11,7 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -26,7 +27,7 @@ class HomeView extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Hai Rafi!',
+                      'Hai ${controller.userFirstName.value}!',
                       style: poppinsBold.copyWith(
                         fontSize: 30,
                         color: CustomColor.blackColor,

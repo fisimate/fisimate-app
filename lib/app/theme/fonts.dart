@@ -62,10 +62,22 @@ TextStyle bodyBold = poppinsBold.copyWith(
   fontSize: 10.0,
 );
 
+TextStyle bodySemiBold = poppinsSemiBold.copyWith(
+  fontSize: 10.0,
+);
+
 TextStyle bodyMedium = poppinsMedium.copyWith(
   fontSize: 10.0,
 );
 
 TextStyle bodyRegular = poppinsRegular.copyWith(
   fontSize: 10.0,
+);
+
+TextStyle subBodyRegular = poppinsRegular.copyWith(
+  fontSize: 8.0,
+);
+
+TextStyle subBodyLight = poppinsLight.copyWith(
+  fontSize: 8.0,
 );
