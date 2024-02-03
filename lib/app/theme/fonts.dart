@@ -41,7 +41,7 @@ TextStyle headingMedium = poppinsMedium.copyWith(
   fontSize: 16.0,
 );
 
-TextStyle subHeadingBold = poppinsRegular.copyWith(
+TextStyle subHeadingBold = poppinsBold.copyWith(
   fontSize: 13.0,
 );
 
@@ -53,12 +53,16 @@ TextStyle subHeadingMedium = poppinsMedium.copyWith(
   fontSize: 13.0,
 );
 
-TextStyle subHeadingRegular = poppinsBold.copyWith(
+TextStyle subHeadingRegular = poppinsRegular.copyWith(
   fontSize: 13.0,
   height: 1.5,
 );
 
 TextStyle bodyBold = poppinsBold.copyWith(
+  fontSize: 10.0,
+);
+
+TextStyle bodySemiBold = poppinsSemiBold.copyWith(
   fontSize: 10.0,
 );
 
@@ -68,4 +72,12 @@ TextStyle bodyMedium = poppinsMedium.copyWith(
 
 TextStyle bodyRegular = poppinsRegular.copyWith(
   fontSize: 10.0,
+);
+
+TextStyle subBodyRegular = poppinsRegular.copyWith(
+  fontSize: 8.0,
+);
+
+TextStyle subBodyLight = poppinsLight.copyWith(
+  fontSize: 8.0,
 );
