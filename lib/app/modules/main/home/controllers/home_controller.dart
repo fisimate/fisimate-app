@@ -15,6 +15,7 @@ class HomeController extends GetxController {
         final userJson = jsonDecode(value);
         user.value = User.fromJson(userJson);
         userFirstName.value = getUserFirstName();
+        userFirstName.value = user.value.fullname!.split(' ')[0];
       }
     });
     super.onReady();
