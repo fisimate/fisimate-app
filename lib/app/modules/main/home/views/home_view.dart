@@ -1,3 +1,4 @@
+import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
@@ -110,6 +111,7 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Rumus',
                   iconPath: "assets/images/bank_rumus.png",
                   color: CustomColor.blueColor,
+                  onTap: () {},
                 ),
                 const Gap(
                   CustomSize.marginSmall,
@@ -118,6 +120,9 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Materi',
                   iconPath: "assets/images/bank_materi.png",
                   color: const Color(0xFFFB9055),
+                  onTap: () {
+                    Get.toNamed(Routes.BANK_MATERI);
+                  },
                 ),
                 const Gap(
                   CustomSize.marginSmall,
@@ -126,6 +131,7 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Soal',
                   iconPath: "assets/images/bank_soal.png",
                   color: CustomColor.orangeColor,
+                  onTap: () {},
                 ),
                 const Gap(
                   CustomSize.marginSmall,
@@ -134,6 +140,7 @@ class HomeView extends GetView<HomeController> {
                   label: 'Leader Board',
                   iconPath: "assets/images/leader_board.png",
                   color: CustomColor.greenColor,
+                  onTap: () {},
                 ),
               ],
             ),
@@ -293,32 +300,36 @@ class HomeView extends GetView<HomeController> {
     required String label,
     required String iconPath,
     required Color color,
+    required Function() onTap,
   }) {
     return Expanded(
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(
-              CustomSize.roundedMedium,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(
+                CustomSize.roundedMedium,
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Image.asset(
-                iconPath,
-              ),
-              Text(
-                label,
-                style: poppinsMedium.copyWith(
-                  color: CustomColor.whiteColor,
-                  fontSize: 10,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Image.asset(
+                  iconPath,
                 ),
-              ),
-            ],
+                Text(
+                  label,
+                  style: poppinsMedium.copyWith(
+                    color: CustomColor.whiteColor,
+                    fontSize: 10,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

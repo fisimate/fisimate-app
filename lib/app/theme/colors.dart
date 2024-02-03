@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 // const Color primaryColor = Color(0xff21396B);
 // const Color secondaryColor = Color(0xffEB8A3A);
@@ -24,6 +24,17 @@ abstract class CustomColor {
   static Color greyColor = const Color(0xFFBCBACD);
   static Color darkGreyColor = const Color(0xFFB5B5B5);
   static Color backgroundColor = const Color(0xFFf2f2f2);
+
+  // Colors on Home
+  static Color bankMateri = const Color(0xffFB9055);
+  static LinearGradient gradientOutline = const LinearGradient(
+    colors: [
+      Color(0xff60E000),
+      Color(0xfffff500),
+    ],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  );
 
   static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
   static Color onLoadingColor = const Color(0xFFd9d9d9);

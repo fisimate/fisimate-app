@@ -8,6 +8,7 @@ abstract class Routes {
   static const HOME = _Paths.MAIN + _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
+  static const BANK_MATERI = _Paths.BANK_MATERI;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
+  static const BANK_MATERI = '/bank-materi';
 }
