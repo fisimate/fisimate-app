@@ -77,7 +77,9 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Soal',
                   iconPath: "assets/images/bank_soal.png",
                   color: CustomColor.orangeColor,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.BANK_SOAL);
+                  },
                 ),
                 const Gap(
                   CustomSize.marginSmall,
@@ -376,7 +378,7 @@ class HomeView extends GetView<HomeController> {
             label,
             style: poppinsMedium.copyWith(
               color: CustomColor.whiteColor,
-              fontSize: 10,
+              fontSize: 7.5,
             ),
           ),
         ],

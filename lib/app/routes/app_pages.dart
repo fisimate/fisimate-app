@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/bank_materi/bindings/bank_materi_binding.dart';
 import '../modules/bank_materi/views/bank_materi_view.dart';
+import '../modules/bank_soal/bindings/bank_soal_binding.dart';
+import '../modules/bank_soal/views/bank_soal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main/bindings/main_binding.dart';
@@ -45,6 +47,11 @@ class AppPages {
       name: _Paths.BANK_MATERI,
       page: () => const BankMateriView(),
       binding: BankMateriBinding(),
+    ),
+    GetPage(
+      name: _Paths.BANK_SOAL,
+      page: () => const BankSoalView(),
+      binding: BankSoalBinding(),
     ),
   ];
 }
