@@ -9,24 +9,24 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
 
 class User {
-  final String id;
-  final String fullname;
-  final String email;
-  final String nis;
-  final String roleId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final Role role;
+  String? id;
+  String? fullname;
+  String? email;
+  String? nis;
+  String? roleId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  Role? role;
 
   User({
-    required this.id,
-    required this.fullname,
-    required this.email,
-    required this.nis,
-    required this.roleId,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.role,
+    this.id,
+    this.fullname,
+    this.email,
+    this.nis,
+    this.roleId,
+    this.createdAt,
+    this.updatedAt,
+    this.role,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -46,19 +46,19 @@ class User {
         "email": email,
         "nis": nis,
         "roleId": roleId,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "role": role.toJson(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "role": role?.toJson(),
       };
 }
 
 class Role {
-  final String id;
-  final String name;
+  String? id;
+  String? name;
 
   Role({
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
   });
 
   factory Role.fromJson(Map<String, dynamic> json) => Role(
