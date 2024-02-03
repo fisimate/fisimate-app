@@ -26,6 +26,10 @@ abstract class CustomColor {
   static Color darkGreyColor = const Color(0xFFB5B5B5);
   static Color backgroundColor = const Color(0xFFf2f2f2);
 
+  // Colors for Bottom Navigation Bar
+  static Color activeColor = const Color(0xff072DF4);
+  static Color inActiveColor = const Color(0xFF6E7191);
+
   // Colors on Home
   static Color bankMateri = const Color(0xffFB9055);
   static Color bankSoal = const Color(0xffF4BB00);

@@ -27,11 +27,13 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Hai ${controller.userFirstName.value}!',
-                      style: poppinsBold.copyWith(
-                        fontSize: 30,
-                        color: CustomColor.blackColor,
+                    Obx(
+                      () => Text(
+                        'Hai ${controller.userFirstName.value}!',
+                        style: poppinsBold.copyWith(
+                          fontSize: 30,
+                          color: CustomColor.blackColor,
+                        ),
                       ),
                     ),
                     CircleAvatar(
