@@ -1,4 +1,3 @@
-import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/form_validation_helper.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
@@ -26,10 +25,6 @@ class LoginView extends GetView<LoginController> {
             ),
             child: Obx(
               () {
-                if (controller.state == ResultState.loading) {
-                  showLoadingDialog(context);
-                  return Container();
-                }
                 return Form(
                   key: controller.formKey,
                   child: Column(children: [
@@ -142,25 +137,4 @@ class LoginView extends GetView<LoginController> {
       ],
     );
   }
-}
-
-void showLoadingDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return const PopScope(
-        canPop: false,
-        child: AlertDialog(
-          content: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 20),
-              Text("Loading..."),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }

@@ -6,8 +6,9 @@ import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/connectivity_helper.dart';
 import 'package:fisimate/app/helpers/secure_storage_helper.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
-import 'package:fisimate/app/theme/colors.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fisimate/app/widgets/custom_loading_dialog.dart';
+import 'package:fisimate/app/widgets/custom_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -51,6 +52,9 @@ class LoginController extends GetxController {
   Future<void> loginWithEmail() async {
     try {
       state = ResultState.loading;
+      showLoadingDialog();
+
+      debugPrint('State: $state');
 
       final checkConnection = await ConnectivityHelper.checkConnection();
 
@@ -87,18 +91,19 @@ class LoginController extends GetxController {
           Get.offAllNamed(Routes.MAIN);
         } else {
           state = ResultState.error;
-          Get.snackbar('Terjadi Kesalahan', jsonResponse['message'],
-              backgroundColor: CustomColor.errorColor,
-              colorText: CustomColor.whiteColor);
+          Get.back();
+
+          showErrorSnackbar(
+              title: 'Terjadi Kesalahan', message: jsonResponse['message']);
         }
       } else {
         // TODO: Add else
+        Get.back();
       }
     } catch (e) {
       state = ResultState.error;
-      Get.snackbar('Terjadi Kesalahan', e.toString(),
-          backgroundColor: CustomColor.errorColor,
-          colorText: CustomColor.whiteColor);
+      Get.back();
+      showErrorSnackbar(title: 'Terjadi Kesalahan', message: e.toString());
       debugPrint('Catch error on Login with email: $e');
     } finally {
       state = ResultState.initial;

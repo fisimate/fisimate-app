@@ -14,6 +14,7 @@ class HomeController extends GetxController {
       if (value != null) {
         final userJson = jsonDecode(value);
         user.value = User.fromJson(userJson);
+        userFirstName.value = getUserFirstName();
         userFirstName.value = user.value.fullname!.split(' ')[0];
       }
     });
@@ -23,5 +24,9 @@ class HomeController extends GetxController {
   Future<String?> getUserDataFromStorage(String key) async {
     final data = await SecureStorageHelper().readData(key: key);
     return data;
+  }
+
+  String getUserFirstName() {
+    return user.value.fullname!.split(' ')[0];
   }
 }
