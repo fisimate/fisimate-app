@@ -27,11 +27,13 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Hai ${controller.userFirstName.value}!',
-                      style: poppinsBold.copyWith(
-                        fontSize: 30,
-                        color: CustomColor.blackColor,
+                    Obx(
+                      () => Text(
+                        'Hai ${controller.userFirstName.value}!',
+                        style: poppinsBold.copyWith(
+                          fontSize: 30,
+                          color: CustomColor.blackColor,
+                        ),
                       ),
                     ),
                     CircleAvatar(
@@ -44,61 +46,7 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
                 const Gap(22),
-                Container(
-                  decoration: BoxDecoration(
-                    color: CustomColor.yellowColor,
-                    borderRadius: BorderRadius.circular(
-                      CustomSize.roundedMedium,
-                    ),
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 17.5,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 30,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Eksplorasi\nInteraktif',
-                                  style: poppinsSemiBold.copyWith(
-                                    fontSize: 23,
-                                    color: CustomColor.blackColor,
-                                  ),
-                                ),
-                                const Gap(6),
-                                Text(
-                                  'Sentuh, putar, dan amati setiap percobaan untuk mendapatkan pemahaman yang mendalam.',
-                                  style: poppinsRegular.copyWith(
-                                    fontSize: 12,
-                                    color: CustomColor.blackColor,
-                                  ),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "assets/images/header.png",
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                buildHeader(),
                 const Gap(18),
               ],
             ),
@@ -131,7 +79,9 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Soal',
                   iconPath: "assets/images/bank_soal.png",
                   color: CustomColor.orangeColor,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.BANK_SOAL);
+                  },
                 ),
                 const Gap(
                   CustomSize.marginSmall,
@@ -139,7 +89,7 @@ class HomeView extends GetView<HomeController> {
                 _buildMenuItem(
                   label: 'Leader Board',
                   iconPath: "assets/images/leader_board.png",
-                  color: CustomColor.greenColor,
+                  color: CustomColor.darkGreenColor,
                   onTap: () {},
                 ),
               ],
@@ -152,13 +102,14 @@ class HomeView extends GetView<HomeController> {
               child: ListView.builder(
                 itemCount: 3,
                 padding: const EdgeInsets.all(5),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   List<Map<String, dynamic>> topics = [
                     {
                       'label': 'Gerak Lurus',
                       'description':
                           'Visualisasikan dan pahami konsep pergerakan benda dalam lintasan lurus',
-                      'iconPath': "icon path goes here", // !TODO: add icon path
+                      'iconPath': 'assets/icons/blue-car.png',
                       'isMaterialAvailable': true,
                       'isExperimentAvailable': false,
                       'isQuizAvailable': true,
@@ -167,7 +118,7 @@ class HomeView extends GetView<HomeController> {
                       'label': 'Kesetimbangan Benda',
                       'description':
                           'Simulasikan bagaimana gaya dapat mempengaruhi pergeseran benda',
-                      'iconPath': "icon path goes here", // !TODO: add icon path
+                      'iconPath': 'assets/icons/scales.png',
                       'isMaterialAvailable': false,
                       'isExperimentAvailable': true,
                       'isQuizAvailable': true,
@@ -176,7 +127,7 @@ class HomeView extends GetView<HomeController> {
                       'label': 'Usaha dan Energi',
                       'description':
                           'Explorasi sebuah usaha pada benda dapat mengubah bentuk-bentuk energi',
-                      'iconPath': "icon path goes here", // !TODO: add icon path
+                      'iconPath': 'assets/icons/gas-cable.png',
                       'isMaterialAvailable': true,
                       'isExperimentAvailable': true,
                       'isQuizAvailable': true,
@@ -197,6 +148,64 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container buildHeader() {
+    return Container(
+      decoration: BoxDecoration(
+        color: CustomColor.yellowColor,
+        borderRadius: BorderRadius.circular(
+          CustomSize.roundedMedium,
+        ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 17.5,
+        ),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 30,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Eksplorasi\nInteraktif',
+                      style: poppinsSemiBold.copyWith(
+                        fontSize: 23,
+                        color: CustomColor.blackColor,
+                      ),
+                    ),
+                    const Gap(6),
+                    Text(
+                      'Sentuh, putar, dan amati setiap percobaan untuk mendapatkan pemahaman yang mendalam.',
+                      style: poppinsRegular.copyWith(
+                        fontSize: 12,
+                        color: CustomColor.blackColor,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/header.png",
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -234,12 +243,13 @@ class HomeView extends GetView<HomeController> {
       ),
       child: Row(
         children: <Widget>[
-          const Expanded(
+          Expanded(
             flex: 2,
-            child: FlutterLogo(
-              size: 50,
+            child: Image.asset(
+              iconPath,
             ),
           ),
+          const Gap(15),
           Expanded(
             flex: 5,
             child: Column(
@@ -251,16 +261,19 @@ class HomeView extends GetView<HomeController> {
                     fontSize: 14,
                     color: CustomColor.blackColor,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const Gap(6),
                 Text(
                   description,
                   style: poppinsRegular.copyWith(
                     fontSize: 12,
                     color: CustomColor.blackColor,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const Gap(10),
+                const Gap(8),
                 Wrap(
                   alignment: WrapAlignment.start,
                   runAlignment: WrapAlignment.start,
@@ -303,12 +316,15 @@ class HomeView extends GetView<HomeController> {
     required Function() onTap,
   }) {
     return Expanded(
-      child: GestureDetector(
+      child: InkWell(
         onTap: onTap,
+        splashFactory: InkRipple.splashFactory,
+        borderRadius: BorderRadius.circular(
+          CustomSize.roundedMedium,
+        ),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Ink(
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(
@@ -316,7 +332,7 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
                   iconPath,
@@ -364,7 +380,7 @@ class HomeView extends GetView<HomeController> {
             label,
             style: poppinsMedium.copyWith(
               color: CustomColor.whiteColor,
-              fontSize: 10,
+              fontSize: 7.5,
             ),
           ),
         ],
