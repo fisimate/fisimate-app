@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class WelcomeController extends GetxController {
-  //TODO: Implement WelcomeController
+class BankSoalController extends GetxController {
+  //TODO: Implement BankSoalController
 
   final count = 0.obs;
   @override

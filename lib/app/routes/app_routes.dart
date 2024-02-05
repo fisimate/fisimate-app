@@ -8,13 +8,19 @@ abstract class Routes {
   static const HOME = _Paths.MAIN + _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const SPLASH = _Paths.SPLASH;
-  static const WELCOME = _Paths.WELCOME;
+  static const ONBOARD = _Paths.ONBOARD;
+  static const REGISTER = _Paths.REGISTER;
+  static const BANK_MATERI = _Paths.BANK_MATERI;
+  static const BANK_SOAL = _Paths.BANK_SOAL;
 }
 
 abstract class _Paths {
   static const MAIN = '/main';
   static const HOME = '/home';
   static const LOGIN = '/login';
+  static const REGISTER = '/register';
+  static const BANK_MATERI = '/bank-materi';
+  static const BANK_SOAL = '/bank-soal';
   static const SPLASH = '/splash';
-  static const WELCOME = '/welcome';
+  static const ONBOARD = '/onboard';
 }

@@ -41,7 +41,7 @@ class SplashController extends GetxController
     _animationController.value?.forward();
     _animationController.value?.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Get.offNamed('/welcome');
+        Get.offNamed('/onboard');
       }
     });
   }

@@ -1,23 +1,32 @@
+import 'dart:convert';
+
+import 'package:fisimate/app/helpers/secure_storage_helper.dart';
+import 'package:fisimate/app/models/user.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final user = User().obs;
+  final userFirstName = ''.obs;
 
   @override
   void onReady() {
+    getUserDataFromStorage('user').then((value) {
+      if (value != null) {
+        final userJson = jsonDecode(value);
+        user.value = User.fromJson(userJson);
+        userFirstName.value = getUserFirstName();
+        userFirstName.value = user.value.fullname!.split(' ')[0];
+      }
+    });
     super.onReady();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<String?> getUserDataFromStorage(String key) async {
+    final data = await SecureStorageHelper().readData(key: key);
+    return data;
   }
 
-  void increment() => count.value++;
+  String getUserFirstName() {
+    return user.value.fullname!.split(' ')[0];
+  }
 }
