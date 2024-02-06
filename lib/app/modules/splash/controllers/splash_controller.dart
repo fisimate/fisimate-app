@@ -22,7 +22,7 @@ class SplashController extends GetxController
     _animationController.value = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 3,
+        seconds: 2,
       ),
     );
     _radiusAnimation.value = Tween(begin: 0.0, end: 450.0)
@@ -32,13 +32,14 @@ class SplashController extends GetxController
         update();
       });
 
-    _sizeAnimation.value = Tween(begin: Get.height, end: 250.0)
-        .chain(CurveTween(curve: Curves.easeOut))
+    _sizeAnimation.value = Tween(begin: Get.height, end: 200.0)
+        .chain(CurveTween(curve: Curves.easeInOut))
         .animate(_animationController.value!)
       ..addListener(() {
         update();
       });
     _animationController.value?.forward();
+
     _animationController.value?.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Get.offNamed('/onboard');
