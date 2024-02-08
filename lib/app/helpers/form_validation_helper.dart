@@ -22,7 +22,7 @@ class ValidationHelper {
       return 'Masukkan kata sandi';
     } else if (value.contains(' ')) {
       return 'Password tidak boleh mengandung spasi';
-    } else if (GetUtils.isLengthLessOrEqual(value, 8)) {
+    } else if (GetUtils.isLengthLessOrEqual(value, 7)) {
       return 'Minimal 8 karakter';
     } else {
       return null;

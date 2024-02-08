@@ -9,4 +9,7 @@ abstract class URLs {
   static const String register = 'auth/register';
 
   // END - Auth
+
+  // START - Exam Bank
+  static const String examBank = 'exam-banks';
 }
