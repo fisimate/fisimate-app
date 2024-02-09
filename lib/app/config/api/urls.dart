@@ -9,6 +9,10 @@ abstract class URLs {
   static const String register = 'auth/register';
   // GET - Login w/ Google
   static const String loginWithGoogle = 'auth/google';
+  // GET - Refresh Token
+  static const String refreshToken = 'auth/token/refresh';
+  // POST - Logout
+  static const String logout = 'auth/logout';
 
   // END - Auth
 

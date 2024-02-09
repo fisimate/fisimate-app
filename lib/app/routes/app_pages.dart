@@ -1,20 +1,22 @@
-import 'package:fisimate/app/modules/login/views/login_with_google_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bank_materi/bindings/bank_materi_binding.dart';
 import '../modules/bank_materi/views/bank_materi_view.dart';
-import '../modules/module_viewer/bindings/module_viewer_binding.dart';
-import '../modules/module_viewer/views/module_viewer_view.dart';
 import '../modules/bank_soal/bindings/bank_soal_binding.dart';
 import '../modules/bank_soal/views/bank_soal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/login/views/login_with_google_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/home/bindings/home_binding.dart';
 import '../modules/main/home/views/home_view.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/module_viewer/bindings/module_viewer_binding.dart';
+import '../modules/module_viewer/views/module_viewer_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
 import '../modules/onboard/views/onboard_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -79,6 +81,11 @@ class AppPages {
       name: _Paths.GOOGLE_LOGIN,
       page: () => const LoginWithGoogleView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }
