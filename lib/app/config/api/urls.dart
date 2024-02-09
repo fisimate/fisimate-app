@@ -18,4 +18,5 @@ abstract class URLs {
 
   // START - Exam Bank
   static const String examBank = 'exam-banks';
+  static const String materialBank = 'material-banks';
 }

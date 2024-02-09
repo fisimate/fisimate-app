@@ -3,7 +3,6 @@ import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/module_viewer_controller.dart';
@@ -12,11 +11,30 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
   const ModuleViewerView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> data = {};
+
+    switch (controller.argumentType.value) {
+      case 'exam_bank':
+        data = {
+          'title': controller.examBank!.title,
+          'filePath': controller.examBank!.filePath,
+          'color': CustomColor.bankSoal,
+        };
+        break;
+      case 'material_bank':
+        data = {
+          'title': controller.materialBank!.title!,
+          'filePath': controller.materialBank!.filePath!,
+          'color': CustomColor.bankMateri,
+        };
+        break;
+      default:
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CustomColor.bankSoal,
         title: Text(
-          controller.examBank!.title,
+          data['title'],
           style: headingBold.copyWith(color: CustomColor.whiteColor),
         ),
         centerTitle: true,
@@ -41,12 +59,12 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
-            color: CustomColor.bankSoal,
+            color: data['color'],
           ),
         ),
         child: const PDF(
           pageSnap: false,
-        ).cachedFromUrl(controller.examBank!.filePath),
+        ).cachedFromUrl(data['filePath']),
       ),
     );
   }
