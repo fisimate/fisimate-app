@@ -12,12 +12,14 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const BANK_MATERI = _Paths.BANK_MATERI;
   static const BANK_SOAL = _Paths.BANK_SOAL;
+  static const GOOGLE_LOGIN = _Paths.GOOGLE_LOGIN;
 }
 
 abstract class _Paths {
   static const MAIN = '/main';
   static const HOME = '/home';
   static const LOGIN = '/login';
+  static const GOOGLE_LOGIN = '/login/google';
   static const REGISTER = '/register';
   static const BANK_MATERI = '/bank-materi';
   static const BANK_SOAL = '/bank-soal';
