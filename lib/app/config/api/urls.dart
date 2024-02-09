@@ -7,6 +7,8 @@ abstract class URLs {
   static const String login = 'auth/login';
   // POST - Register
   static const String register = 'auth/register';
+  // GET - Login w/ Google
+  static const String loginWithGoogle = 'auth/google';
 
   // END - Auth
 
