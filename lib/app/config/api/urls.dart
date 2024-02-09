@@ -11,4 +11,7 @@ abstract class URLs {
   static const String loginWithGoogle = 'auth/google';
 
   // END - Auth
+
+  // START - Exam Bank
+  static const String examBank = 'exam-banks';
 }
