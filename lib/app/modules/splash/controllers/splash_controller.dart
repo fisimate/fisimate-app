@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:fisimate/app/config/services/storage_service.dart';
+import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +44,7 @@ class SplashController extends GetxController
 
     _animationController.value?.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Get.offNamed('/onboard');
+        navigate();
       }
     });
   }
@@ -52,5 +54,17 @@ class SplashController extends GetxController
     log("oonClonse");
     _animationController.value?.dispose();
     super.onClose();
+  }
+
+  navigate() async {
+    final loggedInStatus = await StorageService.getLoggedInStatus();
+    final accessToken = await StorageService.getAccessToken();
+    final refreshToken = await StorageService.getRefreshToken();
+
+    if (loggedInStatus) {
+      Get.offNamed(Routes.MAIN);
+    } else {
+      Get.offNamed(Routes.ONBOARD);
+    }
   }
 }

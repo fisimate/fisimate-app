@@ -15,6 +15,7 @@ abstract class Routes {
   static const MODULE_VIEWER = _Paths.MODULE_VIEWER;
   static const GOOGLE_LOGIN = _Paths.GOOGLE_LOGIN;
   static const BANK_RUMUS = _Paths.BANK_RUMUS;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const ONBOARD = '/onboard';
   static const MODULE_VIEWER = '/module-viewer';
   static const BANK_RUMUS = '/bank-rumus';
+  static const PROFILE = '/profile';
 }

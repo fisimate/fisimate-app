@@ -11,6 +11,7 @@ class OnboardView extends GetView<OnboardController> {
   const OnboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnboardController());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(CustomSize.marginLarge),
@@ -45,7 +46,7 @@ class OnboardView extends GetView<OnboardController> {
               radius: 16,
               text: "Mulai",
               onTap: () {
-                Get.offNamed('/login');
+                controller.navigate();
               },
             )
           ],
