@@ -1,4 +1,5 @@
 import 'package:fisimate/app/models/exam_bank.dart';
+import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:fisimate/app/models/material_bank.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,7 @@ class ModuleViewerController extends GetxController {
   RxString argumentType = ''.obs;
   ExamBank? examBank;
   MaterialBankElement? materialBank;
+  FormulaBankElement? formulaBankElement;
 
   @override
   void onInit() {
@@ -18,6 +20,10 @@ class ModuleViewerController extends GetxController {
       case 'material_bank':
         materialBank = arguments['data'] as MaterialBankElement;
         argumentType.value = 'material_bank';
+        break;
+      case 'formula_bank':
+        formulaBankElement = arguments['data'] as FormulaBankElement;
+        argumentType.value = 'formula_bank';
         break;
       default:
     }

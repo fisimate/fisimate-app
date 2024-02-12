@@ -1,44 +1,34 @@
 import 'dart:developer';
 
-import 'package:fisimate/app/config/api/urls.dart';
+import 'package:fisimate/app/config/services/api_services.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/secure_storage_helper.dart';
-import 'package:fisimate/app/models/exam_bank.dart';
+import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-
 
 class BankRumusController extends GetxController {
-   Rx<ResultState> state = ResultState.initial.obs;
+  Rx<ResultState> state = ResultState.initial.obs;
   RxString accessToken = ''.obs;
-  ExamBankModel? examBank;
+  List<FormulaBank>? formulaBankList;
 
   @override
   void onReady() async {
     await getAccessTokenFromStorage();
-    getAllExamBank();
+    getAllFormulaBank();
     super.onReady();
   }
 
-  Future<void> getAllExamBank() async {
+  Future<void> getAllFormulaBank() async {
+    state.value = ResultState.loading;
     try {
-      state.value = ResultState.loading;
-      final http.Response response = await http.get(
-          Uri.parse(
-            URLs.baseUrl + URLs.examBank,
-          ),
-          headers: {
-            'Authorization' : 'Bearer ${accessToken.value}',
-          });
-      log("Response: ${response.body}");
-      examBank = examBankModelFromJson(response.body);
+      // final connectivityResult = await ConnectivityHelper.checkConnection();
+      formulaBankList =
+          await ApiService.getFormulaBanks(accessToken: accessToken.value);
       state.value = ResultState.hasData;
-      update(['bank_soal']);
-      log("Data fetched successfully");
+      update(['bank_rumus']);
     } catch (e) {
-      log(
-        e.toString(),
-      );
+      state.value = ResultState.error;
+      throw Exception("bank formula error: $e");
     }
   }
 

@@ -28,11 +28,18 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
           'color': CustomColor.bankMateri,
         };
         break;
+      case 'formula_bank':
+        data = {
+          'title': controller.formulaBankElement!.title!,
+          'filePath': controller.formulaBankElement!.filePath!,
+          'color': CustomColor.bankRumus,
+        };
+        break;
       default:
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColor.bankSoal,
+        backgroundColor: data['color'],
         title: Text(
           data['title'],
           style: headingBold.copyWith(color: CustomColor.whiteColor),

@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:fisimate/app/config/api/urls.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/helpers/secure_storage_helper.dart';
 import 'package:fisimate/app/models/exam_bank.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:developer';
 
 class BankSoalController extends GetxController {
   Rx<ResultState> state = ResultState.initial.obs;
@@ -26,9 +27,9 @@ class BankSoalController extends GetxController {
             URLs.baseUrl + URLs.examBank,
           ),
           headers: {
-            'Authorization' : 'Bearer ${accessToken.value}',
+            'Authorization': 'Bearer ${accessToken.value}',
           });
-      log("Response: ${response.body}");
+      log("Response soal: ${response.body}");
       examBank = examBankModelFromJson(response.body);
       state.value = ResultState.hasData;
       update(['bank_soal']);

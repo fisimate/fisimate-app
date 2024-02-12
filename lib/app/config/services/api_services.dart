@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:fisimate/app/config/api/urls.dart';
+import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:fisimate/app/models/material_bank.dart';
 import 'package:http/http.dart' as http;
 
@@ -91,6 +92,24 @@ abstract class ApiService {
       return materialBankFromJson(jsonEncode(jsonResponse));
     } else {
       throw Exception('Failed to load Material Bank');
+    }
+  }
+
+  static Future<List<FormulaBank>> getFormulaBanks(
+      {required String accessToken}) async {
+    final url = Uri.parse(URLs.baseUrl + URLs.formulaBank);
+
+    final response = await http.get(url, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $accessToken',
+    });
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body)["data"]["result"];
+      log("formula + $jsonResponse");
+      return formulaBankFromJson(jsonEncode(jsonResponse));
+    } else {
+      throw Exception('Failed to load Formula Bank');
     }
   }
 }

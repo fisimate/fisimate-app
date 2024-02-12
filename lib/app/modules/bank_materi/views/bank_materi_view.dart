@@ -110,9 +110,9 @@ class BankMateriView extends GetView<BankMateriController> {
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
                                         arguments: {
-                                            'type': 'material_bank',
-                                            'data': subjectDataItem[index]
-                                          },
+                                          'type': 'material_bank',
+                                          'data': subjectDataItem[index]
+                                        },
                                       ),
                                     ),
                                   ),
