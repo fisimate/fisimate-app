@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:fisimate/app/config/services/api_services.dart';
+import 'package:fisimate/app/config/services/storage_service.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
-import 'package:fisimate/app/helpers/secure_storage_helper.dart';
 import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +11,7 @@ class BankRumusController extends GetxController {
 
   @override
   void onReady() async {
-    await getAccessTokenFromStorage();
+    accessToken.value = await StorageService.getAccessToken();
     getAllFormulaBank();
     super.onReady();
   }
@@ -29,15 +27,6 @@ class BankRumusController extends GetxController {
     } catch (e) {
       state.value = ResultState.error;
       throw Exception("bank formula error: $e");
-    }
-  }
-
-  Future<void> getAccessTokenFromStorage() async {
-    final String? fetchedAccessToken =
-        await SecureStorageHelper().readData(key: 'access_token');
-    log(fetchedAccessToken.toString());
-    if (fetchedAccessToken != null) {
-      accessToken.value = fetchedAccessToken;
     }
   }
 }

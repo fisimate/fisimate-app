@@ -46,7 +46,6 @@ class BankRumusView extends GetView<BankRumusController> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 margin: const EdgeInsets.only(top: 80),
-                decoration: BoxDecoration(color: CustomColor.bankRumus),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

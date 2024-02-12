@@ -31,13 +31,13 @@ class HomeView extends GetView<HomeController> {
                       () => Text(
                         'Hai ${controller.userFirstName.value}!',
                         style: poppinsBold.copyWith(
-                          fontSize: 30,
+                          fontSize: 26,
                           color: CustomColor.blackColor,
                         ),
                       ),
                     ),
                     CircleAvatar(
-                      radius: 25,
+                      radius: 20,
                       backgroundColor: CustomColor.yellowColor,
                       backgroundImage: const AssetImage(
                         "assets/images/dummy_profile_photo.png",
@@ -58,7 +58,7 @@ class HomeView extends GetView<HomeController> {
                 _buildMenuItem(
                   label: 'Bank Rumus',
                   iconPath: "assets/images/bank_rumus.png",
-                  color: CustomColor.blueColor,
+                  color: CustomColor.bankRumus,
                   onTap: () {
                     Get.toNamed(Routes.BANK_RUMUS);
                   },
@@ -89,7 +89,7 @@ class HomeView extends GetView<HomeController> {
                   CustomSize.marginSmall,
                 ),
                 _buildMenuItem(
-                  label: 'Leader Board',
+                  label: 'Leaderboard',
                   iconPath: "assets/images/leader_board.png",
                   color: CustomColor.darkGreenColor,
                   onTap: () {},
@@ -339,6 +339,7 @@ class HomeView extends GetView<HomeController> {
                 Image.asset(
                   iconPath,
                 ),
+                const Gap(6),
                 Text(
                   label,
                   style: poppinsMedium.copyWith(

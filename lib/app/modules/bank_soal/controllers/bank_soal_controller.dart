@@ -1,52 +1,32 @@
-import 'dart:developer';
-
-import 'package:fisimate/app/config/api/urls.dart';
+import 'package:fisimate/app/config/services/api_services.dart';
+import 'package:fisimate/app/config/services/storage_service.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
-import 'package:fisimate/app/helpers/secure_storage_helper.dart';
 import 'package:fisimate/app/models/exam_bank.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class BankSoalController extends GetxController {
   Rx<ResultState> state = ResultState.initial.obs;
   RxString accessToken = ''.obs;
-  ExamBankModel? examBank;
+  List<ExamBank>? examBankList;
 
   @override
   void onReady() async {
-    await getAccessTokenFromStorage();
+    accessToken.value = await StorageService.getAccessToken();
     getAllExamBank();
     super.onReady();
   }
 
   Future<void> getAllExamBank() async {
+    state.value = ResultState.loading;
     try {
-      state.value = ResultState.loading;
-      final http.Response response = await http.get(
-          Uri.parse(
-            URLs.baseUrl + URLs.examBank,
-          ),
-          headers: {
-            'Authorization': 'Bearer ${accessToken.value}',
-          });
-      log("Response soal: ${response.body}");
-      examBank = examBankModelFromJson(response.body);
+      // final connectivityResult = await ConnectivityHelper.checkConnection();
+      examBankList =
+          await ApiService.getExamBanks(accessToken: accessToken.value);
       state.value = ResultState.hasData;
       update(['bank_soal']);
-      log("Data fetched successfully");
     } catch (e) {
-      log(
-        e.toString(),
-      );
-    }
-  }
-
-  Future<void> getAccessTokenFromStorage() async {
-    final String? fetchedAccessToken =
-        await SecureStorageHelper().readData(key: 'access_token');
-    log(fetchedAccessToken.toString());
-    if (fetchedAccessToken != null) {
-      accessToken.value = fetchedAccessToken;
+      state.value = ResultState.error;
+      throw Exception("bank formula error: $e");
     }
   }
 }
