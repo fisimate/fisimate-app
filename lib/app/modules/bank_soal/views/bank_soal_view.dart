@@ -1,3 +1,5 @@
+import 'package:fisimate/app/config/state/result_state.dart';
+import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
@@ -63,123 +65,68 @@ class BankSoalView extends GetView<BankSoalController> {
             ),
           ];
         },
-        body: const Padding(
-          padding: EdgeInsets.all(CustomSize.marginLarge),
-          child: Column(
-            children: [
-              CustomSubjectTitleWidget(
-                no: '01',
-                title: 'Keseimbangan Benda',
-              ),
-              Gap(16.0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.only(bottom: 6.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/scales.png',
-                      title: 'Keseimbangan',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/magnetic.png',
-                      title: 'Momen Gaya',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/dart.png',
-                      title: 'Momen Gaya',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/judges-gavel.png',
-                      title: 'Momen Gaya',
-                    ),
-                  ],
-                ),
-              ),
-              Gap(25.0),
-              CustomSubjectTitleWidget(
-                no: '02',
-                title: 'Dinamika Rotasi',
-              ),
-              Gap(16.0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.only(bottom: 6.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/round-red-figure.png',
-                      title: 'Momen Inersia',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/blue-car.png',
-                      title: 'Hukum Newton',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/carpenter-ruler.png',
-                      title: 'Usaha dan Energi',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/autism.png',
-                      title: 'Momentum Sudut',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/judges-gavel.png',
-                      title: 'Momen Integral',
-                    ),
-                  ],
-                ),
-              ),
-              Gap(25.0),
-              CustomSubjectTitleWidget(
-                no: '03',
-                title: 'Fluida',
-              ),
-              Gap(16.0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.only(bottom: 6.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/tonometer.png',
-                      title: 'Tekanan',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/hookah.png',
-                      title: 'Hukum Pascal',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/blue-car.png',
-                      title: 'Hukum Archimedes',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/autism.png',
-                      title: 'Aplikasi Hukum Archimedes',
-                    ),
-                    Gap(10.0),
-                    CustomSubjectCard(
-                      assetPath: 'assets/icons/judges-gavel.png',
-                      title: 'Momen Integral',
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+        body: GetBuilder<BankSoalController>(
+          id: 'bank_soal',
+          builder: (BankSoalController controller) {
+            if (controller.state.value == ResultState.initial) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: 3,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final subjectTitleItem =
+                      controller.examBank!.data[index].name;
+                  final subjectDataItem =
+                      controller.examBank!.data[index].examBanks;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin:
+                            const EdgeInsets.only(left: CustomSize.marginLarge),
+                        child: CustomSubjectTitleWidget(
+                          no: '0${index + 1}',
+                          title: subjectTitleItem,
+                        ),
+                      ),
+                      const Gap(16.0),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.only(bottom: 6.0),
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            const Gap(CustomSize.marginLarge),
+                            for (int index = 0;
+                                index < subjectDataItem.length;
+                                index++) 
+                              Container(
+                                margin: index + 1 == subjectDataItem.length
+                                    ? EdgeInsets.zero
+                                    : const EdgeInsets.only(right: 10.0),
+                                child: CustomSubjectCard(
+                                  assetPath: subjectDataItem[index].icon,
+                                  title: subjectDataItem[index].title,
+                                  onTap: () => Get.toNamed(
+                                    Routes.MODULE_VIEWER,
+                                    arguments: subjectDataItem[index],
+                                  )
+                                ),
+                              ),
+                            const Gap(CustomSize.marginLarge),
+                          ],
+                        ),
+                      ),
+                      const Gap(25.0),
+                    ],
+                  );
+                },
+              );
+            }
+          },
         ),
       ),
     );

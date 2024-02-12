@@ -114,4 +114,34 @@ class LoginController extends GetxController {
     final data = await SecureStorageHelper().readData(key: key);
     return data;
   }
+
+  Future loginWithGoogle() async {
+    try {
+      showLoadingDialog();
+      final checkConnection = await ConnectivityHelper.checkConnection();
+
+      if (checkConnection != ConnectivityResult.none) {
+        final url = Uri.parse(URLs.baseUrl + URLs.loginWithGoogle);
+
+        final response = await http.get(url);
+        final jsonResponse = jsonDecode(response.body);
+
+        if (response.statusCode == 200) {
+          final googleAuthUrl = jsonResponse['data']['authUrl'];
+
+          debugPrint('Google auth url: $googleAuthUrl');
+
+          Get.toNamed(Routes.GOOGLE_LOGIN, arguments: googleAuthUrl);
+        } else {
+          Get.back();
+          showErrorSnackbar(
+              title: 'Terjadi Kesalahan', message: jsonResponse['message']);
+        }
+      }
+    } catch (e) {
+      Get.back();
+      showErrorSnackbar(title: 'Terjadi Kesalahan', message: e.toString());
+      debugPrint('Catch error on Login with Google: $e');
+    }
+  }
 }

@@ -1,7 +1,10 @@
+import 'package:fisimate/app/modules/login/views/login_with_google_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bank_materi/bindings/bank_materi_binding.dart';
 import '../modules/bank_materi/views/bank_materi_view.dart';
+import '../modules/module_viewer/bindings/module_viewer_binding.dart';
+import '../modules/module_viewer/views/module_viewer_view.dart';
 import '../modules/bank_soal/bindings/bank_soal_binding.dart';
 import '../modules/bank_soal/views/bank_soal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -66,6 +69,16 @@ class AppPages {
       name: _Paths.BANK_SOAL,
       page: () => const BankSoalView(),
       binding: BankSoalBinding(),
+    ),
+    GetPage(
+      name: _Paths.MODULE_VIEWER,
+      page: () => const ModuleViewerView(),
+      binding: ModuleViewerBinding(),
+    ),
+    GetPage(
+      name: _Paths.GOOGLE_LOGIN,
+      page: () => const LoginWithGoogleView(),
+      binding: LoginBinding(),
     ),
   ];
 }
