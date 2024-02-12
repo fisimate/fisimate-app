@@ -7,7 +7,6 @@ import 'package:fisimate/app/widgets/custom_chip.dart';
 import 'package:fisimate/app/widgets/custom_subject_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/bank_soal_controller.dart';
@@ -78,9 +77,9 @@ class BankSoalView extends GetView<BankSoalController> {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final subjectTitleItem =
-                      controller.examBank!.data[index].name;
+                      controller.examBankList![index].name;
                   final subjectDataItem =
-                      controller.examBank!.data[index].examBanks;
+                      controller.examBankList![index].examBanks;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -102,19 +101,21 @@ class BankSoalView extends GetView<BankSoalController> {
                             const Gap(CustomSize.marginLarge),
                             for (int index = 0;
                                 index < subjectDataItem.length;
-                                index++) 
+                                index++)
                               Container(
                                 margin: index + 1 == subjectDataItem.length
                                     ? EdgeInsets.zero
                                     : const EdgeInsets.only(right: 10.0),
                                 child: CustomSubjectCard(
-                                  assetPath: subjectDataItem[index].icon,
-                                  title: subjectDataItem[index].title,
-                                  onTap: () => Get.toNamed(
-                                    Routes.MODULE_VIEWER,
-                                    arguments: subjectDataItem[index],
-                                  )
-                                ),
+                                    assetPath: subjectDataItem[index].icon,
+                                    title: subjectDataItem[index].title,
+                                    onTap: () => Get.toNamed(
+                                          Routes.MODULE_VIEWER,
+                                          arguments: {
+                                            'type': 'exam_bank',
+                                            'data': subjectDataItem[index]
+                                          },
+                                        )),
                               ),
                             const Gap(CustomSize.marginLarge),
                           ],

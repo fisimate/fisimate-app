@@ -1,46 +1,22 @@
 // To parse this JSON data, do
 //
-//     final examBankModel = examBankModelFromJson(jsonString);
+//     final examBank = examBankFromJson(jsonString);
 
 import 'dart:convert';
 
-ExamBankModel examBankModelFromJson(String str) => ExamBankModel.fromJson(json.decode(str));
+List<ExamBank> examBankFromJson(String str) => List<ExamBank>.from(json.decode(str).map((x) => ExamBank.fromJson(x)));
 
-String examBankModelToJson(ExamBankModel data) => json.encode(data.toJson());
+String examBankToJson(List<ExamBank> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ExamBankModel {
-    bool success;
-    String message;
-    List<Datum> data;
-
-    ExamBankModel({
-        required this.success,
-        required this.message,
-        required this.data,
-    });
-
-    factory ExamBankModel.fromJson(Map<String, dynamic> json) => ExamBankModel(
-        success: json["success"],
-        message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    };
-}
-
-class Datum {
+class ExamBank {
     String id;
     String name;
     String slug;
     DateTime createdAt;
     DateTime updatedAt;
-    List<ExamBank> examBanks;
+    List<ExamBankElement> examBanks;
 
-    Datum({
+    ExamBank({
         required this.id,
         required this.name,
         required this.slug,
@@ -49,13 +25,13 @@ class Datum {
         required this.examBanks,
     });
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory ExamBank.fromJson(Map<String, dynamic> json) => ExamBank(
         id: json["id"],
         name: json["name"],
         slug: json["slug"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        examBanks: List<ExamBank>.from(json["examBanks"].map((x) => ExamBank.fromJson(x))),
+        examBanks: List<ExamBankElement>.from(json["examBanks"].map((x) => ExamBankElement.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -68,7 +44,7 @@ class Datum {
     };
 }
 
-class ExamBank {
+class ExamBankElement {
     String id;
     String title;
     String icon;
@@ -77,7 +53,7 @@ class ExamBank {
     DateTime createdAt;
     DateTime updatedAt;
 
-    ExamBank({
+    ExamBankElement({
         required this.id,
         required this.title,
         required this.icon,
@@ -87,7 +63,7 @@ class ExamBank {
         required this.updatedAt,
     });
 
-    factory ExamBank.fromJson(Map<String, dynamic> json) => ExamBank(
+    factory ExamBankElement.fromJson(Map<String, dynamic> json) => ExamBankElement(
         id: json["id"],
         title: json["title"],
         icon: json["icon"],

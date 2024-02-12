@@ -87,15 +87,19 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                     const Gap(13.0),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomAssetButton(
                           assetPath: 'assets/icons/google.png',
+                          onTap: () {
+                            controller.loginWithGoogle();
+                          },
                         ),
-                        Gap(18.0),
+                        const Gap(18.0),
                         CustomAssetButton(
                           assetPath: 'assets/icons/facebook.png',
+                          onTap: () {},
                         ),
                       ],
                     ),
