@@ -59,7 +59,9 @@ class HomeView extends GetView<HomeController> {
                   label: 'Bank Rumus',
                   iconPath: "assets/images/bank_rumus.png",
                   color: CustomColor.blueColor,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.BANK_RUMUS);
+                  },
                 ),
                 const Gap(
                   CustomSize.marginSmall,
