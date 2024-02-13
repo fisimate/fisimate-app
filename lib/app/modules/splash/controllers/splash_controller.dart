@@ -24,7 +24,7 @@ class SplashController extends GetxController
     _animationController.value = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 2,
+        seconds: 1,
       ),
     );
     _radiusAnimation.value = Tween(begin: 0.0, end: 450.0)

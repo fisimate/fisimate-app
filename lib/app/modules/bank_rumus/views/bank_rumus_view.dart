@@ -9,19 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../controllers/bank_soal_controller.dart';
+import '../controllers/bank_rumus_controller.dart';
 
-class BankSoalView extends GetView<BankSoalController> {
-  const BankSoalView({Key? key}) : super(key: key);
+class BankRumusView extends GetView<BankRumusController> {
+  const BankRumusView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: CustomColor.bankSoal,
+            backgroundColor: CustomColor.bankRumus,
             title: Text(
-              'Bank Soal',
+              'Bank Rumus',
               style: headingBold.copyWith(
                 color: CustomColor.whiteColor,
               ),
@@ -60,9 +60,9 @@ class BankSoalView extends GetView<BankSoalController> {
           const SliverToBoxAdapter(
             child: SizedBox(height: CustomSize.marginLarge),
           ),
-          GetBuilder<BankSoalController>(
-            id: 'bank_soal',
-            builder: (BankSoalController controller) {
+          GetBuilder<BankRumusController>(
+            id: 'bank_rumus',
+            builder: (BankRumusController controller) {
               if (controller.state.value == ResultState.initial) {
                 return const SliverFillRemaining(
                   child: Center(
@@ -72,12 +72,11 @@ class BankSoalView extends GetView<BankSoalController> {
               } else {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    childCount: controller.examBankList!.length,
                     (context, index) {
                       final subjectTitleItem =
-                          controller.examBankList![index].name;
+                          controller.formulaBankList![index].name;
                       final subjectDataItem =
-                          controller.examBankList![index].examBanks;
+                          controller.formulaBankList![index].formulaBanks;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -113,7 +112,7 @@ class BankSoalView extends GetView<BankSoalController> {
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
                                         arguments: {
-                                          'type': 'exam_bank',
+                                          'type': 'formula_bank',
                                           'data': subjectDataItem[index]
                                         },
                                       ),
@@ -127,6 +126,7 @@ class BankSoalView extends GetView<BankSoalController> {
                         ],
                       );
                     },
+                    childCount: controller.formulaBankList!.length,
                   ),
                 );
               }

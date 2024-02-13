@@ -34,6 +34,7 @@ abstract class CustomColor {
   // Colors on Home
   static Color bankMateri = const Color(0xffFB9055);
   static Color bankSoal = const Color(0xffF4BB00);
+  static Color bankRumus = const Color(0xff0075ff);
   static LinearGradient gradientOutline = const LinearGradient(
     colors: [
       Color(0xff60E000),
@@ -44,43 +45,43 @@ abstract class CustomColor {
   );
 
   static List<BoxShadow> customBoxShadow = [
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 0,
-                spreadRadius: 1,
-                offset: Offset(0, 0),
-              ),
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 1,
-                spreadRadius: -0.5,
-                offset: Offset(0, 1),
-              ),
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 3,
-                spreadRadius: -1.5,
-                offset: Offset(0, 3),
-              ),
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 6,
-                spreadRadius: -3,
-                offset: Offset(0, 6),
-              ),
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 12,
-                spreadRadius: -6,
-                offset: Offset(0, 12),
-              ),
-              const BoxShadow(
-                color: Color.fromARGB(6, 0, 0, 0),
-                blurRadius: 24,
-                spreadRadius: -12,
-                offset: Offset(0, 24),
-              ),
-            ]; 
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 0,
+      spreadRadius: 1,
+      offset: Offset(0, 0),
+    ),
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 1,
+      spreadRadius: -0.5,
+      offset: Offset(0, 1),
+    ),
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 3,
+      spreadRadius: -1.5,
+      offset: Offset(0, 3),
+    ),
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 6,
+      spreadRadius: -3,
+      offset: Offset(0, 6),
+    ),
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 12,
+      spreadRadius: -6,
+      offset: Offset(0, 12),
+    ),
+    const BoxShadow(
+      color: Color.fromARGB(6, 0, 0, 0),
+      blurRadius: 24,
+      spreadRadius: -12,
+      offset: Offset(0, 24),
+    ),
+  ];
 
   static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
   static Color onLoadingColor = const Color(0xFFd9d9d9);

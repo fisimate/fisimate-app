@@ -9,12 +9,14 @@ class CustomSubjectCard extends StatelessWidget {
   final String assetPath;
   final String title;
   final Function()? onTap;
+  final Color? splashColor;
 
   const CustomSubjectCard({
     super.key,
     required this.assetPath,
     required this.title,
     this.onTap,
+    this.splashColor = const Color(0xffF4BB00),
   });
 
   @override
@@ -23,7 +25,7 @@ class CustomSubjectCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20.0),
       splashFactory: InkRipple.splashFactory,
-      splashColor: CustomColor.bankSoal,
+      splashColor: splashColor,
       child: Ink(
         width: CustomSize.maxWidth / 3,
         height: CustomSize.maxWidth / 3,

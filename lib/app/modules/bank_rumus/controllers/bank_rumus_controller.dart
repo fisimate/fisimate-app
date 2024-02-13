@@ -1,29 +1,29 @@
 import 'package:fisimate/app/config/services/api_services.dart';
 import 'package:fisimate/app/config/services/storage_service.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
-import 'package:fisimate/app/models/exam_bank.dart';
+import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:get/get.dart';
 
-class BankSoalController extends GetxController {
+class BankRumusController extends GetxController {
   Rx<ResultState> state = ResultState.initial.obs;
   RxString accessToken = ''.obs;
-  List<ExamBank>? examBankList;
+  List<FormulaBank>? formulaBankList;
 
   @override
   void onReady() async {
     accessToken.value = await StorageService.getAccessToken();
-    getAllExamBank();
+    getAllFormulaBank();
     super.onReady();
   }
 
-  Future<void> getAllExamBank() async {
+  Future<void> getAllFormulaBank() async {
     state.value = ResultState.loading;
     try {
       // final connectivityResult = await ConnectivityHelper.checkConnection();
-      examBankList =
-          await ApiService.getExamBanks(accessToken: accessToken.value);
+      formulaBankList =
+          await ApiService.getFormulaBanks(accessToken: accessToken.value);
       state.value = ResultState.hasData;
-      update(['bank_soal']);
+      update(['bank_rumus']);
     } catch (e) {
       state.value = ResultState.error;
       throw Exception("bank formula error: $e");

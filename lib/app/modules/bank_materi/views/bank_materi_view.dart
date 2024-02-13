@@ -16,66 +16,63 @@ class BankMateriView extends GetView<BankMateriController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                backgroundColor: CustomColor.bankMateri,
-                title: Text(
-                  'Bank Materi',
-                  style: headingBold.copyWith(color: CustomColor.whiteColor),
-                ),
-                centerTitle: true,
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                  icon: CircleAvatar(
-                    radius: 16,
-                    backgroundColor: CustomColor.whiteColor,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: Image.asset('assets/icons/arrow-back.png'),
-                    ),
-                  ),
-                  onPressed: () {
-                    Get.back();
-                  },
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: CustomColor.bankMateri,
+            title: Text(
+              'Bank Materi',
+              style: headingBold.copyWith(
+                color: CustomColor.whiteColor,
+              ),
+            ),
+            pinned: true,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              icon: CircleAvatar(
+                radius: 16,
+                backgroundColor: CustomColor.whiteColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 4.0),
+                  child: Image.asset('assets/icons/arrow-back.png'),
                 ),
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(
-                      width: CustomSize.maxWidth,
-                      height: CustomSize.maxHeight / 10,
-                      decoration: BoxDecoration(color: CustomColor.bankMateri),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomChip(label: '3 Kelas'),
-                          Gap(10.0),
-                          CustomChip(label: '20 Bab'),
-                          Gap(10.0),
-                          CustomChip(label: '150 Soal')
-                        ],
-                      ),
-                    ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            expandedHeight: 130,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                margin: const EdgeInsets.only(top: 80),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomChip(label: '3 Kelas'),
+                    CustomChip(label: '20 Bab'),
+                    CustomChip(label: '150 Soal')
                   ],
                 ),
               ),
-            ];
-          },
-          body: GetBuilder<BankMateriController>(
-              id: 'bank_materi',
-              builder: (BankMateriController controller) {
-                if (controller.state.value == ResultState.initial) {
-                  return const Center(
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: CustomSize.marginLarge),
+          ),
+          GetBuilder<BankMateriController>(
+            id: 'bank_materi',
+            builder: (BankMateriController controller) {
+              if (controller.state.value == ResultState.initial) {
+                return const SliverFillRemaining(
+                  child: Center(
                     child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return ListView.builder(
-                    itemCount: controller.materialBankList!.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
+                  ),
+                );
+              } else {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
                       final subjectTitleItem =
                           controller.materialBankList![index].name;
                       final subjectDataItem =
@@ -85,15 +82,18 @@ class BankMateriView extends GetView<BankMateriController> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(
-                                left: CustomSize.marginLarge),
+                              left: CustomSize.marginLarge,
+                            ),
                             child: CustomSubjectTitleWidget(
-                                no: '0${index + 1}', title: subjectTitleItem!),
+                              no: '0${index + 1}',
+                              title: subjectTitleItem!,
+                            ),
                           ),
                           const Gap(16.0),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             padding: const EdgeInsets.only(bottom: 6.0),
-                            physics: const BouncingScrollPhysics(),
+                            // physics: const BouncingScrollPhysics(),
                             child: Row(
                               children: [
                                 const Gap(CustomSize.marginLarge),
@@ -107,12 +107,14 @@ class BankMateriView extends GetView<BankMateriController> {
                                     child: CustomSubjectCard(
                                       assetPath: subjectDataItem[index].icon!,
                                       title: subjectDataItem[index].title!,
+                                      splashColor: CustomColor.bankRumus
+                                          .withOpacity(0.3),
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
                                         arguments: {
-                                            'type': 'material_bank',
-                                            'data': subjectDataItem[index]
-                                          },
+                                          'type': 'material_bank',
+                                          'data': subjectDataItem[index]
+                                        },
                                       ),
                                     ),
                                   ),
@@ -120,13 +122,18 @@ class BankMateriView extends GetView<BankMateriController> {
                               ],
                             ),
                           ),
-                          const Gap(25.0)
+                          const Gap(25.0),
                         ],
                       );
                     },
-                  );
-                }
-              })),
+                    childCount: controller.materialBankList!.length,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }
