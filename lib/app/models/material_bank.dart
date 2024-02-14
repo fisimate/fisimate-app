@@ -31,20 +31,27 @@ class MaterialBank {
         id: json["id"],
         name: json["name"],
         slug: json["slug"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        materialBanks: List<MaterialBankElement>.from(
-            json["materialBanks"].map((x) => MaterialBankElement.fromJson(x))),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        materialBanks: json["materialBanks"] == null
+            ? []
+            : List<MaterialBankElement>.from(json["materialBanks"]!
+                .map((x) => MaterialBankElement.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "slug": slug,
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
-        "materialBanks":
-            List<dynamic>.from(materialBanks!.map((x) => x.toJson())),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "materialBanks": materialBanks == null
+            ? []
+            : List<dynamic>.from(materialBanks!.map((x) => x.toJson())),
       };
 }
 
@@ -74,8 +81,12 @@ class MaterialBankElement {
         icon: json["icon"],
         filePath: json["filePath"],
         chapterId: json["chapterId"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,7 +95,7 @@ class MaterialBankElement {
         "icon": icon,
         "filePath": filePath,
         "chapterId": chapterId,
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
       };
 }

@@ -1,9 +1,11 @@
+import 'package:fisimate/app/modules/module_viewer/bindings/module_viewer_binding.dart';
+import 'package:fisimate/app/modules/module_viewer/views/module_viewer_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bank_materi/bindings/bank_materi_binding.dart';
 import '../modules/bank_materi/views/bank_materi_view.dart';
-import '../modules/module_viewer/bindings/module_viewer_binding.dart';
-import '../modules/module_viewer/views/module_viewer_view.dart';
+import '../modules/bank_rumus/bindings/bank_rumus_binding.dart';
+import '../modules/bank_rumus/views/bank_rumus_view.dart';
 import '../modules/bank_soal/bindings/bank_soal_binding.dart';
 import '../modules/bank_soal/views/bank_soal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -86,6 +88,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BANK_RUMUS,
+      page: () => const BankRumusView(),
+      binding: BankRumusBinding(),
     ),
   ];
 }

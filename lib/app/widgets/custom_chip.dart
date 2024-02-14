@@ -34,7 +34,10 @@ class CustomChip extends StatelessWidget {
           ),
           Text(
             label,
-            style: bodyRegular.copyWith(color: CustomColor.blackColor),
+            style: bodyRegular.copyWith(
+              color: CustomColor.blackColor,
+              fontSize: 12,
+            ),
           ),
         ],
       ),
