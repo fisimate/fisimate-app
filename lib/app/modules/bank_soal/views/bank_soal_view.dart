@@ -25,6 +25,7 @@ class BankSoalView extends GetView<BankSoalController> {
               style: headingBold.copyWith(
                 color: CustomColor.whiteColor,
               ),
+            ),
             pinned: true,
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -35,7 +36,6 @@ class BankSoalView extends GetView<BankSoalController> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 4.0),
                   child: Image.asset('assets/icons/arrow-back.png'),
-
                 ),
               ),
               onPressed: () {
