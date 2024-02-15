@@ -33,7 +33,10 @@ class BankSoalView extends GetView<BankSoalController> {
                   backgroundColor: CustomColor.whiteColor,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 4.0),
-                    child: Image.asset('assets/icons/arrow-back.png'),
+                    child: Image.asset(
+                      'assets/icons/arrow-back.png',
+                      color: CustomColor.bankSoal,
+                    ),
                   ),
                 ),
                 onPressed: () {
