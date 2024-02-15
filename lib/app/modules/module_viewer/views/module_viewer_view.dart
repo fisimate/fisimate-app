@@ -16,23 +16,30 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
     switch (controller.argumentType.value) {
       case 'exam_bank':
         data = {
-          'title': controller.examBank!.title,
-          'filePath': controller.examBank!.filePath,
+          'title': controller.examBankElement!.title,
+          'filePath': controller.examBankElement!.filePath,
           'color': CustomColor.bankSoal,
         };
         break;
       case 'material_bank':
         data = {
-          'title': controller.materialBank!.title!,
-          'filePath': controller.materialBank!.filePath!,
+          'title': controller.materialBankElement!.title!,
+          'filePath': controller.materialBankElement!.filePath!,
           'color': CustomColor.bankMateri,
+        };
+        break;
+      case 'formula_bank':
+        data = {
+          'title': controller.formulaBankElement!.title!,
+          'filePath': controller.formulaBankElement!.filePath!,
+          'color': CustomColor.bankRumus,
         };
         break;
       default:
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColor.bankSoal,
+        backgroundColor: data['color'],
         title: Text(
           data['title'],
           style: headingBold.copyWith(color: CustomColor.whiteColor),

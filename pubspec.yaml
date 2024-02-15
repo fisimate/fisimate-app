@@ -2,27 +2,29 @@ name: fisimate
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
-  sdk: '>=3.2.5 <4.0.0'
+environment:
+  sdk: ">=3.2.5 <4.0.0"
 
-dependencies: 
-  cupertino_icons: ^1.0.2
-  get: 4.6.6
-  flutter: 
-    sdk: flutter
-  http: ^1.2.0
-  gap: ^3.0.1
-  flutter_svg: ^2.0.9
+dependencies:
+  cached_network_image: ^3.3.1
   connectivity_plus: ^5.0.2
-  flutter_secure_storage: ^9.0.0
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
   flutter_cached_pdfview: ^0.4.2
+  flutter_secure_storage: ^9.0.0
+  flutter_svg: ^2.0.9
+  gap: ^3.0.1
+  get: 4.6.6
+  http: ^1.2.0
+  percent_indicator: ^4.2.3
   webview_flutter: ^4.5.0
   cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
 flutter:
@@ -44,4 +46,3 @@ flutter:
         - asset: fonts/Poppins-Bold.ttf
           weight: 700
   uses-material-design: true
-
