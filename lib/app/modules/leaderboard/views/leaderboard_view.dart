@@ -23,6 +23,7 @@ class LeaderboardView extends GetView<LeaderboardController> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                pinned: true,
                 backgroundColor: CustomColor.leaderboard,
                 title: Text(
                   'Leader Board',

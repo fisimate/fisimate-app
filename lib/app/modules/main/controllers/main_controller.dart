@@ -1,3 +1,4 @@
+import 'package:fisimate/app/modules/chatbot/views/chatbot_view.dart';
 import 'package:fisimate/app/modules/main/home/views/home_view.dart';
 import 'package:fisimate/app/modules/main/simulation/views/simulation_view.dart';
 import 'package:fisimate/app/modules/profile/views/profile_view.dart';
@@ -9,7 +10,7 @@ class MainController extends GetxController {
   List<Widget> pages = [
     const HomeView(),
     const SimulationView(),
-    const HomeView(),
+    const ChatbotView(),
     const ProfileView(),
   ];
 

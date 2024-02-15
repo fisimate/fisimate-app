@@ -6,6 +6,8 @@ import '../modules/bank_rumus/bindings/bank_rumus_binding.dart';
 import '../modules/bank_rumus/views/bank_rumus_view.dart';
 import '../modules/bank_soal/bindings/bank_soal_binding.dart';
 import '../modules/bank_soal/views/bank_soal_view.dart';
+import '../modules/chatbot/bindings/chatbot_binding.dart';
+import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/leaderboard/bindings/leaderboard_binding.dart';
 import '../modules/leaderboard/views/leaderboard_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -95,11 +97,16 @@ class AppPages {
       name: _Paths.LEADERBOARD,
       page: () => const LeaderboardView(),
       binding: LeaderboardBinding(),
-      ),
+    ),
     GetPage(
       name: _Paths.BANK_RUMUS,
       page: () => const BankRumusView(),
       binding: BankRumusBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHATBOT,
+      page: () => const ChatbotView(),
+      binding: ChatbotBinding(),
     ),
   ];
 }
