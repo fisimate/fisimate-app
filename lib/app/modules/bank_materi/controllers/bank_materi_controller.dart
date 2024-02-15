@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class BankMateriController extends GetxController {
   Rx<ResultState> state = ResultState.initial.obs;
   RxString accessToken = ''.obs;
-  List<MaterialBank>? materialBankList;
+  MaterialBank? materialBank;
 
   @override
   void onReady() async {
@@ -28,7 +28,7 @@ class BankMateriController extends GetxController {
       final connectivityResult = await ConnectivityHelper.checkConnection();
       if (connectivityResult != ConnectivityResult.none) {
         log('Mulai');
-        materialBankList =
+        materialBank =
             await ApiService.getMaterialBanks(accessToken: accessToken.value);
         state.value = ResultState.hasData;
         log('Successfully fetched all material bank');
