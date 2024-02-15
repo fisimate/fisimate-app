@@ -95,7 +95,7 @@ abstract class ApiService {
       throw Exception('Failed to load Material Bank');
     }
   }
-
+  
   static Future<List<FormulaBank>> getFormulaBanks(
       {required String accessToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.formulaBank);
@@ -131,4 +131,5 @@ abstract class ApiService {
       throw Exception('Failed to load Exam Bank');
     }
   }
+
 }

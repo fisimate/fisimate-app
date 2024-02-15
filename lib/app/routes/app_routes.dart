@@ -14,8 +14,9 @@ abstract class Routes {
   static const BANK_SOAL = _Paths.BANK_SOAL;
   static const MODULE_VIEWER = _Paths.MODULE_VIEWER;
   static const GOOGLE_LOGIN = _Paths.GOOGLE_LOGIN;
-  static const BANK_RUMUS = _Paths.BANK_RUMUS;
   static const PROFILE = _Paths.PROFILE;
+  static const LEADERBOARD = _Paths.LEADERBOARD;
+  static const BANK_RUMUS = _Paths.BANK_RUMUS;
 }
 
 abstract class _Paths {
@@ -29,6 +30,7 @@ abstract class _Paths {
   static const SPLASH = '/splash';
   static const ONBOARD = '/onboard';
   static const MODULE_VIEWER = '/module-viewer';
-  static const BANK_RUMUS = '/bank-rumus';
   static const PROFILE = '/profile';
+  static const LEADERBOARD = '/leaderboard';
+  static const BANK_RUMUS = '/bank-rumus';
 }

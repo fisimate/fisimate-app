@@ -31,6 +31,7 @@ class MaterialBank {
         id: json["id"],
         name: json["name"],
         slug: json["slug"],
+
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -41,17 +42,20 @@ class MaterialBank {
             ? []
             : List<MaterialBankElement>.from(json["materialBanks"]!
                 .map((x) => MaterialBankElement.fromJson(x))),
+
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "slug": slug,
+
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "materialBanks": materialBanks == null
             ? []
             : List<dynamic>.from(materialBanks!.map((x) => x.toJson())),
+
       };
 }
 

@@ -93,6 +93,7 @@ class BankMateriView extends GetView<BankMateriController> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             padding: const EdgeInsets.only(bottom: 6.0),
+
                             // physics: const BouncingScrollPhysics(),
                             child: Row(
                               children: [
