@@ -17,7 +17,9 @@ class ProfileController extends GetxController {
       try {
         showLoadingDialog();
         final accessToken = await StorageService.getAccessToken();
-        final response = await ApiService.logout(accessToken: accessToken);
+        final refreshToken = await StorageService.getRefreshToken();
+        final response = await ApiService.logout(
+            accessToken: accessToken, refreshToken: refreshToken);
 
         if (response.statusCode == 200) {
           await StorageService.removeAllExceptEmailAndRegisteredStatus();

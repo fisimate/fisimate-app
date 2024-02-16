@@ -60,12 +60,13 @@ abstract class ApiService {
 
     final response = await http.get(url);
 
-    final jsonResponse = jsonDecode(response.body);
+    final result = jsonDecode(response.body)['data']['access_token'];
 
-    return jsonResponse['data']['access_token'];
+    return result;
   }
 
-  static Future<http.Response> logout({required String accessToken}) async {
+  static Future<http.Response> logout(
+      {required String accessToken, required String refreshToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.logout);
 
     final response = await http.post(url, headers: {
@@ -73,11 +74,18 @@ abstract class ApiService {
       'Authorization': 'Bearer $accessToken',
     });
 
+    if (response.statusCode == 200) {
+      return response;
+    } else if (response.statusCode == 401) {
+      getAccessToken(refreshToken: refreshToken);
+      logout(accessToken: accessToken, refreshToken: refreshToken);
+    }
+
     return response;
   }
 
-  static Future<List<MaterialBank>> getMaterialBanks(
-      {required String accessToken}) async {
+  static Future<MaterialBank> getMaterialBanks(
+      {required String accessToken, required String refreshToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.materialBank);
 
     final response = await http.get(url, headers: {
@@ -86,16 +94,21 @@ abstract class ApiService {
     });
 
     if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body)['data']["result"];
+      final jsonResponse = jsonDecode(response.body)['data'];
 
       log('Json Response on Material Bank: $jsonResponse');
 
       return materialBankFromJson(jsonEncode(jsonResponse));
+    } else if (response.statusCode == 401) {
+      getAccessToken(refreshToken: refreshToken);
+      getMaterialBanks(accessToken: accessToken, refreshToken: refreshToken);
     } else {
       throw Exception('Failed to load Material Bank');
     }
+
+    return materialBankFromJson(jsonEncode({}));
   }
-  
+
   static Future<List<FormulaBank>> getFormulaBanks(
       {required String accessToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.formulaBank);
@@ -131,5 +144,4 @@ abstract class ApiService {
       throw Exception('Failed to load Exam Bank');
     }
   }
-
 }
