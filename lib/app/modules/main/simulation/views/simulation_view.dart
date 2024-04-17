@@ -1,3 +1,4 @@
+import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
@@ -13,7 +14,9 @@ class SimulationView extends GetView<SimulationController> {
   const SimulationView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SimulationController());
+    Get.put(
+      SimulationController(),
+    );
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -77,10 +80,15 @@ class SimulationView extends GetView<SimulationController> {
                       'progress': 54,
                     },
                   ];
-                  return _buildSimulationItem(
-                    label: simulationItem[index]['label'],
-                    imagePath: simulationItem[index]['imagePath'],
-                    progress: simulationItem[index]['progress'],
+                  return Column(
+                    children: <Widget>[
+                      _buildSimulationItem(
+                        label: simulationItem[index]['label'],
+                        imagePath: simulationItem[index]['imagePath'],
+                        progress: simulationItem[index]['progress'],
+                      ),
+                      const Gap(10),
+                    ],
                   );
                 },
               ),
@@ -148,95 +156,101 @@ class SimulationView extends GetView<SimulationController> {
     );
   }
 
-  Container _buildSimulationItem({
+  Widget _buildSimulationItem({
     required String label,
     required int progress,
     required String imagePath,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: CustomColor.whiteColor,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: CustomColor.blueColor,
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.SIMULATION_CONTENT);
+      },
+      splashFactory: InkRipple.splashFactory,
+      borderRadius: BorderRadius.circular(14),
+      child: Ink(
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: CustomColor.whiteColor,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: CustomColor.blueColor,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade100,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+            ),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade100,
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
-          ),
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Image.asset(
-              imagePath,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Image.asset(
+                imagePath,
+              ),
             ),
-          ),
-          const Gap(15),
-          Expanded(
-            flex: 5,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Text(
-                      "Simulasi $label",
-                      style: poppinsBold.copyWith(
-                        fontSize: 14,
-                        color: CustomColor.blackColor,
+            const Gap(15),
+            Expanded(
+              flex: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(
+                        "Simulasi $label",
+                        style: poppinsBold.copyWith(
+                          fontSize: 14,
+                          color: CustomColor.blackColor,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      const Spacer(),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: CustomColor.blueColor,
+                        size: 12,
+                      )
+                    ],
+                  ),
+                  const Gap(4),
+                  Text(
+                    "Progress Pembelajaran",
+                    style: bodyRegular.copyWith(
+                      fontSize: 10,
+                      color: Colors.grey,
                     ),
-                    const Spacer(),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: CustomColor.blueColor,
-                      size: 12,
-                    )
-                  ],
-                ),
-                const Gap(4),
-                Text(
-                  "Progress Pembelajaran",
-                  style: bodyRegular.copyWith(
-                    fontSize: 10,
-                    color: Colors.grey,
                   ),
-                ),
-                const Gap(8),
-                LinearPercentIndicator(
-                  lineHeight: 10,
-                  padding: const EdgeInsets.all(0),
-                  // progressColor: CustomColor.blueColor,
-                  linearGradient: LinearGradient(colors: [
-                    CustomColor.bankRumus,
-                    CustomColor.yellowColor,
-                  ]),
-                  backgroundColor: Colors.grey.shade100,
-                  percent: (progress / 100).toDouble(),
-                  animation: false,
-                  barRadius: const Radius.circular(50),
-                ),
-                const Gap(6),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    "3 dari 3",
-                    style: bodyRegular.copyWith(color: CustomColor.blueColor),
+                  const Gap(8),
+                  LinearPercentIndicator(
+                    lineHeight: 10,
+                    padding: const EdgeInsets.all(0),
+                    // progressColor: CustomColor.blueColor,
+                    linearGradient: LinearGradient(colors: [
+                      CustomColor.bankRumus,
+                      CustomColor.yellowColor,
+                    ]),
+                    backgroundColor: Colors.grey.shade100,
+                    percent: (progress / 100).toDouble(),
+                    animation: false,
+                    barRadius: const Radius.circular(50),
                   ),
-                )
-              ],
+                  const Gap(6),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                      "3 dari 3",
+                      style: bodyRegular.copyWith(color: CustomColor.blueColor),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

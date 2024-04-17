@@ -1,0 +1,226 @@
+import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_material_section_view.dart';
+import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_quiz_section_view.dart';
+import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_simulation_section_view.dart';
+import 'package:fisimate/app/theme/colors.dart';
+import 'package:fisimate/app/theme/fonts.dart';
+import 'package:fisimate/app/theme/sizing.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+
+import 'package:get/get.dart';
+
+import '../controllers/simulation_content_controller.dart';
+
+class SimulationContentView extends GetView<SimulationContentController> {
+  const SimulationContentView({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Materi",
+          style: headingBold,
+        ),
+        leading: IconButton(
+          icon: CircleAvatar(
+            radius: 16,
+            backgroundColor: CustomColor.whiteColor,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: Image.asset('assets/icons/arrow-back.png'),
+            ),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
+      body: Column(
+        children: [
+          Obx(
+            () {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _buildItemContentIcon(
+                    context: context,
+                    iconPath: 'assets/images/bank_materi.png',
+                    title: 'Materi',
+                    isActive: controller.currentIndex.value >= 0,
+                  ),
+                  _buildItemContentDivider(context),
+                  _buildItemContentIcon(
+                    context: context,
+                    iconPath: controller.currentIndex.value >= 1
+                        ? 'assets/images/simulation_active.png'
+                        : 'assets/images/simulation_inactive.png',
+                    title: 'Percobaan',
+                    isActive: controller.currentIndex.value >= 1,
+                  ),
+                  _buildItemContentDivider(context),
+                  _buildItemContentIcon(
+                    context: context,
+                    iconPath: controller.currentIndex.value >= 2
+                        ? 'assets/images/quiz_active.png'
+                        : 'assets/images/quiz_inactive.png',
+                    title: 'Kuis',
+                    isActive: controller.currentIndex.value >= 2,
+                  ),
+                ],
+              );
+            },
+          ),
+          const Gap(CustomSize.marginLarge),
+          Expanded(
+            child: PageView(
+              controller: controller.pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: (index) {
+                controller.currentIndex.value = index;
+              },
+              children: const <Widget>[
+                SimulationMaterialSectionView(),
+                SimulationSimulationSectionView(),
+                SimulationQuizSectionView(),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Obx(
+        () {
+          return Row(
+            mainAxisAlignment: controller.currentIndex.value == 0
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              if (controller.currentIndex.value != 0)
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: CustomSize.marginSmall,
+                    right: CustomSize.marginSmall,
+                    bottom: CustomSize.marginLarge,
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller.changePage(controller.currentIndex.value - 1);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColor.whiteColor,
+                      foregroundColor: CustomColor.blueColor,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: CustomSize.marginMedium,
+                        vertical: CustomSize.marginSmall,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      side: BorderSide(
+                        color: CustomColor.blueColor,
+                      ),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.arrow_back,
+                        ),
+                        Gap(10),
+                        Text(
+                          'Kembali',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              Container(
+                margin: const EdgeInsets.only(
+                  left: CustomSize.marginSmall,
+                  right: CustomSize.marginSmall,
+                  bottom: CustomSize.marginLarge,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    controller.changePage(controller.currentIndex.value + 1);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: CustomColor.blueColor,
+                    foregroundColor: CustomColor.whiteColor,
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: CustomSize.marginMedium,
+                      vertical: CustomSize.marginSmall,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Percobaan',
+                      ),
+                      Gap(10),
+                      Icon(
+                        Icons.arrow_forward,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Container _buildItemContentDivider(BuildContext context) {
+    return Container(
+      height: 4,
+      width: MediaQuery.of(context).size.width / 6,
+      decoration: BoxDecoration(
+        color: const Color(0xFF0080FF),
+        borderRadius: BorderRadius.circular(
+          CustomSize.roundedLarge,
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buildItemContentIcon({
+    required BuildContext context,
+    required String iconPath,
+    required String title,
+    required bool isActive,
+  }) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.2,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            height: 40,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(iconPath),
+                fit: BoxFit.contain,
+                opacity: isActive ? 1 : 0.5,
+              ),
+            ),
+          ),
+          const Gap(5),
+          Text(
+            title,
+            style: subHeadingMedium.copyWith(
+              color: CustomColor.blueColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
