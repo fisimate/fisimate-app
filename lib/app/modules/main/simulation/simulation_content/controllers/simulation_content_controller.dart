@@ -7,6 +7,20 @@ class SimulationContentController extends GetxController {
   RxInt currentIndex = 0.obs;
   RxInt currentQuizIndex = 0.obs;
 
+  RxList<int> answeredIndex = <int>[0, 1, 2].obs;
+  RxList<Answer> answers = <Answer>[
+    
+  ].obs;
+  
+
+  void addAnswer(Answer answer) {
+    answers.add(answer);
+  }
+
+  void removeAnswer(int index) {
+    answers.removeWhere((element) => element.index == index);
+  }
+
   void changePage(int index) {
     pageController.animateToPage(
       index,
@@ -29,4 +43,14 @@ class SimulationContentController extends GetxController {
     quizContentController.dispose();
     super.onClose();
   }
+}
+
+class Answer {
+  int index;
+  String answer;
+
+  Answer({
+    required this.index,
+    required this.answer
+  });
 }

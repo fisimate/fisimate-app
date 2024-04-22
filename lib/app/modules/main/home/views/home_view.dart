@@ -92,7 +92,9 @@ class HomeView extends GetView<HomeController> {
                   label: 'Leaderboard',
                   iconPath: "assets/images/leader_board.png",
                   color: CustomColor.darkGreenColor,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.LEADERBOARD);
+                  },
                 ),
               ],
             ),

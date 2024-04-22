@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 
 class ModuleViewerController extends GetxController {
   RxString argumentType = ''.obs;
+
   ExamBankElement? examBankElement;
   MaterialBankElement? materialBankElement;
   FormulaBankElement? formulaBankElement;
+
 
   @override
   void onInit() {

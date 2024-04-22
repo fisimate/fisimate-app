@@ -46,14 +46,19 @@ class BankMateriView extends GetView<BankMateriController> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 margin: const EdgeInsets.only(top: 80),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomChip(label: '3 Kelas'),
-                    CustomChip(label: '20 Bab'),
-                    CustomChip(label: '150 Soal')
-                  ],
-                ),
+                child: GetBuilder(
+                    init: BankMateriController(),
+                    builder: (controller) {
+                      final count = controller.materialBank!.count;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CustomChip(label: '${count!.chapters} Bab'),
+                          CustomChip(label: '${count.subChapters} SubBab'),
+                          const CustomChip(label: '150 Soal')
+                        ],
+                      );
+                    }),
               ),
             ),
           ),
@@ -74,9 +79,9 @@ class BankMateriView extends GetView<BankMateriController> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final subjectTitleItem =
-                          controller.materialBankList![index].name;
+                          controller.materialBank!.result![index].name;
                       final subjectDataItem =
-                          controller.materialBankList![index].materialBanks;
+                          controller.materialBank!.result![index].materialBanks;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -93,6 +98,7 @@ class BankMateriView extends GetView<BankMateriController> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             padding: const EdgeInsets.only(bottom: 6.0),
+
                             // physics: const BouncingScrollPhysics(),
                             child: Row(
                               children: [
@@ -126,7 +132,7 @@ class BankMateriView extends GetView<BankMateriController> {
                         ],
                       );
                     },
-                    childCount: controller.materialBankList!.length,
+                    childCount: controller.materialBank!.result!.length,
                   ),
                 );
               }

@@ -2,6 +2,7 @@ import 'package:fisimate/app/modules/main/simulation/simulation_content/controll
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class SimulationQuizSectionView extends GetView<SimulationContentController> {
@@ -14,16 +15,18 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
         Obx(
           () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               for (int i = 0; i < 4; i++)
                 _buildQuizNumber(
                   number: i + 1,
+                  isActive: controller.currentQuizIndex.value == i,
                   isLastItem: i == 3,
-                  isActive: i == controller.currentQuizIndex.value,
+                  answered: controller.answeredIndex.contains(i),
                 ),
             ],
           ),
         ),
+        const Gap(26),
         Expanded(
           child: PageView(
             controller: controller.quizContentController,
@@ -64,10 +67,10 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
           ),
           child: Column(
             children: <Widget>[
-              _buildAnswerButton(),
-              _buildAnswerButton(),
-              _buildAnswerButton(),
-              _buildAnswerButton(),
+              for (int i = 0; i < 4; i++)
+                _buildAnswerButton(
+                  isSelected: i == 0,
+                ),
             ],
           ),
         ),
@@ -75,11 +78,14 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
     );
   }
 
-  ElevatedButton _buildAnswerButton() {
+  ElevatedButton _buildAnswerButton({
+    bool isSelected = false,
+  }) {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        backgroundColor: CustomColor.whiteColor,
+        backgroundColor:
+            isSelected == true ? CustomColor.blueColor : CustomColor.whiteColor,
         elevation: 0,
         side: BorderSide(
           color: CustomColor.blueColor,
@@ -124,11 +130,15 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
     required int number,
     required bool isActive,
     required bool? isLastItem,
+    required bool answered,
   }) {
     return Container(
       decoration: BoxDecoration(
-        color:
-            isActive == true ? CustomColor.bankRumus : CustomColor.whiteColor,
+        color: isActive == true
+            ? CustomColor.blueColor
+            : answered == true
+                ? CustomColor.greenColor
+                : CustomColor.whiteColor,
         shape: BoxShape.circle,
         border: Border.all(
           color: CustomColor.bankRumus,

@@ -36,6 +36,7 @@ abstract class CustomColor {
   // Colors on Home
   static Color bankMateri = const Color(0xffFB9055);
   static Color bankSoal = const Color(0xffF4BB00);
+  static Color leaderboard = const Color(0xff00B232);
   static Color bankRumus = const Color(0xff0075ff);
   static LinearGradient gradientOutline = const LinearGradient(
     colors: [
