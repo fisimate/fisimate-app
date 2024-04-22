@@ -15,7 +15,9 @@ abstract class CustomColor {
   static Color successColor = const Color(0xff158444);
 
   static Color purpleColor = const Color(0xFFC193D5);
+  static Color pinkColor = const Color(0xFFFC4F72);
   static Color blueColor = const Color(0xff072DF4);
+  static Color seaBlueColor = const Color(0xFFC9F2FF);
   static Color lightBlueColor = const Color(0xff00C0FF);
   static Color darkGreenColor = const Color(0xff00B232);
   static Color greenColor = const Color(0xff60E000);

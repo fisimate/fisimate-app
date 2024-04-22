@@ -15,6 +15,8 @@ abstract class Routes {
   static const MODULE_VIEWER = _Paths.MODULE_VIEWER;
   static const GOOGLE_LOGIN = _Paths.GOOGLE_LOGIN;
   static const PROFILE = _Paths.PROFILE;
+  static const SIMULATION = _Paths.SIMULATION;
+  static const SIMULATION_CONTENT = _Paths.SIMULATION_CONTENT;
   static const LEADERBOARD = _Paths.LEADERBOARD;
   static const BANK_RUMUS = _Paths.BANK_RUMUS;
   static const CHATBOT = _Paths.CHATBOT;
@@ -32,6 +34,8 @@ abstract class _Paths {
   static const ONBOARD = '/onboard';
   static const MODULE_VIEWER = '/module-viewer';
   static const PROFILE = '/profile';
+  static const SIMULATION = '/simulation';
+  static const SIMULATION_CONTENT = '/simulation-content';
   static const LEADERBOARD = '/leaderboard';
   static const BANK_RUMUS = '/bank-rumus';
   static const CHATBOT = '/chatbot';

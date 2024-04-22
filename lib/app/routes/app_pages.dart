@@ -16,6 +16,8 @@ import '../modules/login/views/login_with_google_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/home/bindings/home_binding.dart';
 import '../modules/main/home/views/home_view.dart';
+import '../modules/main/simulation/simulation_content/bindings/simulation_content_binding.dart';
+import '../modules/main/simulation/simulation_content/views/simulation_content_view.dart';
 import '../modules/main/views/main_view.dart';
 import '../modules/module_viewer/bindings/module_viewer_binding.dart';
 import '../modules/module_viewer/views/module_viewer_view.dart';
@@ -47,6 +49,11 @@ class AppPages {
           binding: HomeBinding(),
         ),
       ],
+    ),
+    GetPage(
+      name: _Paths.SIMULATION_CONTENT,
+      page: () => const SimulationContentView(),
+      binding: SimulationContentBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
