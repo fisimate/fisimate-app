@@ -18,8 +18,11 @@ import '../modules/main/home/bindings/home_binding.dart';
 import '../modules/main/home/views/home_view.dart';
 import '../modules/main/simulation/simulation_content/bindings/simulation_content_binding.dart';
 import '../modules/main/simulation/simulation_content/views/simulation_content_view.dart';
+<<<<<<< HEAD
 import '../modules/main/simulation/simulation_result/bindings/simulation_result_binding.dart';
 import '../modules/main/simulation/simulation_result/views/simulation_result_view.dart';
+=======
+>>>>>>> fb9c162e3a543d636489a676805ea23dd8945e2d
 import '../modules/main/views/main_view.dart';
 import '../modules/module_viewer/bindings/module_viewer_binding.dart';
 import '../modules/module_viewer/views/module_viewer_view.dart';
@@ -58,11 +61,14 @@ class AppPages {
       binding: SimulationContentBinding(),
     ),
     GetPage(
+<<<<<<< HEAD
       name: _Paths.SIMULATION_RESULT,
       page: () => const SimulationResultView(),
       binding: SimulationResultBinding(),
     ),
     GetPage(
+=======
+>>>>>>> fb9c162e3a543d636489a676805ea23dd8945e2d
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
