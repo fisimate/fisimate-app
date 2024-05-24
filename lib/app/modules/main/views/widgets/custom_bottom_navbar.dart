@@ -14,6 +14,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
+      color: CustomColor.whiteColor,
       child: Row(
         children: <Widget>[
           _buildNavbarItem(
