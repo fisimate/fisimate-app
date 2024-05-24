@@ -20,7 +20,7 @@ class SplashController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    log("oninit");
+    log("onInit");
     _animationController.value = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -51,15 +51,15 @@ class SplashController extends GetxController
 
   @override
   void onClose() {
-    log("oonClonse");
+    log("onClose");
     _animationController.value?.dispose();
     super.onClose();
   }
 
   navigate() async {
     final loggedInStatus = await StorageService.getLoggedInStatus();
-    final accessToken = await StorageService.getAccessToken();
-    final refreshToken = await StorageService.getRefreshToken();
+    // final accessToken = await StorageService.getAccessToken();
+    // final refreshToken = await StorageService.getRefreshToken();
 
     if (loggedInStatus) {
       Get.offNamed(Routes.MAIN);

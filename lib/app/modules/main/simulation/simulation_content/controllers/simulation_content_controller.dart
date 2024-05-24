@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../views/simulation_material_section_view.dart';
+import '../views/simulation_quiz_section_view.dart';
+import '../views/simulation_simulation_section_view.dart';
+
 class SimulationContentController extends GetxController {
   PageController pageController = PageController();
   PageController quizContentController = PageController();
   RxInt currentIndex = 0.obs;
   RxInt currentQuizIndex = 0.obs;
 
-  RxList<int> answeredIndex = <int>[0, 1, 2].obs;
-  RxList<Answer> answers = <Answer>[
-    
-  ].obs;
-  
+  List<String> optionsAlphabet = <String>['A', 'B', 'C', 'D'];
+  RxList<int> answeredIndex = <int>[].obs;
+  RxList<Answer> answers = <Answer>[].obs;
+  List<Widget> pages = const <Widget>[
+    SimulationMaterialSectionView(),
+    SimulationSimulationSectionView(),
+    SimulationQuizSectionView(),
+  ];
 
-  void addAnswer(Answer answer) {
-    answers.add(answer);
+  void addOrChangeAnswer(Answer answer) {
+    if (answeredIndex.contains(answer.quizIndex)) {
+      final int index = answeredIndex.indexOf(answer.quizIndex);
+      answers[index] = answer;
+    } else {
+      answeredIndex.add(answer.quizIndex);
+      answers.add(answer);
+    }
   }
 
-  void removeAnswer(int index) {
-    answers.removeWhere((element) => element.index == index);
+  void removeAnswer(int selectedAnswerIndex) {
+    final int index = answeredIndex.indexOf(currentQuizIndex.value);
+    answers.removeAt(index);
+    answeredIndex.remove(currentQuizIndex.value);
   }
 
   void changePage(int index) {
@@ -46,11 +61,11 @@ class SimulationContentController extends GetxController {
 }
 
 class Answer {
-  int index;
-  String answer;
+  int quizIndex;
+  int answerIndex;
 
   Answer({
-    required this.index,
-    required this.answer
+    required this.quizIndex,
+    required this.answerIndex,
   });
 }

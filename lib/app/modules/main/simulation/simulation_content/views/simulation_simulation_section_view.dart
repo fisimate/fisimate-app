@@ -123,7 +123,7 @@ class SimulationSimulationSectionView
                     IconButton.filled(
                       onPressed: () {},
                       style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll<Color>(
+                        backgroundColor: WidgetStatePropertyAll<Color>(
                           CustomColor.bankRumus,
                         ),
                       ),

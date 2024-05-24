@@ -20,6 +20,7 @@ abstract class Routes {
   static const LEADERBOARD = _Paths.LEADERBOARD;
   static const BANK_RUMUS = _Paths.BANK_RUMUS;
   static const CHATBOT = _Paths.CHATBOT;
+  static const SIMULATION_RESULT = _Paths.SIMULATION_RESULT;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const LEADERBOARD = '/leaderboard';
   static const BANK_RUMUS = '/bank-rumus';
   static const CHATBOT = '/chatbot';
+  static const SIMULATION_RESULT = '/simulation-result';
 }
