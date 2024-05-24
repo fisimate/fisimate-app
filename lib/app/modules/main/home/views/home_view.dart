@@ -14,6 +14,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       body: Column(
         children: <Widget>[
           Gap(
@@ -47,10 +48,10 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const Gap(22),
                 buildHeader(),
-                const Gap(18),
               ],
             ),
           ),
+          const Gap(CustomSize.marginMedium),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -99,7 +100,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
           ),
-          const Gap(13),
+          const Gap(CustomSize.marginMedium),
           Expanded(
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -230,20 +231,11 @@ class HomeView extends GetView<HomeController> {
         borderRadius: BorderRadius.circular(
           CustomSize.roundedMedium,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.09),
-            spreadRadius: 0,
-            blurRadius: 7.8,
-            offset: const Offset(1, 3),
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.21),
-            spreadRadius: 0,
-            blurRadius: 4.8,
-            offset: Offset.zero,
-          ),
-        ],
+        border: Border.all(
+          color: CustomColor.bankRumus,
+          width: 1.0,
+        ),
+        boxShadow: CustomColor.bankItemShadow,
       ),
       child: Row(
         children: <Widget>[
@@ -334,6 +326,7 @@ class HomeView extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(
                 CustomSize.roundedMedium,
               ),
+              boxShadow: CustomColor.mainMenuItemShadow,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -87,18 +87,32 @@ abstract class CustomColor {
   ];
 
   static List<BoxShadow> bankItemShadow = [
-  BoxShadow(
-    color: CustomColor.blackColor.withOpacity(0.21),
-    spreadRadius: 0,
-    blurRadius: 4.8,
-  ),
-  BoxShadow(
-    color: CustomColor.blackColor.withOpacity(0.09),
-    spreadRadius: 0,
-    blurRadius: 7.8,
-    offset: const Offset(1, 3),
-  ),
-];
+    BoxShadow(
+      color: CustomColor.blackColor.withOpacity(0.21),
+      spreadRadius: 0,
+      blurRadius: 4.8,
+    ),
+    BoxShadow(
+      color: CustomColor.blackColor.withOpacity(0.09),
+      spreadRadius: 0,
+      blurRadius: 7.8,
+      offset: const Offset(1, 3),
+    ),
+  ];
+
+  static List<BoxShadow> mainMenuItemShadow = [
+    BoxShadow(
+      color: CustomColor.blackColor.withOpacity(0.05),
+      spreadRadius: 0,
+      blurRadius: 4.1,
+    ),
+    BoxShadow(
+      color: CustomColor.blackColor.withOpacity(0.09),
+      spreadRadius: 0,
+      blurRadius: 6.67,
+      offset: const Offset(0.08, 2.57),
+    ),
+  ];
 
   static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
   static Color onLoadingColor = const Color(0xFFd9d9d9);
