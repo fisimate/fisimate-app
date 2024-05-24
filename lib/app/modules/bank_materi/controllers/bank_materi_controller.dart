@@ -28,12 +28,13 @@ class BankMateriController extends GetxController {
       final connectivityResult = await ConnectivityHelper.checkConnection();
       if (connectivityResult != ConnectivityResult.none) {
         log('Mulai');
-        materialBank =
-            await ApiService.getMaterialBanks(accessToken: accessToken.value, refreshToken: refreshToken);
+        materialBank = await ApiService.getMaterialBanks(
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        );
         state.value = ResultState.hasData;
         log('Successfully fetched all material bank');
-        log('Access token value: ${accessToken.value}');
-        update(['bank_materi']);
+        update(['bank_materi', 'bank_materi_counter']);
       }
     } catch (e) {
       throw Exception('Error on Get All Material Bank: $e');

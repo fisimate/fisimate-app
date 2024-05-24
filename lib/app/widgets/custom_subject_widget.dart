@@ -32,7 +32,7 @@ class CustomSubjectCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: CustomColor.whiteColor,
           borderRadius: BorderRadius.circular(20.0),
-          boxShadow: CustomColor.customBoxShadow,
+          boxShadow: CustomColor.bankItemShadow,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

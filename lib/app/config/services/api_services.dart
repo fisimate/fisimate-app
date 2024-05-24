@@ -84,8 +84,10 @@ abstract class ApiService {
     return response;
   }
 
-  static Future<MaterialBank> getMaterialBanks(
-      {required String accessToken, required String refreshToken}) async {
+  static Future<MaterialBank> getMaterialBanks({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
     final url = Uri.parse(URLs.baseUrl + URLs.materialBank);
 
     final response = await http.get(url, headers: {
