@@ -1,4 +1,5 @@
 import 'package:fisimate/app/config/state/result_state.dart';
+import 'package:fisimate/app/models/material_bank.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
@@ -12,12 +13,14 @@ import 'package:get/get.dart';
 import '../controllers/bank_materi_controller.dart';
 
 class BankMateriView extends GetView<BankMateriController> {
-  const BankMateriView({Key? key}) : super(key: key);
+  const BankMateriView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       body: CustomScrollView(
-        slivers: [
+        slivers: <Widget>[
           SliverAppBar(
             backgroundColor: CustomColor.bankMateri,
             title: Text(
@@ -46,19 +49,24 @@ class BankMateriView extends GetView<BankMateriController> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 margin: const EdgeInsets.only(top: 80),
-                child: GetBuilder(
-                    init: BankMateriController(),
-                    builder: (controller) {
-                      final count = controller.materialBank!.count;
+                child: GetBuilder<BankMateriController>(
+                  id: 'bank_materi_counter',
+                  builder: (controller) {
+                    if (controller.state.value == ResultState.initial) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      final Count count = controller.materialBank!.count!;
                       return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomChip(label: '${count!.chapters} Bab'),
-                          CustomChip(label: '${count.subChapters} SubBab'),
-                          const CustomChip(label: '150 Soal')
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CustomChip(label: '${count.chapters} Bab'),
+                          const Gap(CustomSize.marginLarge),
+                          CustomChip(label: '${count.subChapters} Sub Bab')
                         ],
                       );
-                    }),
+                    }
+                  },
+                ),
               ),
             ),
           ),
@@ -109,7 +117,9 @@ class BankMateriView extends GetView<BankMateriController> {
                                   Container(
                                     margin: index + 1 == subjectDataItem.length
                                         ? EdgeInsets.zero
-                                        : const EdgeInsets.only(right: 10.0),
+                                        : const EdgeInsets.only(
+                                            right: 10.0,
+                                          ),
                                     child: CustomSubjectCard(
                                       assetPath: subjectDataItem[index].icon!,
                                       title: subjectDataItem[index].title!,
