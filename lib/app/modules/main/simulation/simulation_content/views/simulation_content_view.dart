@@ -1,6 +1,3 @@
-import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_material_section_view.dart';
-import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_quiz_section_view.dart';
-import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_simulation_section_view.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
