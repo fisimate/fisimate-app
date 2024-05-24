@@ -9,9 +9,7 @@ void main() {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(
-      const FisimateApp()
-    );
+    runApp(const FisimateApp());
   });
 }
 

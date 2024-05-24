@@ -1,9 +1,11 @@
 import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_material_section_view.dart';
 import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_quiz_section_view.dart';
 import 'package:fisimate/app/modules/main/simulation/simulation_content/views/simulation_simulation_section_view.dart';
+import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
+import 'package:fisimate/app/widgets/custom_simulation_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -79,99 +81,22 @@ class SimulationContentView extends GetView<SimulationContentController> {
               onPageChanged: (index) {
                 controller.currentIndex.value = index;
               },
-              children: const <Widget>[
-                SimulationMaterialSectionView(),
-                SimulationSimulationSectionView(),
-                SimulationQuizSectionView(),
-              ],
+              children: controller.pages,
             ),
           ),
         ],
       ),
       bottomNavigationBar: Obx(
         () {
-          return Row(
-            mainAxisAlignment: controller.currentIndex.value == 0
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              if (controller.currentIndex.value != 0)
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: CustomSize.marginSmall,
-                    right: CustomSize.marginSmall,
-                    bottom: CustomSize.marginLarge,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.changePage(controller.currentIndex.value - 1);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: CustomColor.whiteColor,
-                      foregroundColor: CustomColor.blueColor,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: CustomSize.marginMedium,
-                        vertical: CustomSize.marginSmall,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      side: BorderSide(
-                        color: CustomColor.blueColor,
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.arrow_back,
-                        ),
-                        Gap(10),
-                        Text(
-                          'Kembali',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              Container(
-                margin: const EdgeInsets.only(
-                  left: CustomSize.marginSmall,
-                  right: CustomSize.marginSmall,
-                  bottom: CustomSize.marginLarge,
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    controller.changePage(controller.currentIndex.value + 1);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: CustomColor.blueColor,
-                    foregroundColor: CustomColor.whiteColor,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: CustomSize.marginMedium,
-                      vertical: CustomSize.marginSmall,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Percobaan',
-                      ),
-                      Gap(10),
-                      Icon(
-                        Icons.arrow_forward,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          return CustomSimulationNavigator(
+            currentSectionIndex: controller.currentIndex.value,
+            onNextPressed: () =>
+                controller.currentIndex.value == controller.pages.length - 1
+                    ? Get.toNamed(Routes.SIMULATION_RESULT)
+                    : controller.changePage(controller.currentIndex.value + 1),
+            onBackPressed: () => controller.changePage(
+              controller.currentIndex.value - 1,
+            ),
           );
         },
       ),
