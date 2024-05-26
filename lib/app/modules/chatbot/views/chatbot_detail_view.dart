@@ -2,6 +2,7 @@ import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class ChatbotDetailView extends StatelessWidget {
@@ -10,50 +11,69 @@ class ChatbotDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 5,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                decoration: BoxDecoration(
-                  color: CustomColor.greyColor.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: TextField(
-                  style: subHeadingRegular,
-                  decoration: InputDecoration(
-                    hintText: 'Ketik pesan di sini...',
-                    hintStyle: subHeadingRegular,
-                    isDense: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(30),
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Container(
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: CustomColor.backgroundColor,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: TextField(
+                      style: subHeadingRegular,
+                      minLines: 1,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: 'Ketik pesan di sini...',
+                        hintStyle: subHeadingRegular.copyWith(
+                          color: CustomColor.greyColor,
+                        ),
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10.0,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: SvgPicture.asset(
+                            'assets/icons/emoji.svg',
+                            height: 25,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: CustomColor.bankRumus,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Icon(
-                    Icons.send,
-                    color: CustomColor.whiteColor,
+              const SizedBox(width: 10),
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: CustomColor.bankRumus,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/icons/send.svg',
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: ListView(
@@ -83,8 +103,14 @@ class BubbleChat extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            margin: const EdgeInsets.only(bottom: 10, top: 10),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
+            margin: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
             constraints: BoxConstraints(
               maxWidth: CustomSize.maxWidth * 0.6,
             ),
@@ -101,7 +127,8 @@ class BubbleChat extends StatelessWidget {
               children: [
                 Text(
                   'Apa itu Hukum Newton?',
-                  style: subHeadingRegular.copyWith(color: CustomColor.whiteColor),
+                  style:
+                      subHeadingRegular.copyWith(color: CustomColor.whiteColor),
                 ),
                 const Gap(5.0),
                 Text(
@@ -126,7 +153,7 @@ class BubbleChat extends StatelessWidget {
               maxWidth: CustomSize.maxWidth * 0.6,
             ),
             decoration: BoxDecoration(
-              color: CustomColor.greyColor.withOpacity(0.3),
+              color: CustomColor.backgroundColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -145,7 +172,9 @@ class BubbleChat extends StatelessWidget {
                 Text(
                   '10:00',
                   style: bodyMedium.copyWith(
-                      fontSize: 12, color: CustomColor.darkGreyColor),
+                    fontSize: 12,
+                    color: CustomColor.darkGreyColor,
+                  ),
                 ),
               ],
             ),
