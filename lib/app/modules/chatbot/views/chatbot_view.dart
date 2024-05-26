@@ -14,12 +14,16 @@ class ChatbotView extends GetView<ChatbotController> {
   Widget build(BuildContext context) {
     final controller = Get.put(ChatbotController());
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       appBar: AppBar(
+        backgroundColor: CustomColor.whiteColor,
         title: Row(
           children: [
             CircleAvatar(
               backgroundColor: CustomColor.bankRumus,
-              foregroundImage: const AssetImage('assets/icons/chatbot.png'),
+              foregroundImage: const AssetImage(
+                'assets/icons/chatbot.png',
+              ),
             ),
             const Gap(10.0),
             Text(
