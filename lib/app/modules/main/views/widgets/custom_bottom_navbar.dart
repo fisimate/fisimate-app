@@ -11,7 +11,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Ink(
       padding: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       color: CustomColor.whiteColor,
@@ -59,32 +59,34 @@ class CustomBottomNavigationBar extends StatelessWidget {
           controller.changePage(index);
         },
         splashFactory: InkRipple.splashFactory,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Obx(
-              () => SvgPicture.asset(
-                controller.currentIndex.value == index
-                    ? activeIconPath
-                    : inActiveIconPath,
-                height: 25,
-              ),
-            ),
-            const Gap(
-              10,
-            ),
-            Obx(
-              () => Text(
-                label,
-                style: poppinsMedium.copyWith(
-                  fontSize: 12,
-                  color: controller.currentIndex.value == index
-                      ? CustomColor.activeColor
-                      : CustomColor.inActiveColor,
+        child: Ink(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Obx(
+                () => SvgPicture.asset(
+                  controller.currentIndex.value == index
+                      ? activeIconPath
+                      : inActiveIconPath,
+                  height: 25,
                 ),
               ),
-            ),
-          ],
+              const Gap(
+                10,
+              ),
+              Obx(
+                () => Text(
+                  label,
+                  style: poppinsMedium.copyWith(
+                    fontSize: 12,
+                    color: controller.currentIndex.value == index
+                        ? CustomColor.activeColor
+                        : CustomColor.inActiveColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

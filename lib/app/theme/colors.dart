@@ -116,4 +116,6 @@ abstract class CustomColor {
 
   static Color dividerColor = const Color.fromRGBO(239, 239, 239, 100);
   static Color onLoadingColor = const Color(0xFFd9d9d9);
+
+  static Color searchBarGreyColor = const Color(0xFFEFEFF0);
 }
