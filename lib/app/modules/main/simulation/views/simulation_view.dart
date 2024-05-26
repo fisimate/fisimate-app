@@ -2,8 +2,10 @@ import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
+import 'package:fisimate/app/widgets/custom_header.dart';
 import 'package:fisimate/app/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -11,19 +13,22 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../controllers/simulation_controller.dart';
 
 class SimulationView extends GetView<SimulationController> {
-  const SimulationView({Key? key}) : super(key: key);
+  const SimulationView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Get.put(
       SimulationController(),
     );
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           "Simulasi",
-          style: titleBold.copyWith(
+          style: headingBold.copyWith(
             color: CustomColor.blueColor,
+            fontSize: 20,
           ),
         ),
       ),
@@ -31,15 +36,14 @@ class SimulationView extends GetView<SimulationController> {
         padding: const EdgeInsets.symmetric(horizontal: CustomSize.marginLarge),
         child: Column(
           children: [
-            buildHeader(),
-            const Gap(18),
+            const CustomHeader(),
+            const Gap(
+              CustomSize.marginMedium,
+            ),
             CustomSearchBar(
               hint: "Cari",
-              prefix: Icon(
-                Icons.search,
-                color: CustomColor.greyColor,
-              ),
-              suffix: const Icon(Icons.tune),
+              prefix: SvgPicture.asset("assets/icons/search.svg"),
+              suffix: SvgPicture.asset("assets/icons/filter.svg"),
             ),
             const Gap(32),
             Row(
@@ -47,13 +51,13 @@ class SimulationView extends GetView<SimulationController> {
               children: [
                 Text(
                   "Pembelajaran Terakhir",
-                  style: bodySemiBold.copyWith(fontSize: 12),
+                  style: bodyMedium.copyWith(fontSize: 12),
                 ),
                 const Gap(10),
                 Expanded(
                   child: Container(
                     height: 2,
-                    color: CustomColor.blackColor,
+                    color: CustomColor.greyColor,
                   ),
                 )
               ],
@@ -173,15 +177,9 @@ class SimulationView extends GetView<SimulationController> {
           color: CustomColor.whiteColor,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: CustomColor.blueColor,
+            color: CustomColor.bankRumus,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade100,
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-            ),
-          ],
+          boxShadow: CustomColor.mainMenuItemShadow,
         ),
         child: Row(
           children: <Widget>[
@@ -211,8 +209,8 @@ class SimulationView extends GetView<SimulationController> {
                       const Spacer(),
                       Icon(
                         Icons.arrow_forward_ios,
-                        color: CustomColor.blueColor,
-                        size: 12,
+                        color: CustomColor.greyColor,
+                        size: 14,
                       )
                     ],
                   ),

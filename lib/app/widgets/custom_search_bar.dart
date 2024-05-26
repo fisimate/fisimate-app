@@ -17,8 +17,8 @@ class CustomSearchBar extends StatefulWidget {
   final Function? onClick;
   final bool? withElevation;
   final bool readOnly;
-  final Icon? suffix;
-  final Icon? prefix;
+  final Widget? suffix;
+  final Widget? prefix;
   final Function(String)? onChanged;
 
   @override
@@ -38,48 +38,54 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         elevation: widget.withElevation == true ? 1 : 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(
-            color: Colors.grey,
-          ),
+          side: BorderSide.none,
         ),
-        child: TextField(
-          cursorColor: CustomColor.blueColor,
-          enabled: widget.onClick == null,
-          readOnly: widget.readOnly,
-          onChanged: (data) {
-            widget.onChanged?.call(data);
-            setState(() {
-              showClearButton = controller.text.isNotEmpty;
-            });
-          },
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: bodyRegular.copyWith(fontSize: 14),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 20,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: CustomColor.greyColor,
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: CustomColor.mainMenuItemShadow,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: TextField(
+            cursorColor: CustomColor.blueColor,
+            enabled: widget.onClick == null,
+            readOnly: widget.readOnly,
+            onChanged: (data) {
+              widget.onChanged?.call(data);
+              setState(() {
+                showClearButton = controller.text.isNotEmpty;
+              });
+            },
+            controller: controller,
+            decoration: InputDecoration(
+              hintText: widget.hint,
+              hintStyle: bodyRegular.copyWith(fontSize: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 20,
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: CustomColor.blackColor,
+              filled: true,
+              fillColor: CustomColor.searchBarGreyColor,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
               ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: Colors.grey.shade300,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
               ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
+              suffixIconConstraints: const BoxConstraints(
+                minWidth: 50,
+              ),
+              suffixIcon: widget.suffix,
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 50,
+              ),
+              prefixIcon: widget.prefix,
             ),
-            suffixIcon: widget.suffix,
-            prefixIcon: widget.prefix,
           ),
         ),
       ),
