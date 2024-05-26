@@ -28,6 +28,7 @@ abstract class CustomColor {
   static Color greyColor = const Color(0xFFBCBACD);
   static Color darkGreyColor = const Color(0xFFB5B5B5);
   static Color backgroundColor = const Color(0xFFf2f2f2);
+  static Color transparentColor = const Color(0x00000000);
 
   // Colors for Bottom Navigation Bar
   static Color activeColor = const Color(0xff072DF4);

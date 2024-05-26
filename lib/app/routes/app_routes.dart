@@ -21,6 +21,7 @@ abstract class Routes {
   static const BANK_RUMUS = _Paths.BANK_RUMUS;
   static const CHATBOT = _Paths.CHATBOT;
   static const SIMULATION_RESULT = _Paths.SIMULATION_RESULT;
+  static const EDIT_PROFILE = _Paths.PROFILE + _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const BANK_RUMUS = '/bank-rumus';
   static const CHATBOT = '/chatbot';
   static const SIMULATION_RESULT = '/simulation-result';
+  static const EDIT_PROFILE = '/edit-profile';
 }
