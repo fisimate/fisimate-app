@@ -5,6 +5,7 @@ import 'package:fisimate/app/config/api/urls.dart';
 import 'package:fisimate/app/models/exam_bank.dart';
 import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:fisimate/app/models/material_bank.dart';
+import 'package:fisimate/app/models/user_profile.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiService {
@@ -145,5 +146,32 @@ abstract class ApiService {
     } else {
       throw Exception('Failed to load Exam Bank');
     }
+  }
+
+  static Future<UserProfile> getUserProfile({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
+    final url = Uri.parse(URLs.baseUrl + URLs.userProfile);
+
+    final response = await http.get(url, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $accessToken',
+    });
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body)['data'];
+
+      log('Json Response on User Profile: $jsonResponse');
+
+      return userProfileFromJson(jsonEncode(jsonResponse));
+    } else if (response.statusCode == 401) {
+      getAccessToken(refreshToken: refreshToken);
+      getUserProfile(accessToken: accessToken, refreshToken: refreshToken);
+    } else {
+      throw Exception('Failed to load User Profile');
+    }
+
+    return userProfileFromJson(jsonEncode({}));
   }
 }

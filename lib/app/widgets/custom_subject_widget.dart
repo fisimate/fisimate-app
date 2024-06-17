@@ -40,6 +40,11 @@ class CustomSubjectCard extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: assetPath,
               width: 80,
+              errorWidget: (context, url, error) => Icon(
+                Icons.error,
+                color: CustomColor.bankRumus,
+                size: 80,
+              ),
             ),
             const Gap(8.0),
             Flexible(

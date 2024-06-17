@@ -12,10 +12,12 @@ import 'package:get/get.dart';
 import '../controllers/bank_rumus_controller.dart';
 
 class BankRumusView extends GetView<BankRumusController> {
-  const BankRumusView({Key? key}) : super(key: key);
+  const BankRumusView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -35,7 +37,9 @@ class BankRumusView extends GetView<BankRumusController> {
                 backgroundColor: CustomColor.whiteColor,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 4.0),
-                  child: Image.asset('assets/icons/arrow-back.png'),
+                  child: Image.asset(
+                    'assets/icons/arrow-back.png',
+                  ),
                 ),
               ),
               onPressed: () {

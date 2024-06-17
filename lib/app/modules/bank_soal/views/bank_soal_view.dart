@@ -16,6 +16,7 @@ class BankSoalView extends GetView<BankSoalController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

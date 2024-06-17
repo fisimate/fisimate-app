@@ -26,7 +26,7 @@ class CustomFilledButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? CustomSize.maxWidth,
-        height: height ?? CustomSize.maxHeight / 13.5,
+        height: height ?? CustomSize.maxHeight / 18,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 75.0),
           color: color,

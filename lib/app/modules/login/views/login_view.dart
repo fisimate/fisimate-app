@@ -17,6 +17,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(

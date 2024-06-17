@@ -1,3 +1,5 @@
+import 'package:fisimate/app/modules/main/simulation/simulation_result/bindings/simulation_result_binding.dart';
+import 'package:fisimate/app/modules/main/simulation/simulation_result/views/simulation_result_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bank_materi/bindings/bank_materi_binding.dart';
@@ -54,10 +56,16 @@ class AppPages {
       ],
     ),
     GetPage(
-      name: _Paths.SIMULATION_CONTENT,
-      page: () => const SimulationContentView(),
-      binding: SimulationContentBinding(),
-    ),
+        name: _Paths.SIMULATION_CONTENT,
+        page: () => const SimulationContentView(),
+        binding: SimulationContentBinding(),
+        children: [
+          GetPage(
+            name: _Paths.SIMULATION_RESULT,
+            page: () => const SimulationResultView(),
+            binding: SimulationResultBinding(),
+          ),
+        ]),
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),
@@ -102,13 +110,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
-      children: [
-        GetPage(
-          name: _Paths.EDIT_PROFILE,
-          page: () => const EditProfileView(),
-          binding: EditProfileBinding(),
-        ),
-      ],
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
     ),
     GetPage(
       name: _Paths.LEADERBOARD,

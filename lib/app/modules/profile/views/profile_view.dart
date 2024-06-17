@@ -9,10 +9,13 @@ import 'package:get/get.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
+    final controller = Get.put(
+      ProfileController(),
+    );
     return Scaffold(
       backgroundColor: CustomColor.whiteColor,
       body: Column(
@@ -32,24 +35,53 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               children: <Widget>[
                 const Gap(11),
-                CircleAvatar(
-                  radius: 45,
-                  backgroundColor: CustomColor.yellowColor,
-                  backgroundImage: const AssetImage(
-                    "assets/images/dummy_profile_photo.jpeg",
+                Hero(
+                  tag: "profile_photo",
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        // BoxShadow(
+                        //   color: CustomColor.greyColor.withOpacity(0.5),
+                        //   blurRadius: 10,
+                        //   offset: const Offset(0, 5),
+                        // ),
+                      ],
+                    ),
+                    child: GetBuilder<ProfileController>(
+                      id: "profile_photo",
+                      builder: (context) {
+                        return CircleAvatar(
+                          radius: 45,
+                          backgroundColor: CustomColor.yellowColor,
+                          backgroundImage:
+                              controller.userProfile.profilePicture != null
+                                  ? NetworkImage(
+                                      controller.userProfile.profilePicture!,
+                                    )
+                                  : const AssetImage(
+                                      'assets/images/dummy_profile_photo.jpeg',
+                                    ) as ImageProvider,
+                        );
+                      },
+                    ),
                   ),
                 ),
                 const Gap(6),
-                Text(
-                  "Dafa Rispek",
-                  style: titleBold.copyWith(
-                    color: CustomColor.whiteColor,
+                Obx(
+                  () => Text(
+                    controller.userProfile.fullname ?? "",
+                    style: titleBold.copyWith(
+                      color: CustomColor.whiteColor,
+                    ),
                   ),
                 ),
-                Text(
-                  "Siswa 10 MIPA 2 SMAN 1 Binangun",
-                  style: subHeadingRegular.copyWith(
-                    color: CustomColor.whiteColor,
+                Obx(
+                  () => Text(
+                    controller.userProfile.nis ?? "",
+                    style: subHeadingRegular.copyWith(
+                      color: CustomColor.whiteColor,
+                    ),
                   ),
                 ),
                 const Gap(22.5),

@@ -9,16 +9,11 @@ void main() {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(
-      const FisimateApp()
-    );
+    runApp(const FisimateApp());
   });
 }
-
 class FisimateApp extends StatelessWidget {
-  const FisimateApp({
-    super.key,
-  });
+  const FisimateApp({super.key});
 
   @override
   Widget build(BuildContext context) {
