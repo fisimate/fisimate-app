@@ -5,6 +5,7 @@ import 'package:fisimate/app/config/api/urls.dart';
 import 'package:fisimate/app/models/exam_bank.dart';
 import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:fisimate/app/models/material_bank.dart';
+import 'package:fisimate/app/models/simulation.dart';
 import 'package:fisimate/app/models/user_profile.dart';
 import 'package:http/http.dart' as http;
 
@@ -145,6 +146,26 @@ abstract class ApiService {
       return examBankFromJson(jsonEncode(jsonResponse));
     } else {
       throw Exception('Failed to load Exam Bank');
+    }
+  }
+
+  static Future<List<Simulation>> getSimulations({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
+    final url = Uri.parse(URLs.baseUrl + URLs.simulation);
+
+    final response = await http.get(url, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $accessToken',
+    });
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body)["data"];
+      log("Simulation + $jsonResponse");
+      return simulationFromJson(jsonEncode(jsonResponse));
+    } else {
+      throw Exception('Failed to load Simulations');
     }
   }
 

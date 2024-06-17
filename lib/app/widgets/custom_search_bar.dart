@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({
-    Key? key,
+    super.key,
     required this.hint,
     this.onClick,
     this.withElevation,
@@ -12,7 +12,9 @@ class CustomSearchBar extends StatefulWidget {
     this.onChanged,
     this.suffix,
     this.prefix,
-  }) : super(key: key);
+    this.controller,
+  });
+
   final String hint;
   final Function? onClick;
   final bool? withElevation;
@@ -20,6 +22,7 @@ class CustomSearchBar extends StatefulWidget {
   final Widget? suffix;
   final Widget? prefix;
   final Function(String)? onChanged;
+  final TextEditingController? controller;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();

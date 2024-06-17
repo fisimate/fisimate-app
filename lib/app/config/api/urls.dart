@@ -16,13 +16,30 @@ abstract class URLs {
 
   // END - Auth
 
-  // START - Exam Bank
+  // START - Contents Bank
+
+  // GET - Exam Bank
   static const String examBank = 'exam-banks';
+  // GET - Material Bank
   static const String materialBank = 'material-banks';
+  // GET - Formula Bank
   static const String formulaBank = 'formula-banks';
 
-  // END - Exam Bank
+  // END - Contents Bank
+
+  // START - Simulation
+
+  // GET - Simulation
+  static const String simulation = 'simulations';
+  // GET - Simulation Quiz
+  static const String simulationQuiz = 'quizzes';
+
+  // END - Simulation
 
   // START - User Profile
+
+  // GET - User Profile
   static const String userProfile = 'users/profile';
+
+  // END - User Profile
 }

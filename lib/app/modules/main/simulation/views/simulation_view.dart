@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
@@ -9,8 +11,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
 import '../controllers/simulation_controller.dart';
+import 'package:fisimate/app/models/simulation.dart' as simulation_model;
 
 class SimulationView extends GetView<SimulationController> {
   const SimulationView({super.key});
@@ -23,6 +25,9 @@ class SimulationView extends GetView<SimulationController> {
     return Scaffold(
       backgroundColor: CustomColor.whiteColor,
       appBar: AppBar(
+        backgroundColor: CustomColor.whiteColor,
+        scrolledUnderElevation: 0,
+        elevation: 0,
         centerTitle: true,
         title: Text(
           "Simulasi",
@@ -32,74 +37,91 @@ class SimulationView extends GetView<SimulationController> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: CustomSize.marginLarge),
-        child: Column(
-          children: [
-            const CustomHeader(),
-            const Gap(
-              CustomSize.marginMedium,
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: CustomSize.marginLarge,
             ),
-            CustomSearchBar(
-              hint: "Cari",
-              prefix: SvgPicture.asset("assets/icons/search.svg"),
-              suffix: SvgPicture.asset("assets/icons/filter.svg"),
-            ),
-            const Gap(32),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            color: CustomColor.whiteColor,
+            child: Column(
               children: [
-                Text(
-                  "Pembelajaran Terakhir",
-                  style: bodyMedium.copyWith(fontSize: 12),
+                const CustomHeader(),
+                const Gap(
+                  CustomSize.marginMedium,
+                ),
+                CustomSearchBar(
+                  controller: controller.searchController,
+                  onChanged: (String value) =>
+                      controller.filterSimulations(value),
+                  hint: "Cari",
+                  prefix: SvgPicture.asset("assets/icons/search.svg"),
+                  suffix: SvgPicture.asset("assets/icons/filter.svg"),
+                ),
+                const Gap(32),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Pembelajaran Terakhir",
+                      style: bodyMedium.copyWith(fontSize: 12),
+                    ),
+                    const Gap(10),
+                    Expanded(
+                      child: Container(
+                        height: 2,
+                        color: CustomColor.greyColor,
+                      ),
+                    )
+                  ],
                 ),
                 const Gap(10),
-                Expanded(
-                  child: Container(
-                    height: 2,
-                    color: CustomColor.greyColor,
-                  ),
-                )
               ],
             ),
-            const Gap(10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  List<Map<String, dynamic>> simulationItem = [
-                    {
-                      'label': 'GLBB',
-                      'imagePath': 'assets/icons/blue-car.png',
-                      'progress': 80,
-                    },
-                    {
-                      'label': 'Titik Berat',
-                      'imagePath': 'assets/icons/scales.png',
-                      'progress': 20,
-                    },
-                    {
-                      'label': 'Hukum Pascal',
-                      'imagePath': 'assets/icons/gas-cable.png',
-                      'progress': 54,
-                    },
-                  ];
-                  return Column(
-                    children: <Widget>[
-                      _buildSimulationItem(
-                        label: simulationItem[index]['label'],
-                        imagePath: simulationItem[index]['imagePath'],
-                        progress: simulationItem[index]['progress'],
-                      ),
-                      const Gap(10),
-                    ],
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+          ),
+          Obx(
+            () {
+              return Expanded(
+                child: controller.state == ResultState.loading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : controller.filteredSimulations.isEmpty
+                        ? _buildListView(
+                            simulations: controller.simulations,
+                          )
+                        : _buildListView(
+                            simulations: controller.filteredSimulations,
+                          ),
+              );
+            },
+          )
+        ],
       ),
+    );
+  }
+
+  ListView _buildListView({
+    required List<simulation_model.Simulation> simulations,
+  }) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(
+        horizontal: CustomSize.marginLarge,
+      ),
+      itemCount: simulations.length,
+      itemBuilder: (context, index) {
+        return Column(
+          children: <Widget>[
+            _buildSimulationItem(
+              label: simulations[index].title ?? "",
+              imagePath: simulations[index].icon ?? "",
+              progress: 100,
+            ),
+            const Gap(10),
+          ],
+        );
+      },
     );
   }
 
@@ -185,8 +207,23 @@ class SimulationView extends GetView<SimulationController> {
           children: <Widget>[
             Expanded(
               flex: 2,
-              child: Image.asset(
-                imagePath,
+              child: CachedNetworkImage(
+                imageUrl: imagePath,
+                imageBuilder: (context, imageProvider) => Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
             const Gap(15),
@@ -197,16 +234,18 @@ class SimulationView extends GetView<SimulationController> {
                 children: <Widget>[
                   Row(
                     children: [
-                      Text(
-                        "Simulasi $label",
-                        style: poppinsBold.copyWith(
-                          fontSize: 14,
-                          color: CustomColor.blackColor,
+                      Expanded(
+                        child: Text(
+                          "Simulasi $label",
+                          style: poppinsBold.copyWith(
+                            fontSize: 14,
+                            color: CustomColor.blackColor,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                      const Spacer(),
+                      const Gap(10),
                       Icon(
                         Icons.arrow_forward_ios,
                         color: CustomColor.greyColor,
