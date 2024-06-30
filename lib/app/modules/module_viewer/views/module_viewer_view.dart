@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 import '../controllers/module_viewer_controller.dart';
 
 class ModuleViewerView extends GetView<ModuleViewerController> {
-  const ModuleViewerView({Key? key}) : super(key: key);
+  const ModuleViewerView({super.key});
+  
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> data = {};
@@ -38,6 +39,7 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
       default:
     }
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       appBar: AppBar(
         backgroundColor: data['color'],
         title: Text(
@@ -64,6 +66,7 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
         margin: const EdgeInsets.all(CustomSize.marginSmall),
         padding: const EdgeInsets.all(CustomSize.marginSmall),
         decoration: BoxDecoration(
+          color: CustomColor.whiteColor,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: data['color'],

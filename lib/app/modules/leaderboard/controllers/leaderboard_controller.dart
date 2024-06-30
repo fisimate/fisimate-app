@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class LeaderboardController extends GetxController {
@@ -19,4 +20,9 @@ class LeaderboardController extends GetxController {
     {'position': 10, 'name': 'Rizky Ramadhan', 'score': 40},
     {'position': 10, 'name': 'Rizky Ramadhan', 'score': 40},
   ];
+
+  PageController pageController = PageController(
+    viewportFraction: 0.5,
+    initialPage: 1,
+  );
 }

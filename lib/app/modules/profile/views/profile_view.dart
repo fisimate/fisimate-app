@@ -38,15 +38,8 @@ class ProfileView extends GetView<ProfileController> {
                 Hero(
                   tag: "profile_photo",
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        // BoxShadow(
-                        //   color: CustomColor.greyColor.withOpacity(0.5),
-                        //   blurRadius: 10,
-                        //   offset: const Offset(0, 5),
-                        // ),
-                      ],
                     ),
                     child: GetBuilder<ProfileController>(
                       id: "profile_photo",

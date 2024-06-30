@@ -1,12 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:fisimate/app/config/api/urls.dart';
+import 'package:fisimate/app/data/responses/profile/update_user_picture.dart';
+import 'package:fisimate/app/helpers/request_helper.dart';
 import 'package:fisimate/app/models/exam_bank.dart';
 import 'package:fisimate/app/models/formula_bank.dart';
 import 'package:fisimate/app/models/material_bank.dart';
 import 'package:fisimate/app/models/simulation.dart';
 import 'package:fisimate/app/models/user_profile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiService {
@@ -194,5 +199,50 @@ abstract class ApiService {
     }
 
     return userProfileFromJson(jsonEncode({}));
+  }
+
+  static Future<dynamic> updateUserPicture({
+    required File file,
+    required String accessToken,
+  }) async {
+    Dio dio = Dio();
+
+    String url = '${URLs.baseUrl}${URLs.updateUserPicture}';
+
+    try {
+      String fileName = file.path.split('/').last;
+
+      debugPrint('File Name: $fileName');
+
+      FormData formData = FormData.fromMap({
+        'profilePicture': await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+          contentType: RequestHelper.getImageContentType(
+            file.path,
+          ),
+        ),
+      });
+
+      final response = await dio.post(
+        url,
+        data: formData,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+          },
+        ),
+      );
+
+      return UpdateUserPictureResponse.fromJson(
+        jsonDecode(
+          response.toString(),
+        ),
+      );
+    } catch (e) {
+      if (e is DioException) {
+        log('Error: ${e.response}');
+      }
+    }
   }
 }

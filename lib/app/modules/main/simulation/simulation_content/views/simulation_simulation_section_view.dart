@@ -3,7 +3,6 @@ import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:fisimate/app/theme/sizing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -93,6 +92,7 @@ class SimulationSimulationSectionView
             const Gap(10),
             Column(
               children: <Widget>[
+                // TODO : Change into game widget
                 Image.asset(
                   "assets/images/dummy_simulation.png",
                   fit: BoxFit.contain,
@@ -101,35 +101,39 @@ class SimulationSimulationSectionView
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        _buildSimulationInputForm(
-                          title: "Kecepatan",
-                          unit: "m/s",
-                        ),
-                        const Gap(18),
-                        _buildSimulationInputForm(
-                          title: "Waktu awal",
-                          unit: "s",
-                        ),
-                        const Gap(18),
-                        _buildSimulationInputForm(
-                          title: "Percepatan",
-                          unit: "m/s^2",
-                        ),
-                      ],
-                    ),
-                    IconButton.filled(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll<Color>(
-                          CustomColor.bankRumus,
-                        ),
+                    Form(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _buildSimulationInputForm(
+                            title: "Kecepatan",
+                            unit: "m/s",
+                          ),
+                          const Gap(18),
+                          _buildSimulationInputForm(
+                            title: "Waktu awal",
+                            unit: "s",
+                          ),
+                          const Gap(18),
+                          _buildSimulationInputForm(
+                            title: "Percepatan",
+                            unit: "m/s^2",
+                          ),
+                        ],
                       ),
-                      icon: const Icon(
-                        Icons.play_arrow_rounded,
-                        size: 45,
+                    ),
+                    Expanded(
+                      child: IconButton.filled(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll<Color>(
+                            CustomColor.bankRumus,
+                          ),
+                        ),
+                        icon: const Icon(
+                          Icons.play_arrow_rounded,
+                          size: 45,
+                        ),
                       ),
                     ),
                   ],
@@ -165,16 +169,20 @@ class SimulationSimulationSectionView
                     borderRadius: BorderRadius.circular(
                       CustomSize.roundedMedium,
                     ),
-                    boxShadow: [
+                    boxShadow: <BoxShadow>[
                       BoxShadow(
                         color: CustomColor.blackColor.withOpacity(0.1),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
-                  child: TextField(
+                  child: TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
                     decoration: InputDecoration(
                       constraints: const BoxConstraints(
                         maxWidth: 70,

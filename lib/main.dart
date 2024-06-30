@@ -7,11 +7,16 @@ import 'app/routes/app_pages.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(const FisimateApp());
-  });
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then(
+    (_) => runApp(
+      const FisimateApp(),
+    ),
+  );
 }
+
 class FisimateApp extends StatelessWidget {
   const FisimateApp({super.key});
 

@@ -40,6 +40,9 @@ abstract class URLs {
 
   // GET - User Profile
   static const String userProfile = 'users/profile';
+  
+  // PUT - Update User Picture
+  static const String updateUserPicture = 'users/profile/picture';
 
   // END - User Profile
 }

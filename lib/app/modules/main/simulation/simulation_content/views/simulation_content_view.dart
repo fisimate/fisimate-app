@@ -11,11 +11,14 @@ import 'package:get/get.dart';
 import '../controllers/simulation_content_controller.dart';
 
 class SimulationContentView extends GetView<SimulationContentController> {
-  const SimulationContentView({Key? key}) : super(key: key);
+  const SimulationContentView({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColor.whiteColor,
       appBar: AppBar(
+        backgroundColor: CustomColor.whiteColor,
         centerTitle: true,
         title: Text(
           "Materi",

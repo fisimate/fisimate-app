@@ -161,32 +161,30 @@ class EditProfileView extends GetView<EditProfileController> {
             ),
             child: Obx(
               () {
-                return Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        _buildProfileItem(
-                          label: "Nama Panjang",
-                          value: profileController.userProfile.fullname ?? "",
-                        ),
-                        const Gap(20),
-                        _buildProfileItem(
-                          label: "Kelas",
-                          value: profileController.userProfile.role?.name ?? "",
-                        ),
-                        const Gap(20),
-                        _buildProfileItem(
-                          label: "Email",
-                          value: profileController.userProfile.email ?? "",
-                        ),
-                        const Gap(20),
-                        _buildProfileItem(
-                          label: "No Telepon",
-                          value: profileController.userProfile.nis ?? "",
-                        ),
-                        const Gap(20),
-                      ],
-                    ),
+                return SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      _buildProfileItem(
+                        label: "Nama Panjang",
+                        value: profileController.userProfile.fullname ?? "",
+                      ),
+                      const Gap(20),
+                      _buildProfileItem(
+                        label: "Kelas",
+                        value: profileController.userProfile.role?.name ?? "",
+                      ),
+                      const Gap(20),
+                      _buildProfileItem(
+                        label: "Email",
+                        value: profileController.userProfile.email ?? "",
+                      ),
+                      const Gap(20),
+                      _buildProfileItem(
+                        label: "No Telepon",
+                        value: profileController.userProfile.nis ?? "",
+                      ),
+                      const Gap(20),
+                    ],
                   ),
                 );
               }
