@@ -3,10 +3,7 @@
 *.log
 *.pyc
 *.swp
-
-/fisimate-base-app/.DS_Store
-/fisimate-gamified-app/.DS_Store
-
+.DS_Store
 .atom/
 .buildlog/
 .history
@@ -32,9 +29,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-
-/fisimate-base-app/build/
-/fisimate-gamified-app/build/
+/build/
 
 # Symbolication related
 app.*.symbols
@@ -43,17 +38,8 @@ app.*.symbols
 app.*.map.json
 
 # Android Studio will place build artifacts here
-/fisimate-base-app/android/app/debug
-/fisimate-base-app/android/app/profile
-/fisimate-base-app/android/app/release
+/android/app/debug
+/android/app/profile
+/android/app/release
 
-/fisimate-gamified-app/android/app/debug
-/fisimate-gamified-app/android/app/profile
-/fisimate-gamified-app/android/app/release
-
-/fisimate-base-app/pubspec.lock
-/fisimate-gamified-app/pubspec.lock
-
-/fisimate-gamified-app/flutter_unity_widget/
-/fisimate-gamified-app/unity/
-/fisimate-gamified-app/android/unityLibrary/
+pubspec.lock
