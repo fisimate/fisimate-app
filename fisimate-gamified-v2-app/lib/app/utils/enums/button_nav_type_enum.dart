@@ -1,0 +1,1 @@
+enum ButtonNavTypeEnum { previous, next }
