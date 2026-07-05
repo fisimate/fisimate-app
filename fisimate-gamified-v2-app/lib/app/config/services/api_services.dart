@@ -15,8 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiService {
-  static Future<http.Response> login(
-      {required String email, required String password}) async {
+  static Future<http.Response> login({required String email, required String password}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.login);
 
     final body = {
@@ -31,12 +30,13 @@ abstract class ApiService {
     return response;
   }
 
-  static Future<http.Response> register(
-      {required String fullname,
-      required String nis,
-      required String email,
-      required String password,
-      required String passwordConfirmation}) async {
+  static Future<http.Response> register({
+    required String fullname,
+    required String nis,
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+  }) async {
     final url = Uri.parse(URLs.baseUrl + URLs.register);
 
     final body = {
@@ -44,7 +44,7 @@ abstract class ApiService {
       'nis': nis,
       'email': email,
       'password': password,
-      'passwordConfirmation': passwordConfirmation
+      'passwordConfirmation': passwordConfirmation,
     };
 
     log('Register url: $url');
@@ -54,8 +54,7 @@ abstract class ApiService {
     return response;
   }
 
-  static bool isTokenValid(
-      {required String accessToken, required String refreshToken}) {
+  static bool isTokenValid({required String accessToken, required String refreshToken}) {
     if (accessToken == refreshToken) {
       return true;
     }
@@ -78,14 +77,16 @@ abstract class ApiService {
     return result;
   }
 
-  static Future<http.Response> logout(
-      {required String accessToken, required String refreshToken}) async {
+  static Future<http.Response> logout({required String accessToken, required String refreshToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.logout);
 
-    final response = await http.post(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.post(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       return response;
@@ -103,10 +104,13 @@ abstract class ApiService {
   }) async {
     final url = Uri.parse(URLs.baseUrl + URLs.materialBank);
 
-    final response = await http.get(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body)['data'];
@@ -124,14 +128,16 @@ abstract class ApiService {
     return materialBankFromJson(jsonEncode({}));
   }
 
-  static Future<List<FormulaBank>> getFormulaBanks(
-      {required String accessToken}) async {
+  static Future<List<FormulaBank>> getFormulaBanks({required String accessToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.formulaBank);
 
-    final response = await http.get(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body)["data"]["result"];
@@ -142,14 +148,16 @@ abstract class ApiService {
     }
   }
 
-  static Future<List<ExamBank>> getExamBanks(
-      {required String accessToken}) async {
+  static Future<List<ExamBank>> getExamBanks({required String accessToken}) async {
     final url = Uri.parse(URLs.baseUrl + URLs.examBank);
 
-    final response = await http.get(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body)["data"]["result"];
@@ -166,10 +174,13 @@ abstract class ApiService {
   }) async {
     final url = Uri.parse(URLs.baseUrl + URLs.simulation);
 
-    final response = await http.get(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body)["data"];
@@ -186,10 +197,13 @@ abstract class ApiService {
   }) async {
     final url = Uri.parse(URLs.baseUrl + URLs.userProfile);
 
-    final response = await http.get(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    });
+    final response = await http.get(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
 
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body)['data'];

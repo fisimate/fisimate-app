@@ -65,9 +65,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             children: <Widget>[
               Obx(
                 () => SvgPicture.asset(
-                  controller.currentIndex.value == index
-                      ? activeIconPath
-                      : inActiveIconPath,
+                  controller.currentIndex.value == index ? activeIconPath : inActiveIconPath,
                   height: 25,
                 ),
               ),
@@ -79,9 +77,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   label,
                   style: poppinsMedium.copyWith(
                     fontSize: 12,
-                    color: controller.currentIndex.value == index
-                        ? CustomColor.activeColor
-                        : CustomColor.inActiveColor,
+                    color: controller.currentIndex.value == index ? CustomColor.activeColor : CustomColor.inActiveColor,
                   ),
                 ),
               ),

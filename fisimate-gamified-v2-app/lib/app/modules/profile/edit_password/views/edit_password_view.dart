@@ -73,7 +73,7 @@ class EditPasswordView extends GetView<EditPasswordController> {
                             obscureText: controller.isOldPasswordObscure,
                             onTap: () => controller.toggleIsOldPasswordObscure,
                           );
-                        }
+                        },
                       ),
                       const Gap(20),
                       _buildEditPasswordItem(
@@ -117,8 +117,7 @@ class EditPasswordView extends GetView<EditPasswordController> {
             child: CustomFilledButton(
               text: "Simpan",
               onTap: () {
-                if (controller.formKey.currentState != null &&
-                    controller.formKey.currentState!.validate()) {
+                if (controller.formKey.currentState != null && controller.formKey.currentState!.validate()) {
                   controller.changePassword();
                 }
               },
@@ -129,7 +128,7 @@ class EditPasswordView extends GetView<EditPasswordController> {
           builder: (EditPasswordController controller) {
             if (controller.resultState == ResultState.loading) {
               return Container(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 child: Center(
                   child: CircularProgressIndicator(
                     color: CustomColor.bankRumus,
@@ -166,12 +165,12 @@ class EditPasswordView extends GetView<EditPasswordController> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: CustomColor.blackColor.withOpacity(0.06),
+            color: CustomColor.blackColor.withValues(alpha: 0.06),
             blurRadius: 2,
             offset: const Offset(0, 1),
           ),
           BoxShadow(
-            color: CustomColor.blackColor.withOpacity(0.10),
+            color: CustomColor.blackColor.withValues(alpha: 0.10),
             blurRadius: 3,
             offset: const Offset(0, 1),
           ),
@@ -213,11 +212,11 @@ class EditPasswordView extends GetView<EditPasswordController> {
                       borderSide: BorderSide.none,
                     ),
                     suffix: GestureDetector(
+                      onTap: onTap,
                       child: Icon(
                         Icons.visibility,
                         color: CustomColor.darkGreyColor,
                       ),
-                      onTap: onTap,
                     ),
                   ),
                 ),

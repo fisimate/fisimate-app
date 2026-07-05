@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../controllers/bank_soal_controller.dart';
 
 class BankSoalView extends GetView<BankSoalController> {
-  const BankSoalView({Key? key}) : super(key: key);
+  const BankSoalView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class BankSoalView extends GetView<BankSoalController> {
                           const Gap(CustomSize.marginLarge),
                           CustomChip(
                             label: '${controller.subChapterCount} Sub Bab',
-                          )
+                          ),
                         ],
                       );
                     }
@@ -90,10 +90,8 @@ class BankSoalView extends GetView<BankSoalController> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: controller.chapterList.length,
                     (context, index) {
-                      final subjectTitleItem =
-                          controller.chapterList[index].name;
-                      final subjectDataItem =
-                          controller.chapterList[index].examBankSubChapters;
+                      final subjectTitleItem = controller.chapterList[index].name;
+                      final subjectDataItem = controller.chapterList[index].examBankSubChapters;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -114,9 +112,7 @@ class BankSoalView extends GetView<BankSoalController> {
                             child: Row(
                               children: [
                                 const Gap(CustomSize.marginLarge),
-                                for (int index = 0;
-                                    index < subjectDataItem.length;
-                                    index++)
+                                for (int index = 0; index < subjectDataItem.length; index++)
                                   Container(
                                     margin: index + 1 == subjectDataItem.length
                                         ? EdgeInsets.zero
@@ -124,14 +120,10 @@ class BankSoalView extends GetView<BankSoalController> {
                                     child: CustomSubjectCard(
                                       assetPath: subjectDataItem[index].icon!,
                                       title: subjectDataItem[index].title,
-                                      splashColor: CustomColor.bankRumus
-                                          .withOpacity(0.3),
+                                      splashColor: CustomColor.bankRumus.withValues(alpha: 0.3),
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
-                                        arguments: {
-                                          'type': 'exam_bank',
-                                          'data': subjectDataItem[index]
-                                        },
+                                        arguments: {'type': 'exam_bank', 'data': subjectDataItem[index]},
                                       ),
                                     ),
                                   ),

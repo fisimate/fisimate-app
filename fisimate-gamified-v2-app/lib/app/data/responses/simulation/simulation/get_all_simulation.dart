@@ -29,7 +29,7 @@ class SimulationDTO {
       updatedAt: DateTime.parse(json['updatedAt']),
       chapter: Chapter.fromJson(json['chapter']),
       simulationProgress: List<SimulationProgress>.from(
-        json['simulationProgress'].map(
+        (json['simulationProgress'] as List? ?? []).map(
           (x) => SimulationProgress.fromJson(x),
         ),
       ),
@@ -62,7 +62,7 @@ class Chapter {
       name: json['name'],
       slug: json['slug'],
       icon: json['icon'],
-      shortDescription: json['shortDescription'],
+      shortDescription: json['shortDescription'] ?? '',
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
     );

@@ -13,8 +13,7 @@ class PostAnswerRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      'responses':
-          List<dynamic>.from(responses.map((response) => response.toJson())),
+      'responses': List<dynamic>.from(responses.map((response) => response.toJson())),
     };
   }
 }

@@ -62,9 +62,7 @@ class LoginView extends GetView<LoginController> {
                             controller.toggleObscurePassword();
                           },
                           icon: Icon(
-                            controller.isObscurePassword.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            controller.isObscurePassword.value ? Icons.visibility : Icons.visibility_off,
                             color: CustomColor.darkGreyColor,
                           ),
                         ),
@@ -75,8 +73,7 @@ class LoginView extends GetView<LoginController> {
                       CustomFilledButton(
                         text: 'Masuk',
                         onTap: () {
-                          if (controller.formKey.currentState != null &&
-                              controller.formKey.currentState!.validate()) {
+                          if (controller.formKey.currentState != null && controller.formKey.currentState!.validate()) {
                             controller.unfocusAll();
                             controller.loginWithEmail();
                           }
@@ -118,7 +115,7 @@ class LoginView extends GetView<LoginController> {
               decoration: TextDecoration.underline,
             ),
           ),
-        )
+        ),
       ],
     );
   }

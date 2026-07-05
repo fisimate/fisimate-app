@@ -14,7 +14,7 @@ class LeaderboardController extends GetxController {
   Future<void> getLeaderboard() async {
     final DashboardApiService dashboardApiService = DashboardApiService();
     final leaderboard = await dashboardApiService.getLeaderboard(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
     );
 
     if (leaderboard is Leaderboard) {

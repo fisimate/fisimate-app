@@ -60,16 +60,17 @@ class AppPages {
       ],
     ),
     GetPage(
-        name: _Paths.SIMULATION_CONTENT,
-        page: () => const SimulationContentView(),
-        binding: SimulationContentBinding(),
-        children: [
-          GetPage(
-            name: _Paths.SIMULATION_RESULT,
-            page: () => const SimulationResultView(),
-            binding: SimulationResultBinding(),
-          ),
-        ]),
+      name: _Paths.SIMULATION_CONTENT,
+      page: () => const SimulationContentView(),
+      binding: SimulationContentBinding(),
+      children: [
+        GetPage(
+          name: _Paths.SIMULATION_RESULT,
+          page: () => const SimulationResultView(),
+          binding: SimulationResultBinding(),
+        ),
+      ],
+    ),
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),

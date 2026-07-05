@@ -44,8 +44,7 @@ class SimulationContentController extends GetxController {
     _questions.value = await getQuestions();
     await getSimulationMaterial();
     updateSimulationProgress(1);
-    SimulationController simulationController =
-        Get.find<SimulationController>();
+    SimulationController simulationController = Get.find<SimulationController>();
     simulationController.getAllSimulations();
     super.onReady();
   }
@@ -57,7 +56,7 @@ class SimulationContentController extends GetxController {
 
     final SimulationApiService simulationApiService = SimulationApiService();
     final response = await simulationApiService.getSimulationMaterialById(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: simulation.id,
     );
 
@@ -73,9 +72,8 @@ class SimulationContentController extends GetxController {
 
   Future<List<Question>> getQuestions() async {
     SimulationDTO simulation = Get.arguments['simulation'];
-    final QuestionResponse response =
-        await QuestionApiService().getAllQuestionsById(
-      accessToken: await StorageService.getAccessToken(),
+    final QuestionResponse response = await QuestionApiService().getAllQuestionsById(
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: simulation.id,
     );
     return response.data.questions;
@@ -94,9 +92,8 @@ class SimulationContentController extends GetxController {
 
     final SimulationDTO simulation = Get.arguments['simulation'];
 
-    final PostAnswerResponse postAnswerResponse =
-        await QuestionApiService().submitAnswers(
-      accessToken: await StorageService.getAccessToken(),
+    final PostAnswerResponse postAnswerResponse = await QuestionApiService().submitAnswers(
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: simulation.id,
       answers: answersMap,
     );
@@ -134,8 +131,7 @@ class SimulationContentController extends GetxController {
     );
 
     updateSimulationProgress(index + 1);
-    SimulationController simulationController =
-        Get.find<SimulationController>();
+    SimulationController simulationController = Get.find<SimulationController>();
     simulationController.getAllSimulations();
 
     print(Get.arguments['gameScene']);
@@ -146,7 +142,7 @@ class SimulationContentController extends GetxController {
   Future<void> updateSimulationProgress(int progress) async {
     final SimulationDTO simulation = Get.arguments['simulation'];
     await SimulationApiService().postSimulationProgressById(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: simulation.id,
       progress: progress,
     );

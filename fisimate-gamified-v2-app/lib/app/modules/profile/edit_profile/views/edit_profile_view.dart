@@ -71,7 +71,7 @@ class EditProfileView extends GetView<ProfileController> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: CustomColor.greyColor.withOpacity(0.5),
+                                color: CustomColor.greyColor.withValues(alpha: 0.5),
                                 blurRadius: 10,
                                 offset: const Offset(0, 5),
                               ),
@@ -88,36 +88,31 @@ class EditProfileView extends GetView<ProfileController> {
                                     ),
                                   ),
                                 );
-                              } else if (controller.imageState ==
-                                  ResultState.hasData) {
+                              } else if (controller.imageState == ResultState.hasData) {
                                 return CircleAvatar(
                                   radius: 80,
                                   backgroundColor: CustomColor.yellowColor,
-                                  backgroundImage:
-                                      controller.userProfile.profilePicture !=
-                                              null
-                                          ? NetworkImage(
-                                              controller
-                                                  .userProfile.profilePicture!,
-                                            )
-                                          : const AssetImage(
+                                  backgroundImage: controller.userProfile.profilePicture != null
+                                      ? NetworkImage(
+                                          controller.userProfile.profilePicture!,
+                                        )
+                                      : const AssetImage(
                                               'assets/images/default/default_profile_photo.png',
-                                            ) as ImageProvider,
+                                            )
+                                            as ImageProvider,
                                 );
                               } else {
                                 return CircleAvatar(
                                   radius: 80,
                                   backgroundColor: CustomColor.yellowColor,
-                                  backgroundImage:
-                                      controller.userProfile.profilePicture !=
-                                              null
-                                          ? NetworkImage(
-                                              controller
-                                                  .userProfile.profilePicture!,
-                                            )
-                                          : const AssetImage(
+                                  backgroundImage: controller.userProfile.profilePicture != null
+                                      ? NetworkImage(
+                                          controller.userProfile.profilePicture!,
+                                        )
+                                      : const AssetImage(
                                               'assets/images/default/default_profile_photo.png',
-                                            ) as ImageProvider,
+                                            )
+                                            as ImageProvider,
                                 );
                               }
                             },
@@ -143,7 +138,7 @@ class EditProfileView extends GetView<ProfileController> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: CustomColor.greyColor.withOpacity(0.5),
+                                color: CustomColor.greyColor.withValues(alpha: 0.5),
                                 blurRadius: 2,
                                 offset: const Offset(0, 1),
                               ),
@@ -156,14 +151,12 @@ class EditProfileView extends GetView<ProfileController> {
                                 backgroundColor: CustomColor.whiteColor,
                                 builder: (context) {
                                   return Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        60, 31, 60, 23),
+                                    padding: const EdgeInsets.fromLTRB(60, 31, 60, 23),
                                     child: Row(
                                       children: <Widget>[
                                         _buildBottomSheetItem(
                                           label: "Ambil Foto",
-                                          iconPath:
-                                              "assets/icons/profile/camera.svg",
+                                          iconPath: "assets/icons/profile/camera.svg",
                                           onTap: () {
                                             controller.getImageFromCamera();
                                             Get.back();
@@ -172,8 +165,7 @@ class EditProfileView extends GetView<ProfileController> {
                                         const Gap(20),
                                         _buildBottomSheetItem(
                                           label: "Pilih dari Galeri",
-                                          iconPath:
-                                              "assets/icons/profile/gallery.svg",
+                                          iconPath: "assets/icons/profile/gallery.svg",
                                           onTap: () async {
                                             controller.getImageFromGallery();
                                             Get.back();
@@ -304,12 +296,12 @@ class EditProfileView extends GetView<ProfileController> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: CustomColor.blackColor.withOpacity(0.06),
+            color: CustomColor.blackColor.withValues(alpha: 0.06),
             blurRadius: 2,
             offset: const Offset(0, 1),
           ),
           BoxShadow(
-            color: CustomColor.blackColor.withOpacity(0.10),
+            color: CustomColor.blackColor.withValues(alpha: 0.10),
             blurRadius: 3,
             offset: const Offset(0, 1),
           ),

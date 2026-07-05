@@ -41,8 +41,7 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
               children: <Widget>[
                 ...controller.questions.map(
                   (Question question) {
-                    final int questionIndex =
-                        controller.questions.indexOf(question);
+                    final int questionIndex = controller.questions.indexOf(question);
                     return _buildQuizContent(
                       questionIndex: questionIndex,
                       question: question,
@@ -107,31 +106,22 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
               () {
                 return Column(
                   children: <Widget>[
-                    for (int i = 0;
-                        i <
-                            controller
-                                .questions[questionIndex].quizOptions.length;
-                        i++)
+                    for (int i = 0; i < controller.questions[questionIndex].quizOptions.length; i++)
                       Column(
                         children: [
                           _buildAnswerButton(
                             questionAlphabet: controller.optionsAlphabet[i],
-                            quizOption: controller
-                                .questions[questionIndex].quizOptions[i],
+                            quizOption: controller.questions[questionIndex].quizOptions[i],
                             isSelected: controller.answers.any(
-                                (AnswerItem answer) =>
-                                    answer.questionId ==
-                                        controller.questions[questionIndex].id &&
-                                    answer.selectedOptionId ==
-                                        controller.questions[questionIndex]
-                                            .quizOptions[i].id),
+                              (AnswerItem answer) =>
+                                  answer.questionId == controller.questions[questionIndex].id &&
+                                  answer.selectedOptionId == controller.questions[questionIndex].quizOptions[i].id,
+                            ),
                             onPressed: () {
                               controller.addOrChangeAnswer(
                                 AnswerItem(
-                                  questionId:
-                                      controller.questions[questionIndex].id,
-                                  selectedOptionId: controller
-                                      .questions[questionIndex].quizOptions[i].id,
+                                  questionId: controller.questions[questionIndex].id,
+                                  selectedOptionId: controller.questions[questionIndex].quizOptions[i].id,
                                 ),
                               );
                             },
@@ -160,9 +150,7 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected == true
-            ? CustomColor.seaBlueColor
-            : CustomColor.whiteColor,
+        backgroundColor: isSelected == true ? CustomColor.seaBlueColor : CustomColor.whiteColor,
         elevation: 0,
         side: BorderSide(
           color: CustomColor.blueColor,
@@ -176,9 +164,7 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: isSelected == true
-                  ? CustomColor.blueColor
-                  : CustomColor.whiteColor,
+              color: isSelected == true ? CustomColor.blueColor : CustomColor.whiteColor,
               shape: BoxShape.circle,
               border: Border.all(
                 color: CustomColor.lightBlueColor,
@@ -189,9 +175,7 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
               questionAlphabet,
               style: bodyRegular.copyWith(
                 fontSize: 14,
-                color: isSelected == true
-                    ? CustomColor.whiteColor
-                    : CustomColor.blackColor,
+                color: isSelected == true ? CustomColor.whiteColor : CustomColor.blackColor,
               ),
             ),
           ),
@@ -221,22 +205,19 @@ class SimulationQuizSectionView extends GetView<SimulationContentController> {
         color: isActive == true
             ? CustomColor.blueColor
             : answered == true
-                ? CustomColor.seaBlueColor
-                : CustomColor.whiteColor,
+            ? CustomColor.seaBlueColor
+            : CustomColor.whiteColor,
         shape: BoxShape.circle,
         border: Border.all(
           color: CustomColor.bankRumus,
         ),
       ),
       padding: const EdgeInsets.all(16),
-      margin: isLastItem == true
-          ? const EdgeInsets.only(right: 0)
-          : const EdgeInsets.only(right: 10),
+      margin: isLastItem == true ? const EdgeInsets.only(right: 0) : const EdgeInsets.only(right: 10),
       child: Text(
         number.toString(),
         style: bodyRegular.copyWith(
-          color:
-              isActive == true ? CustomColor.whiteColor : CustomColor.bankRumus,
+          color: isActive == true ? CustomColor.whiteColor : CustomColor.bankRumus,
           fontSize: 16,
         ),
       ),

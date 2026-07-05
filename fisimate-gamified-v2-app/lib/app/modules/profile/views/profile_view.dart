@@ -63,34 +63,31 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
                                 ),
                               );
-                            } else if (controller.state ==
-                                ResultState.hasData) {
+                            } else if (controller.state == ResultState.hasData) {
                               return CircleAvatar(
                                 radius: 45,
                                 backgroundColor: CustomColor.yellowColor,
-                                backgroundImage: controller
-                                            .userProfile.profilePicture !=
-                                        null
+                                backgroundImage: controller.userProfile.profilePicture != null
                                     ? NetworkImage(
                                         controller.userProfile.profilePicture!,
                                       )
                                     : const AssetImage(
-                                        'assets/images/default/default_profile_photo.png',
-                                      ) as ImageProvider,
+                                            'assets/images/default/default_profile_photo.png',
+                                          )
+                                          as ImageProvider,
                               );
                             } else {
                               return CircleAvatar(
                                 radius: 45,
                                 backgroundColor: CustomColor.yellowColor,
-                                backgroundImage: controller
-                                            .userProfile.profilePicture !=
-                                        null
+                                backgroundImage: controller.userProfile.profilePicture != null
                                     ? NetworkImage(
                                         controller.userProfile.profilePicture!,
                                       )
                                     : const AssetImage(
-                                        'assets/images/default/default_profile_photo.png',
-                                      ) as ImageProvider,
+                                            'assets/images/default/default_profile_photo.png',
+                                          )
+                                          as ImageProvider,
                               );
                             }
                           },

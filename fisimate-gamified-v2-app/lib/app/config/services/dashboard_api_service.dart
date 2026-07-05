@@ -22,13 +22,12 @@ class DashboardApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/chapters',
+        '${URLs.baseUrl}dashboard/mobile',
       );
 
       logger.i(response.data);
 
-      final AvailableChapter leaderboardResponse =
-          AvailableChapter.fromJson(response.data);
+      final AvailableChapter leaderboardResponse = AvailableChapter.fromJson(response.data);
 
       return leaderboardResponse;
     } catch (e) {
@@ -48,13 +47,12 @@ class DashboardApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/dashboard/leaderboard',
+        '${URLs.baseUrl}dashboard/leaderboard',
       );
 
       logger.i(response.data);
 
-      final Leaderboard leaderboardResponse =
-          Leaderboard.fromJson(response.data);
+      final Leaderboard leaderboardResponse = Leaderboard.fromJson(response.data);
 
       return leaderboardResponse;
     } catch (e) {

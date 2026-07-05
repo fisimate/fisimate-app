@@ -95,12 +95,12 @@ abstract class CustomColor {
 
   static List<BoxShadow> bankItemShadow = [
     BoxShadow(
-      color: CustomColor.blackColor.withOpacity(0.21),
+      color: CustomColor.blackColor.withValues(alpha: 0.21),
       spreadRadius: 0,
       blurRadius: 4.8,
     ),
     BoxShadow(
-      color: CustomColor.blackColor.withOpacity(0.09),
+      color: CustomColor.blackColor.withValues(alpha: 0.09),
       spreadRadius: 0,
       blurRadius: 7.8,
       offset: const Offset(1, 3),
@@ -109,12 +109,12 @@ abstract class CustomColor {
 
   static List<BoxShadow> mainMenuItemShadow = [
     BoxShadow(
-      color: CustomColor.blackColor.withOpacity(0.05),
+      color: CustomColor.blackColor.withValues(alpha: 0.05),
       spreadRadius: 0,
       blurRadius: 4.1,
     ),
     BoxShadow(
-      color: CustomColor.blackColor.withOpacity(0.09),
+      color: CustomColor.blackColor.withValues(alpha: 0.09),
       spreadRadius: 0,
       blurRadius: 6.67,
       offset: const Offset(0.08, 2.57),

@@ -20,8 +20,8 @@ class BankMateriController extends GetxController {
   }
 
   Future<void> getAllMaterialBank() async {
-    final accessToken = await StorageService.getAccessToken();
-    final refreshToken = await StorageService.getRefreshToken();
+    final accessToken = await StorageService.getAccessToken() ?? '';
+    final refreshToken = await StorageService.getRefreshToken() ?? '';
     try {
       state.value = ResultState.loading;
 

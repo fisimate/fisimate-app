@@ -139,18 +139,16 @@ class HomeView extends GetView<HomeController> {
               () {
                 switch (controller.state) {
                   case ResultState.loading:
-                    return Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                        ),
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          return const CustomSkeletonWidget(
-                            height: 160,
-                          );
-                        },
+                    return ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
                       ),
+                      itemCount: 7,
+                      itemBuilder: (context, index) {
+                        return const CustomSkeletonWidget(
+                          height: 160,
+                        );
+                      },
                     );
                   case ResultState.error:
                     return const Center(
@@ -170,23 +168,17 @@ class HomeView extends GetView<HomeController> {
                           padding: const EdgeInsets.all(5),
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            final List<ChapterData> availableChapters =
-                                controller.availableChapters;
-                            final ChapterData chapter =
-                                availableChapters[index];
+                            final List<ChapterData> availableChapters = controller.availableChapters;
+                            final ChapterData chapter = availableChapters[index];
 
                             return _buildTopicItem(
                               label: chapter.name,
                               description: chapter.shortDescription,
                               iconUrl: chapter.icon,
-                              isMaterialBanksIsAvailable:
-                                  chapter.materialBanks.isNotEmpty,
-                              isFormulaBanksIsAvailable:
-                                  chapter.formulaBanks.isNotEmpty,
-                              isExamBanksIsAvailable:
-                                  chapter.examBanks.isNotEmpty,
-                              isExperimentsIsAvailable:
-                                  chapter.simulations.isNotEmpty,
+                              isMaterialBanksIsAvailable: chapter.materialBanks.isNotEmpty,
+                              isFormulaBanksIsAvailable: chapter.formulaBanks.isNotEmpty,
+                              isExamBanksIsAvailable: chapter.examBanks.isNotEmpty,
+                              isExperimentsIsAvailable: chapter.simulations.isNotEmpty,
                             );
                           },
                         ),
@@ -270,7 +262,7 @@ class HomeView extends GetView<HomeController> {
                   children: <Widget>[
                     isFormulaBanksIsAvailable == true
                         ? _buildAvaibilityItem(
-                            label: 'Bank Materi',
+                            label: 'Bank Rumus',
                             color: CustomColor.blueColor,
                           )
                         : const SizedBox.shrink(),
@@ -293,7 +285,7 @@ class HomeView extends GetView<HomeController> {
                           )
                         : const SizedBox.shrink(),
                   ],
-                )
+                ),
               ],
             ),
           ),

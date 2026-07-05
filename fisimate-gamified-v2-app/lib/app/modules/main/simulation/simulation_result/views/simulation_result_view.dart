@@ -115,7 +115,7 @@ class SimulationResultView extends GetView<SimulationResultController> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -138,7 +138,7 @@ class SimulationResultView extends GetView<SimulationResultController> {
                     color: CustomColor.blueColor,
                     thickness: 1.5,
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -212,7 +212,7 @@ class LeaderBoardItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: CustomColor.greyColor.withOpacity(0.5),
+            color: CustomColor.greyColor.withValues(alpha: 0.5),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -236,8 +236,9 @@ class LeaderBoardItem extends StatelessWidget {
                     image: DecorationImage(
                       image: imageUrl == ''
                           ? const AssetImage(
-                              "assets/images/default/default_profile_photo.png",
-                            ) as ImageProvider
+                                  "assets/images/default/default_profile_photo.png",
+                                )
+                                as ImageProvider
                           : NetworkImage(
                               imageUrl!,
                             ),
@@ -250,7 +251,7 @@ class LeaderBoardItem extends StatelessWidget {
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: CustomColor.greyColor.withOpacity(0.5),
+                        color: CustomColor.greyColor.withValues(alpha: 0.5),
                         blurRadius: 10,
                         offset: const Offset(0, 5),
                       ),
@@ -283,10 +284,10 @@ class LeaderBoardItem extends StatelessWidget {
                     color: CustomColor.blackColor,
                     fontSize: 12,
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -316,7 +317,7 @@ class ResultItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: CustomColor.greyColor.withOpacity(0.5),
+              color: CustomColor.greyColor.withValues(alpha: 0.5),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),

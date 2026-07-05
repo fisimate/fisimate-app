@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
 import 'package:fisimate/app/data/responses/simulation/simulation/get_all_simulation.dart';
+import 'package:fisimate/app/modules/main/simulation/controllers/simulation_controller.dart';
 import 'package:fisimate/app/routes/app_pages.dart';
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
@@ -14,8 +15,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import '../controllers/simulation_controller.dart';
-// import 'package:fisimate/app/models/simulation.dart' as simulation_model;
 
 class SimulationView extends GetView<SimulationController> {
   const SimulationView({super.key});
@@ -56,10 +55,12 @@ class SimulationView extends GetView<SimulationController> {
                 ),
                 CustomSearchBar(
                   controller: controller.searchController,
-                  onChanged: (String value) =>
-                      controller.filterSimulations(value),
+                  onChanged: (String value) => controller.filterSimulations(value),
                   hint: "Cari",
-                  prefix: SvgPicture.asset("assets/icons/search.svg"),
+                  prefix: SvgPicture.asset(
+                    "assets/icons/search.svg",
+                    width: 20,
+                  ),
                 ),
                 const Gap(32),
                 Row(
@@ -75,7 +76,7 @@ class SimulationView extends GetView<SimulationController> {
                         height: 2,
                         color: CustomColor.greyColor,
                       ),
-                    )
+                    ),
                   ],
                 ),
                 const Gap(10),
@@ -100,14 +101,14 @@ class SimulationView extends GetView<SimulationController> {
                   return Expanded(
                     child: controller.filteredSimulations.isEmpty
                         ? (controller.searchController.text.isEmpty
-                            ? _buildListView(
-                                simulations: controller.simulations,
-                              )
-                            : Center(
-                                child: Text(
-                                  "Tidak ditemukan simulasi dengan kata kunci ${controller.searchController.text}",
-                                ),
-                              ))
+                              ? _buildListView(
+                                  simulations: controller.simulations,
+                                )
+                              : Center(
+                                  child: Text(
+                                    "Tidak ditemukan simulasi dengan kata kunci ${controller.searchController.text}",
+                                  ),
+                                ))
                         : _buildListView(
                             simulations: controller.filteredSimulations,
                           ),
@@ -186,7 +187,7 @@ class SimulationView extends GetView<SimulationController> {
   Container buildHeader() {
     return Container(
       decoration: BoxDecoration(
-        color: CustomColor.orangeColor.withOpacity(0.7),
+        color: CustomColor.orangeColor.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(
           CustomSize.roundedMedium,
         ),
@@ -277,10 +278,13 @@ class SimulationView extends GetView<SimulationController> {
 
         controller.unfocusSearch();
 
-        Get.toNamed(Routes.SIMULATION_CONTENT, arguments: {
-          'simulation': simulation,
-          'gameScene': gameScene,
-        });
+        Get.toNamed(
+          Routes.SIMULATION_CONTENT,
+          arguments: {
+            'simulation': simulation,
+            'gameScene': gameScene,
+          },
+        );
       },
       splashFactory: InkRipple.splashFactory,
       borderRadius: BorderRadius.circular(14),
@@ -353,7 +357,7 @@ class SimulationView extends GetView<SimulationController> {
                         Icons.arrow_forward_ios,
                         color: CustomColor.greyColor,
                         size: 14,
-                      )
+                      ),
                     ],
                   ),
                   const Gap(4),
@@ -368,10 +372,12 @@ class SimulationView extends GetView<SimulationController> {
                   LinearPercentIndicator(
                     lineHeight: 10,
                     padding: const EdgeInsets.all(0),
-                    linearGradient: LinearGradient(colors: [
-                      CustomColor.bankRumus,
-                      CustomColor.yellowColor,
-                    ]),
+                    linearGradient: LinearGradient(
+                      colors: [
+                        CustomColor.bankRumus,
+                        CustomColor.yellowColor,
+                      ],
+                    ),
                     backgroundColor: Colors.grey.shade100,
                     percent: progress,
                     animation: false,
@@ -386,7 +392,7 @@ class SimulationView extends GetView<SimulationController> {
                         color: CustomColor.blueColor,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

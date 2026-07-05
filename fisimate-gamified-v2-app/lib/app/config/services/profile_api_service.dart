@@ -25,12 +25,14 @@ class ProfileApiService {
     try {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
-      final Response response =
-          await dio.put('${URLs.baseUrl}${URLs.updateUserProfile}', data: {
-        "fullname": fullname,
-        "email": email,
-        "nis": nis,
-      });
+      final Response response = await dio.put(
+        '${URLs.baseUrl}${URLs.updateUserProfile}',
+        data: {
+          "fullname": fullname,
+          "email": email,
+          "nis": nis,
+        },
+      );
       logger.i(response.data);
       return UpdateUserProfileResponse.fromJson(
         response.data,
@@ -55,7 +57,7 @@ class ProfileApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.post(
-        '${URLs.baseUrl}/users/password/update',
+        '${URLs.baseUrl}users/password/update',
         data: UpdateUserPasswordRequest(
           oldPassword: oldPassword,
           newPassword: newPassword,

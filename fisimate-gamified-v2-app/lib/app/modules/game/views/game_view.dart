@@ -1,7 +1,6 @@
 import 'package:fisimate/app/theme/colors.dart';
 import 'package:fisimate/app/theme/fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
@@ -22,10 +21,14 @@ class GameView extends GetView<GameController> {
           builder: (GameController gameController) {
             return Stack(
               children: <Widget>[
-                UnityWidget(
-                  onUnityCreated: gameController.onUnityCreated,
-                  onUnityMessage: gameController.onUnityMessage,
-                  onUnitySceneLoaded: gameController.onUnitySceneLoaded,
+                // Unity simulation is disabled for now, see docs/MIGRATION.md.
+                Container(
+                  color: Colors.black,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Simulasi 3D belum tersedia',
+                    style: poppinsBold.copyWith(color: Colors.white),
+                  ),
                 ),
                 if (!gameController.isGameLoaded.value == true)
                   Stack(

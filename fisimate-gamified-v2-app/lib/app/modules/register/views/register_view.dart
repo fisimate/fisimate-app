@@ -84,9 +84,7 @@ class RegisterView extends GetView<RegisterController> {
                               controller.toggleObscurePassword();
                             },
                             icon: Icon(
-                              controller.isObscurePassword.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              controller.isObscurePassword.value ? Icons.visibility : Icons.visibility_off,
                               color: CustomColor.darkGreyColor,
                             ),
                           ),
@@ -105,9 +103,7 @@ class RegisterView extends GetView<RegisterController> {
                               controller.toggleObscurePasswordConf();
                             },
                             icon: Icon(
-                              controller.isObscurePasswordConf.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              controller.isObscurePasswordConf.value ? Icons.visibility : Icons.visibility_off,
                               color: CustomColor.darkGreyColor,
                             ),
                           ),
@@ -166,7 +162,7 @@ class RegisterView extends GetView<RegisterController> {
           builder: (RegisterController controller) {
             if (controller.state == ResultState.loading) {
               return Container(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 child: Center(
                   child: CircularProgressIndicator(
                     color: CustomColor.bankRumus,
@@ -212,7 +208,7 @@ Row _buildAlreadyHaveAccountComponents() {
             decoration: TextDecoration.underline,
           ),
         ),
-      )
+      ),
     ],
   );
 }

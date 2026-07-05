@@ -54,27 +54,27 @@ class ChapterData {
       id: json['id'],
       name: json['name'],
       slug: json['slug'],
-      icon: json['icon'],
-      shortDescription: json['shortDescription'],
+      icon: json['icon'] ?? '',
+      shortDescription: json['shortDescription'] ?? '',
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       materialBanks: List<MaterialBankData>.from(
-        json['materialBanks'].map(
+        (json['materialBanks'] as List? ?? []).map(
           (x) => MaterialBankData.fromJson(x),
         ),
       ),
       formulaBanks: List<FormulaBankData>.from(
-        json['formulaBanks'].map(
+        (json['formulaBanks'] as List? ?? []).map(
           (x) => FormulaBankData.fromJson(x),
         ),
       ),
       examBanks: List<ExamBankData>.from(
-        json['examBanks'].map(
+        (json['examBanks'] as List? ?? []).map(
           (x) => ExamBankData.fromJson(x),
         ),
       ),
       simulations: List<SimulationData>.from(
-        json['simulations'].map(
+        (json['simulations'] as List? ?? []).map(
           (x) => SimulationData.fromJson(x),
         ),
       ),

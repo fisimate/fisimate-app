@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../controllers/onboard_controller.dart';
 
 class OnboardView extends GetView<OnboardController> {
-  const OnboardView({Key? key}) : super(key: key);
+  const OnboardView({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OnboardController());

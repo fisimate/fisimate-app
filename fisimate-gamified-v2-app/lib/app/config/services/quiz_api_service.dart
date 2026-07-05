@@ -22,13 +22,12 @@ class QuizApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/quizzes/$simulationId/review',
+        '${URLs.baseUrl}quizzes/$simulationId/review',
       );
 
       logger.i(response.data);
 
-      final GetQuizReviewResponse getQuizReviewResponse =
-          GetQuizReviewResponse.fromJson(response.data);
+      final GetQuizReviewResponse getQuizReviewResponse = GetQuizReviewResponse.fromJson(response.data);
 
       return getQuizReviewResponse;
     } catch (e) {

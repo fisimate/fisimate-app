@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  
+
   const CustomTextField({
     super.key,
     this.height,

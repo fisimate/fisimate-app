@@ -29,15 +29,14 @@ class SimulationResultController extends GetxController {
   List<LeaderboardData> get leaderboardData => _leaderboardData;
 
   void getQuizResultOverview() async {
-    final PostAnswerResponse passedResultData =
-        Get.arguments['postAnswerResponse'];
+    final PostAnswerResponse passedResultData = Get.arguments['postAnswerResponse'];
     _quizScore.value = passedResultData.score;
     _answeredQuestions.value = passedResultData.answered;
     _notAnsweredQuestions.value = passedResultData.notAnswered;
 
     final String simulationId = Get.arguments['simulationId'];
     final dynamic quizResultResponse = await QuestionApiService().getQuizResult(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: simulationId,
     );
     if (quizResultResponse is QuizResultResponse) {
@@ -47,9 +46,8 @@ class SimulationResultController extends GetxController {
   }
 
   void getLeaderboard() async {
-    final dynamic leaderboardResponse =
-        await DashboardApiService().getLeaderboard(
-      accessToken: await StorageService.getAccessToken(),
+    final dynamic leaderboardResponse = await DashboardApiService().getLeaderboard(
+      accessToken: await StorageService.getAccessToken() ?? '',
     );
 
     if (leaderboardResponse is Leaderboard) {
@@ -58,11 +56,11 @@ class SimulationResultController extends GetxController {
   }
 
   RxString filePath = ''.obs;
-  
+
   Future<void> getQuizReview() async {
     final QuizApiService quizApiService = QuizApiService();
     final response = await quizApiService.getQuizReviewBySimulationId(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
       simulationId: Get.arguments['simulationId'],
     );
 

@@ -7,8 +7,7 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class SimulationMaterialSectionView
-    extends GetView<SimulationContentController> {
+class SimulationMaterialSectionView extends GetView<SimulationContentController> {
   const SimulationMaterialSectionView({super.key});
 
   @override
@@ -29,7 +28,7 @@ class SimulationMaterialSectionView
         ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Color(0xFF9747FF).withOpacity(0.20),
+            color: Color(0xFF9747FF).withValues(alpha: 0.20),
             blurRadius: 3.3,
             spreadRadius: 1.65,
             offset: const Offset(1.65, 0.0),

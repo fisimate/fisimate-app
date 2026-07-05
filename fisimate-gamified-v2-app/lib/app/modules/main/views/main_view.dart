@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../controllers/main_controller.dart';
 
 class MainView extends GetView<MainController> {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({super.key});
   @override
   Widget build(BuildContext context) {
     ChatbotController chatbotController = Get.find<ChatbotController>();
@@ -40,8 +40,8 @@ class MainView extends GetView<MainController> {
                     },
                     child: Container(
                       color: chatbotController.isQuizAnswerCorrect
-                          ? CustomColor.greenColor.withOpacity(0.4)
-                          : CustomColor.errorColor.withOpacity(0.4),
+                          ? CustomColor.greenColor.withValues(alpha: 0.4)
+                          : CustomColor.errorColor.withValues(alpha: 0.4),
                       height: CustomSize.maxHeight,
                       width: CustomSize.maxWidth,
                       child: Center(
@@ -56,7 +56,7 @@ class MainView extends GetView<MainController> {
                   )
                 : Container();
           },
-        )
+        ),
       ],
     );
   }

@@ -85,11 +85,12 @@ class ModuleViewerView extends GetView<ModuleViewerController> {
             color: data['color'],
           ),
         ),
-        child: const PDF(
-          pageSnap: false,
-        ).cachedFromUrl(
-          data['filePath'],
-        ),
+        child:
+            const PDF(
+              pageSnap: false,
+            ).cachedFromUrl(
+              data['filePath'],
+            ),
       ),
     );
   }

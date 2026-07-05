@@ -29,9 +29,9 @@ class CustomSimulationNavigator extends StatelessWidget {
     required this.currentSectionIndex,
     required this.onNextPressed,
     required this.onBackPressed,
-  })  : isOnResultPage = true,
-        currentQuizIndex = null,
-        quizLength = null;
+  }) : isOnResultPage = true,
+       currentQuizIndex = null,
+       quizLength = null;
 
   @override
   Widget build(BuildContext context) {
@@ -171,25 +171,19 @@ class BaseElevatedButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (iconData != null &&
-              style == BaseElevatedButtonStyle.withPrefixIcon)
+          if (iconData != null && style == BaseElevatedButtonStyle.withPrefixIcon)
             Icon(
               iconData,
             ),
-          if (iconData != null &&
-              style == BaseElevatedButtonStyle.withPrefixIcon)
-            const Gap(10),
+          if (iconData != null && style == BaseElevatedButtonStyle.withPrefixIcon) const Gap(10),
           Text(
             label,
             style: poppinsMedium.copyWith(
               fontSize: 12,
             ),
           ),
-          if (iconData != null &&
-              style == BaseElevatedButtonStyle.withSuffixIcon)
-            const Gap(10),
-          if (iconData != null &&
-              style == BaseElevatedButtonStyle.withSuffixIcon)
+          if (iconData != null && style == BaseElevatedButtonStyle.withSuffixIcon) const Gap(10),
+          if (iconData != null && style == BaseElevatedButtonStyle.withSuffixIcon)
             Icon(
               iconData,
             ),

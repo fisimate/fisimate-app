@@ -20,7 +20,7 @@ class ChapterApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/chapters',
+        '${URLs.baseUrl}chapters',
       );
 
       final List<String> chapterNames = [];

@@ -4,11 +4,10 @@
 
 import 'dart:convert';
 
-List<FormulaBank> formulaBankFromJson(String str) => List<FormulaBank>.from(
-    json.decode(str).map((x) => FormulaBank.fromJson(x)));
+List<FormulaBank> formulaBankFromJson(String str) =>
+    List<FormulaBank>.from(json.decode(str).map((x) => FormulaBank.fromJson(x)));
 
-String formulaBankToJson(List<FormulaBank> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String formulaBankToJson(List<FormulaBank> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class FormulaBank {
   String? id;
@@ -28,31 +27,24 @@ class FormulaBank {
   });
 
   factory FormulaBank.fromJson(Map<String, dynamic> json) => FormulaBank(
-        id: json["id"],
-        name: json["name"],
-        slug: json["slug"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        formulaBanks: json["formulaBanks"] == null
-            ? []
-            : List<FormulaBankElement>.from(json["formulaBanks"]!
-                .map((x) => FormulaBankElement.fromJson(x))),
-      );
+    id: json["id"],
+    name: json["name"],
+    slug: json["slug"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    formulaBanks: json["formulaBanks"] == null
+        ? []
+        : List<FormulaBankElement>.from(json["formulaBanks"]!.map((x) => FormulaBankElement.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "slug": slug,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "formulaBanks": formulaBanks == null
-            ? []
-            : List<dynamic>.from(formulaBanks!.map((x) => x.toJson())),
-      };
+    "id": id,
+    "name": name,
+    "slug": slug,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "formulaBanks": formulaBanks == null ? [] : List<dynamic>.from(formulaBanks!.map((x) => x.toJson())),
+  };
 }
 
 class FormulaBankElement {
@@ -74,28 +66,23 @@ class FormulaBankElement {
     this.updatedAt,
   });
 
-  factory FormulaBankElement.fromJson(Map<String, dynamic> json) =>
-      FormulaBankElement(
-        id: json["id"],
-        title: json["title"],
-        icon: json["icon"],
-        filePath: json["filePath"],
-        chapterId: json["chapterId"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-      );
+  factory FormulaBankElement.fromJson(Map<String, dynamic> json) => FormulaBankElement(
+    id: json["id"],
+    title: json["title"],
+    icon: json["icon"],
+    filePath: json["filePath"],
+    chapterId: json["chapterId"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "icon": icon,
-        "filePath": filePath,
-        "chapterId": chapterId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-      };
+    "id": id,
+    "title": title,
+    "icon": icon,
+    "filePath": filePath,
+    "chapterId": chapterId,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+  };
 }

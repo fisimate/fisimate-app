@@ -42,8 +42,9 @@ class TopLeaderboardCard extends StatelessWidget {
               image: imageUrl != ''
                   ? NetworkImage(imageUrl!)
                   : const AssetImage(
-                      'assets/images/default/default_profile_photo.png',
-                    ) as ImageProvider,
+                          'assets/images/default/default_profile_photo.png',
+                        )
+                        as ImageProvider,
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),

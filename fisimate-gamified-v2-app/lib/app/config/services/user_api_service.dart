@@ -21,13 +21,12 @@ class UserApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/users/profile',
+        '${URLs.baseUrl}users/profile',
       );
 
       logger.i(response.data);
 
-      final UserProfileDTO getUserProfileResponse =
-          UserProfileDTO.fromJson(response.data['data']);
+      final UserProfileDTO getUserProfileResponse = UserProfileDTO.fromJson(response.data['data']);
 
       return getUserProfileResponse;
     } catch (e) {

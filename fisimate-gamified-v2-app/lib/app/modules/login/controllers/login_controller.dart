@@ -69,8 +69,7 @@ class LoginController extends GetxController {
       final connectivityResult = await ConnectivityHelper.checkConnection();
 
       if (connectivityResult != ConnectivityResult.none) {
-        final response = await ApiService.login(
-            email: emailController.text, password: passwordController.text);
+        final response = await ApiService.login(email: emailController.text, password: passwordController.text);
         final jsonResponse = jsonDecode(response.body);
 
         if (response.statusCode == 200) {
@@ -134,8 +133,7 @@ class LoginController extends GetxController {
           Get.toNamed(Routes.GOOGLE_LOGIN, arguments: googleAuthUrl);
         } else {
           Get.back();
-          showErrorSnackbar(
-              title: 'Terjadi Kesalahan', message: jsonResponse['message']);
+          showErrorSnackbar(title: 'Terjadi Kesalahan', message: jsonResponse['message']);
         }
       }
     } catch (e) {

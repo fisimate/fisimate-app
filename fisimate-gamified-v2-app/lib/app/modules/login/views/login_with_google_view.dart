@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginWithGoogleView extends GetView<LoginWithGoogleController> {
-  const LoginWithGoogleView({Key? key}) : super(key: key);
+  const LoginWithGoogleView({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<LoginWithGoogleController>();

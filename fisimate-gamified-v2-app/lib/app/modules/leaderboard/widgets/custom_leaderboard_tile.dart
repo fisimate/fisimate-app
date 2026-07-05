@@ -33,7 +33,7 @@ class CustomLeaderboardTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: CustomColor.greyColor.withOpacity(0.5),
+            color: CustomColor.greyColor.withValues(alpha: 0.5),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -60,8 +60,9 @@ class CustomLeaderboardTile extends StatelessWidget {
                         imageUrl,
                       )
                     : const AssetImage(
-                        'assets/images/dummy_profile_photo.png',
-                      ) as ImageProvider,
+                            'assets/images/dummy_profile_photo.png',
+                          )
+                          as ImageProvider,
                 fit: BoxFit.cover,
               ),
             ),
@@ -88,7 +89,7 @@ class CustomLeaderboardTile extends StatelessWidget {
               color: CustomColor.blackColor,
               fontSize: 12,
             ),
-          )
+          ),
         ],
       ),
     );

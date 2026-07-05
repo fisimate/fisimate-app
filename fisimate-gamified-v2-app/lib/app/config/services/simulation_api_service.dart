@@ -7,8 +7,7 @@ import 'package:fisimate/app/data/responses/simulation/simulation/post_simulatio
 import 'package:logger/logger.dart';
 
 class SimulationApiService {
-  static final SimulationApiService _instance =
-      SimulationApiService._internal();
+  static final SimulationApiService _instance = SimulationApiService._internal();
   Dio dio = Dio();
   Logger logger = Logger();
 
@@ -26,13 +25,14 @@ class SimulationApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/simulations/$simulationId/materials',
+        '${URLs.baseUrl}simulations/$simulationId/materials',
       );
 
       logger.i(response.data);
 
-      final GetSimulationMaterialResponse simulationMaterialResponse =
-          GetSimulationMaterialResponse.fromJson(response.data);
+      final GetSimulationMaterialResponse simulationMaterialResponse = GetSimulationMaterialResponse.fromJson(
+        response.data,
+      );
 
       return simulationMaterialResponse;
     } catch (e) {
@@ -52,13 +52,12 @@ class SimulationApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/simulations',
+        '${URLs.baseUrl}simulations',
       );
 
       logger.i(response.data);
 
-      final List<SimulationDTO> allSimulationResponse =
-          List<SimulationDTO>.from(
+      final List<SimulationDTO> allSimulationResponse = List<SimulationDTO>.from(
         response.data['data'].map(
           (x) => SimulationDTO.fromJson(x),
         ),
@@ -84,7 +83,7 @@ class SimulationApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.post(
-        '${URLs.baseUrl}/simulations/$simulationId/progress',
+        '${URLs.baseUrl}simulations/$simulationId/progress',
         data: PostSimulationProgressRequest(
           currentStep: progress,
         ).toJson(),
@@ -92,8 +91,9 @@ class SimulationApiService {
 
       logger.i(response.data);
 
-      final PostSimulationProgressResponse simulationProgressResponse =
-          PostSimulationProgressResponse.fromJson(response.data);
+      final PostSimulationProgressResponse simulationProgressResponse = PostSimulationProgressResponse.fromJson(
+        response.data,
+      );
 
       return simulationProgressResponse;
     } catch (e) {

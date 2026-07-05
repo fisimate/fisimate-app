@@ -29,8 +29,7 @@ class ValidationHelper {
     }
   }
 
-  static String? validateConfirmPassword(
-      {required String confirmPassword, required String password}) {
+  static String? validateConfirmPassword({required String confirmPassword, required String password}) {
     if (confirmPassword.isEmpty || confirmPassword == '') {
       return 'Masukkan ulang kata sandi';
     } else if (confirmPassword != password) {

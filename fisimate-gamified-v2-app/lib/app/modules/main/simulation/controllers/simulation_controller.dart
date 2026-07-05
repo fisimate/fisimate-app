@@ -46,17 +46,16 @@ class SimulationController extends GetxController {
   }
 
   Future<void> getAllSimulations() async {
-    final SimulationApiService _simulationApiService = SimulationApiService();
+    final SimulationApiService simulationApiService = SimulationApiService();
     try {
       _state.value = ResultState.loading;
       update();
 
-      final ConnectivityResult connectivityResult =
-          await Connectivity().checkConnectivity();
+      final ConnectivityResult connectivityResult = (await Connectivity().checkConnectivity()).first;
 
       if (connectivityResult != ConnectivityResult.none) {
-        final response = await _simulationApiService.getAllSimulations(
-          accessToken: await StorageService.getAccessToken(),
+        final response = await simulationApiService.getAllSimulations(
+          accessToken: await StorageService.getAccessToken() ?? '',
         );
 
         if (response is List<SimulationDTO>) {
@@ -83,8 +82,7 @@ class SimulationController extends GetxController {
     _logger.i('Filtering simulations : $query');
     if (query.isNotEmpty) {
       final List<SimulationDTO> searchedSimulations = _simulations
-          .where((simulation) =>
-              simulation.title.toLowerCase().contains(query.toLowerCase()))
+          .where((simulation) => simulation.title.toLowerCase().contains(query.toLowerCase()))
           .toList();
       _filteredSimulations.value = searchedSimulations;
       _logger.i('Filtered simulations : ${_filteredSimulations.length}');

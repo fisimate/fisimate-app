@@ -6,7 +6,8 @@ class EditProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<EditProfileController>(
-      () => EditProfileController(), fenix: true,
+      () => EditProfileController(),
+      fenix: true,
     );
   }
 }

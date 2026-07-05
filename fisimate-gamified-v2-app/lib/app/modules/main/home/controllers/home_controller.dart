@@ -11,10 +11,10 @@ class HomeController extends GetxController {
   final Rx<ResultState> _state = ResultState.initial.obs;
   ResultState get state => _state.value;
 
-  RxString _userFirstName = ''.obs;
+  final RxString _userFirstName = ''.obs;
   String get userFirstName => _userFirstName.value;
 
-  RxString _userProfilePhotoUrl = ''.obs;
+  final RxString _userProfilePhotoUrl = ''.obs;
   String get userProfilePhotoUrl => _userProfilePhotoUrl.value;
 
   final RxList<ChapterData> _availableChapters = <ChapterData>[].obs;
@@ -31,7 +31,7 @@ class HomeController extends GetxController {
     final UserApiService userApiService = UserApiService();
     try {
       final response = await userApiService.getAllFormulaBank(
-        accessToken: await StorageService.getAccessToken(),
+        accessToken: await StorageService.getAccessToken() ?? '',
       );
 
       if (response is UserProfileDTO) {
@@ -53,9 +53,8 @@ class HomeController extends GetxController {
 
     try {
       _state.value = ResultState.loading;
-      final availableChaptersResponse =
-          await dashboardApiService.getChapterDashboard(
-        accessToken: await StorageService.getAccessToken(),
+      final availableChaptersResponse = await dashboardApiService.getChapterDashboard(
+        accessToken: await StorageService.getAccessToken() ?? '',
       );
 
       if (availableChaptersResponse is AvailableChapter) {

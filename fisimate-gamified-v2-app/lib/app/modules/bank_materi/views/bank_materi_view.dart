@@ -67,7 +67,7 @@ class BankMateriView extends GetView<BankMateriController> {
                         children: <Widget>[
                           CustomChip(label: '${count.chapters} Bab'),
                           const Gap(CustomSize.marginLarge),
-                          CustomChip(label: '${count.subChapters} Sub Bab')
+                          CustomChip(label: '${count.subChapters} Sub Bab'),
                         ],
                       );
                     }
@@ -94,10 +94,8 @@ class BankMateriView extends GetView<BankMateriController> {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      final subjectTitleItem =
-                          controller.materialBank!.result![index].name;
-                      final subjectDataItem =
-                          controller.materialBank!.result![index].materialBanks;
+                      final subjectTitleItem = controller.materialBank!.result![index].name;
+                      final subjectDataItem = controller.materialBank!.result![index].materialBanks;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -119,9 +117,7 @@ class BankMateriView extends GetView<BankMateriController> {
                             child: Row(
                               children: [
                                 const Gap(CustomSize.marginLarge),
-                                for (int index = 0;
-                                    index < subjectDataItem!.length;
-                                    index++)
+                                for (int index = 0; index < subjectDataItem!.length; index++)
                                   Container(
                                     margin: index + 1 == subjectDataItem.length
                                         ? EdgeInsets.zero
@@ -131,14 +127,10 @@ class BankMateriView extends GetView<BankMateriController> {
                                     child: CustomSubjectCard(
                                       assetPath: subjectDataItem[index].icon!,
                                       title: subjectDataItem[index].title!,
-                                      splashColor: CustomColor.bankRumus
-                                          .withOpacity(0.3),
+                                      splashColor: CustomColor.bankRumus.withValues(alpha: 0.3),
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
-                                        arguments: {
-                                          'type': 'material_bank',
-                                          'data': subjectDataItem[index]
-                                        },
+                                        arguments: {'type': 'material_bank', 'data': subjectDataItem[index]},
                                       ),
                                     ),
                                   ),

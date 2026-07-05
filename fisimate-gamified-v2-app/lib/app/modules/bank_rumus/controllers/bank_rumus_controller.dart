@@ -16,7 +16,7 @@ class BankRumusController extends GetxController {
 
   @override
   void onReady() async {
-    accessToken.value = await StorageService.getAccessToken();
+    accessToken.value = await StorageService.getAccessToken() ?? '';
     getAllFormulaBank();
     super.onReady();
   }

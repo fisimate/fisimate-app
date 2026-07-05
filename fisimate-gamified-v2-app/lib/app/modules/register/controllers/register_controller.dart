@@ -93,9 +93,9 @@ class RegisterController extends GetxController {
           showErrorSnackbar(
             title: 'Gagal',
             message: jsonResponse['message'].toString().replaceFirst(
-                  jsonResponse['message'][0],
-                  jsonResponse['message'][0].toString().toUpperCase(),
-                ),
+              jsonResponse['message'][0],
+              jsonResponse['message'][0].toString().toUpperCase(),
+            ),
           );
         }
         update();

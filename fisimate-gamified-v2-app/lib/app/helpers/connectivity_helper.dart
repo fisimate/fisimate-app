@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class ConnectivityHelper {
   static Future<ConnectivityResult> checkConnection() async {
-    return await (Connectivity().checkConnectivity());
+    final results = await Connectivity().checkConnectivity();
+    return results.first;
   }
 }

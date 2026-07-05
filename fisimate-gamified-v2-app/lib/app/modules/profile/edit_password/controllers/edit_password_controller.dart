@@ -12,23 +12,22 @@ class EditPasswordController extends GetxController {
   ResultState _resultState = ResultState.initial;
   ResultState get resultState => _resultState;
 
-  TextEditingController _oldPasswordController = TextEditingController();
+  final TextEditingController _oldPasswordController = TextEditingController();
   TextEditingController get oldPasswordController => _oldPasswordController;
 
-  FocusNode _oldPasswordFocusNode = FocusNode();
+  final FocusNode _oldPasswordFocusNode = FocusNode();
   FocusNode get oldPasswordFocusNode => _oldPasswordFocusNode;
 
-  TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
   TextEditingController get newPasswordController => _newPasswordController;
 
-  FocusNode _newPasswordFocusNode = FocusNode();
+  final FocusNode _newPasswordFocusNode = FocusNode();
   FocusNode get newPasswordFocusNode => _newPasswordFocusNode;
 
-  TextEditingController _confirmPasswordController = TextEditingController();
-  TextEditingController get confirmPasswordController =>
-      _confirmPasswordController;
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController get confirmPasswordController => _confirmPasswordController;
 
-  FocusNode _confirmPasswordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
   FocusNode get confirmPasswordFocusNode => _confirmPasswordFocusNode;
 
   Future<void> changePassword() async {
@@ -39,7 +38,7 @@ class EditPasswordController extends GetxController {
       update();
 
       final dynamic response = await profileApiService.updateUserPassword(
-        accessToken: await StorageService.getAccessToken(),
+        accessToken: await StorageService.getAccessToken() ?? '',
         oldPassword: oldPasswordController.text,
         newPassword: newPasswordController.text,
         passwordConfirmation: confirmPasswordController.text,

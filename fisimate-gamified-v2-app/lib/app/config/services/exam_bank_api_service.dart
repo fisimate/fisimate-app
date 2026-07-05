@@ -21,13 +21,12 @@ class ExamBankApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/exam-banks',
+        '${URLs.baseUrl}exam-banks',
       );
 
       logger.i(response.data);
 
-      final GetAllExamBankResponse getAllExamBankResponse =
-          GetAllExamBankResponse.fromJson(response.data);
+      final GetAllExamBankResponse getAllExamBankResponse = GetAllExamBankResponse.fromJson(response.data);
 
       return getAllExamBankResponse;
     } catch (e) {

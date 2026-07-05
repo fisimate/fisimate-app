@@ -4,8 +4,7 @@ import 'package:fisimate/app/data/responses/formula_bank/get_all_formula_bank.da
 import 'package:logger/logger.dart';
 
 class FormulaBankApiService {
-  static final FormulaBankApiService _instance =
-      FormulaBankApiService._internal();
+  static final FormulaBankApiService _instance = FormulaBankApiService._internal();
   Dio dio = Dio();
   Logger logger = Logger();
 
@@ -22,13 +21,12 @@ class FormulaBankApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/formula-banks',
+        '${URLs.baseUrl}formula-banks',
       );
 
       logger.i(response.data);
 
-      final GetAllFormulaBankResponse getAllFormulaBankResponse =
-          GetAllFormulaBankResponse.fromJson(response.data);
+      final GetAllFormulaBankResponse getAllFormulaBankResponse = GetAllFormulaBankResponse.fromJson(response.data);
 
       return getAllFormulaBankResponse;
     } catch (e) {

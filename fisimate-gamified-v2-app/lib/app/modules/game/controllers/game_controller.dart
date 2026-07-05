@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
-import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
+// Unity is disabled for now — flutter_unity_widget isn't in pubspec.yaml and
+// android/unityLibrary isn't wired up, see docs/MIGRATION.md. Every method
+// below is a no-op stub that still updates the observable state the rest of
+// the simulation UI reads, so screens using GameController keep working.
 enum DisplacementDirection { left, right }
 
 class GameController extends GetxController {
-  UnityWidgetController? _unityWidgetController;
+  dynamic _unityWidgetController;
 
   RxBool isGameLoaded = false.obs;
   RxString gameSceneName = ''.obs;
@@ -85,8 +88,7 @@ class GameController extends GetxController {
   }
 
   void setDisplacementDirection(DisplacementDirection direction) {
-    String stringDirection =
-        direction == DisplacementDirection.left ? 'left' : 'right';
+    String stringDirection = direction == DisplacementDirection.left ? 'left' : 'right';
     _unityWidgetController?.postMessage(
       'Block',
       'SetDisplacementDirection',
@@ -145,14 +147,13 @@ class GameController extends GetxController {
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
-    if (message == 'Car movement stopped' ||
-        message == 'Block movement stopped') {
+    if (message == 'Car movement stopped' || message == 'Block movement stopped') {
       isObjectMoving.value = false;
       update();
     }
   }
 
-  void onUnitySceneLoaded(SceneLoaded? scene) {
+  void onUnitySceneLoaded(dynamic scene) {
     if (scene != null) {
       print('Received scene loaded from unity: ${scene.name}');
       print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');

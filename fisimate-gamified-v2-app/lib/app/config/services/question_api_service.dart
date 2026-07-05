@@ -25,7 +25,7 @@ class QuestionApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/simulations/$simulationId/quizzes',
+        '${URLs.baseUrl}simulations/$simulationId/quizzes',
       );
       logger.i(response.data);
       return QuestionResponse.fromJson(
@@ -56,7 +56,7 @@ class QuestionApiService {
       logger.d(postAnswerRequest.toJson());
 
       final Response response = await dio.post(
-        '${URLs.baseUrl}/quizzes/$simulationId/attempt',
+        '${URLs.baseUrl}quizzes/$simulationId/attempt',
         data: postAnswerRequest.toJson(),
       );
 
@@ -83,7 +83,7 @@ class QuestionApiService {
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
       final Response response = await dio.get(
-        '${URLs.baseUrl}/quizzes/result/$simulationId',
+        '${URLs.baseUrl}quizzes/result/$simulationId',
       );
 
       logger.i(response.data);
@@ -91,7 +91,6 @@ class QuestionApiService {
       final QuizResultResponse quizResultResponse = QuizResultResponse.fromJson(response.data);
 
       return quizResultResponse;
-
     } catch (e) {
       if (e is DioException) {
         logger.e(e.response!.data);

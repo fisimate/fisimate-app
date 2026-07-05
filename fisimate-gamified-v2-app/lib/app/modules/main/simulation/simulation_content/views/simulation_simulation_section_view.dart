@@ -22,8 +22,7 @@ final List<String> listOfGuidelinesFriction = [
   "Klik tombol mulai",
 ];
 
-class SimulationSimulationSectionView
-    extends GetView<SimulationContentController> {
+class SimulationSimulationSectionView extends GetView<SimulationContentController> {
   const SimulationSimulationSectionView({super.key});
 
   @override
@@ -61,15 +60,11 @@ class SimulationSimulationSectionView
           children: <Widget>[
             Get.arguments['gameScene'] != null
                 ? Text(
-                    Get.arguments['gameScene'] == "GLB"
-                        ? "Mencari Perpindahan Balok Kayu"
-                        : "Mencari Kecepatan Mobil",
+                    Get.arguments['gameScene'] == "GLB" ? "Mencari Perpindahan Balok Kayu" : "Mencari Kecepatan Mobil",
                     style: headingBold,
                   )
                 : const SizedBox(),
-            Get.arguments['gameScene'] != null
-                ? const Gap(20)
-                : const SizedBox.shrink(),
+            Get.arguments['gameScene'] != null ? const Gap(20) : const SizedBox.shrink(),
             Get.arguments['gameScene'] != null
                 ? Container(
                     padding: const EdgeInsets.all(
@@ -86,13 +81,13 @@ class SimulationSimulationSectionView
                       ),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
-                          color: CustomColor.blackColor.withOpacity(0.09),
+                          color: CustomColor.blackColor.withValues(alpha: 0.09),
                           blurRadius: 7.8,
                           spreadRadius: 0,
                           offset: const Offset(3.0, 1.0),
                         ),
                         BoxShadow(
-                          color: CustomColor.blackColor.withOpacity(0.17),
+                          color: CustomColor.blackColor.withValues(alpha: 0.17),
                           blurRadius: 4.8,
                           spreadRadius: 0,
                           offset: const Offset(2.0, 1.0),
@@ -119,9 +114,7 @@ class SimulationSimulationSectionView
                                     ),
                                   ),
                                   const Gap(5),
-                                  for (int i = 0;
-                                      i < listOfGuidelinesFriction.length;
-                                      i++)
+                                  for (int i = 0; i < listOfGuidelinesFriction.length; i++)
                                     Text(
                                       "${i + 1}. ${listOfGuidelinesFriction[i]}",
                                       style: bodyRegular,
@@ -138,9 +131,7 @@ class SimulationSimulationSectionView
                                     ),
                                   ),
                                   const Gap(5),
-                                  for (int i = 0;
-                                      i < listOfGuidelinesGlb.length;
-                                      i++)
+                                  for (int i = 0; i < listOfGuidelinesGlb.length; i++)
                                     Text(
                                       "${i + 1}. ${listOfGuidelinesGlb[i]}",
                                       style: bodyRegular,
@@ -169,8 +160,7 @@ class SimulationSimulationSectionView
                               label: "Dorong ke kiri",
                               style: BaseElevatedButtonStyle.withPrefixIcon,
                               onPressed: () {
-                                gameController.setDisplacementDirection(
-                                    DisplacementDirection.left);
+                                gameController.setDisplacementDirection(DisplacementDirection.left);
                                 gameController.startBlockMovement();
                               },
                             ),
@@ -184,8 +174,7 @@ class SimulationSimulationSectionView
                               label: "Dorong ke kanan",
                               style: BaseElevatedButtonStyle.withSuffixIcon,
                               onPressed: () {
-                                gameController.setDisplacementDirection(
-                                    DisplacementDirection.right);
+                                gameController.setDisplacementDirection(DisplacementDirection.right);
                                 gameController.startBlockMovement();
                               },
                             ),
@@ -226,8 +215,7 @@ class SimulationSimulationSectionView
                                     _buildSimulationInputForm(
                                       title: "Koefisien Gesekan",
                                       unit: "",
-                                      onChanged:
-                                          gameController.setFrictionCoefficient,
+                                      onChanged: gameController.setFrictionCoefficient,
                                     ),
                                     const Gap(18),
                                     _buildSimulationInputForm(
@@ -238,16 +226,14 @@ class SimulationSimulationSectionView
                                     const Gap(18),
                                   ],
                                 ),
-                              if (gameController.gameSceneName.value ==
-                                  "Gaya & Gerak")
+                              if (gameController.gameSceneName.value == "Gaya & Gerak")
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     _buildSimulationInputForm(
                                       title: "Jarak",
                                       unit: "m",
-                                      onChanged:
-                                          gameController.setMovementDistance,
+                                      onChanged: gameController.setMovementDistance,
                                     ),
                                     const Gap(18),
                                     _buildSimulationInputForm(
@@ -265,8 +251,7 @@ class SimulationSimulationSectionView
                     ),
                     GetBuilder<GameController>(
                       builder: (GameController gameController) {
-                        if (gameController.gameSceneName.value ==
-                            "Gaya & Gerak") {
+                        if (gameController.gameSceneName.value == "Gaya & Gerak") {
                           return Expanded(
                             child: Center(
                               child: GetBuilder<GameController>(
@@ -280,13 +265,10 @@ class SimulationSimulationSectionView
                                       }
                                     },
                                     style: ButtonStyle(
-                                      backgroundColor:
-                                          WidgetStatePropertyAll<Color>(
-                                              CustomColor.lightBlueColor50),
+                                      backgroundColor: WidgetStatePropertyAll<Color>(CustomColor.lightBlueColor50),
                                     ),
                                     icon: Icon(
-                                      gameController.isObjectMoving.value ==
-                                              true
+                                      gameController.isObjectMoving.value == true
                                           ? Icons.stop_rounded
                                           : Icons.play_arrow_rounded,
                                       size: 65,
@@ -304,7 +286,7 @@ class SimulationSimulationSectionView
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -337,7 +319,7 @@ class SimulationSimulationSectionView
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: CustomColor.blackColor.withOpacity(0.1),
+                        color: CustomColor.blackColor.withValues(alpha: 0.1),
                         spreadRadius: 2,
                         blurRadius: 5,
                         offset: const Offset(0, 3),
@@ -381,7 +363,7 @@ class SimulationSimulationSectionView
               ],
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -7,7 +7,7 @@ class OnboardController extends GetxController {
 
   void increment() => count.value++;
 
-  navigate() async {
+  Future<void> navigate() async {
     final registeredStatus = await StorageService.getRegisteredStatus();
 
     if (registeredStatus) {

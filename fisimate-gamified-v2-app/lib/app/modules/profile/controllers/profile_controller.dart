@@ -20,7 +20,7 @@ import 'package:image_picker/image_picker.dart';
 class ProfileController extends GetxController {
   final Rx<ResultState> _state = ResultState.initial.obs;
   final Rx<ResultState> _state2 = ResultState.initial.obs;
-  
+
   ResultState get state => _state.value;
   ResultState get imageState => _state2.value;
 
@@ -43,8 +43,8 @@ class ProfileController extends GetxController {
   }
 
   Future<void> getUserProfile() async {
-    final accessToken = await StorageService.getAccessToken();
-    final refreshToken = await StorageService.getRefreshToken();
+    final accessToken = await StorageService.getAccessToken() ?? '';
+    final refreshToken = await StorageService.getRefreshToken() ?? '';
     try {
       _state.value = ResultState.loading;
 
@@ -71,7 +71,7 @@ class ProfileController extends GetxController {
 
   Future<void> updateUserProfile() async {
     final profileApiService = ProfileApiService();
-    final accessToken = await StorageService.getAccessToken();
+    final accessToken = await StorageService.getAccessToken() ?? '';
     final fullname = _nameController.value.text;
     final email = _emailController.value.text;
     final nis = _nisController.value.text;
@@ -101,7 +101,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  logout() async {
+  Future<void> logout() async {
     final connectivityResult = await ConnectivityHelper.checkConnection();
 
     if (connectivityResult != ConnectivityResult.none) {
@@ -164,7 +164,7 @@ class ProfileController extends GetxController {
     try {
       await ApiService.updateUserPicture(
         file: File(croppedImageFile.path),
-        accessToken: await StorageService.getAccessToken(),
+        accessToken: await StorageService.getAccessToken() ?? '',
       );
       await getUserProfile();
     } on Exception catch (e) {

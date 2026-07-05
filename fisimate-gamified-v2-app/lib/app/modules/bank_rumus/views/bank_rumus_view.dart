@@ -66,7 +66,7 @@ class BankRumusView extends GetView<BankRumusController> {
                           const Gap(CustomSize.marginLarge),
                           CustomChip(
                             label: '${controller.subChapterCount} Sub Bab',
-                          )
+                          ),
                         ],
                       );
                     }
@@ -92,10 +92,8 @@ class BankRumusView extends GetView<BankRumusController> {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      final subjectTitleItem =
-                          controller.chapterList[index].name;
-                      final subjectDataItem =
-                          controller.chapterList[index].formulaBankSubChapters;
+                      final subjectTitleItem = controller.chapterList[index].name;
+                      final subjectDataItem = controller.chapterList[index].formulaBankSubChapters;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -116,9 +114,7 @@ class BankRumusView extends GetView<BankRumusController> {
                             child: Row(
                               children: [
                                 const Gap(CustomSize.marginLarge),
-                                for (int index = 0;
-                                    index < subjectDataItem.length;
-                                    index++)
+                                for (int index = 0; index < subjectDataItem.length; index++)
                                   Container(
                                     margin: index + 1 == subjectDataItem.length
                                         ? EdgeInsets.zero
@@ -126,14 +122,10 @@ class BankRumusView extends GetView<BankRumusController> {
                                     child: CustomSubjectCard(
                                       assetPath: subjectDataItem[index].icon!,
                                       title: subjectDataItem[index].title,
-                                      splashColor: CustomColor.bankRumus
-                                          .withOpacity(0.3),
+                                      splashColor: CustomColor.bankRumus.withValues(alpha: 0.3),
                                       onTap: () => Get.toNamed(
                                         Routes.MODULE_VIEWER,
-                                        arguments: {
-                                          'type': 'formula_bank',
-                                          'data': subjectDataItem[index]
-                                        },
+                                        arguments: {'type': 'formula_bank', 'data': subjectDataItem[index]},
                                       ),
                                     ),
                                   ),

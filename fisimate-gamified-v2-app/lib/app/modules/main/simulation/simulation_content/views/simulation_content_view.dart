@@ -91,26 +91,24 @@ class SimulationContentView extends GetView<SimulationContentController> {
             currentSectionIndex: controller.currentIndex.value,
             currentQuizIndex: controller.currentQuizIndex.value,
             quizLength: controller.questions.length,
-            onNextPressed: () =>
-                controller.currentIndex.value == controller.pages.length - 1
-                    ? controller.currentQuizIndex.value ==
-                            controller.questions.length - 1
-                        ? controller.submitAnswers()
-                        : controller.changeQuizIndex(
-                            controller.currentQuizIndex.value + 1,
-                          )
-                    : controller.changePage(
-                        controller.currentIndex.value + 1,
-                      ),
+            onNextPressed: () => controller.currentIndex.value == controller.pages.length - 1
+                ? controller.currentQuizIndex.value == controller.questions.length - 1
+                      ? controller.submitAnswers()
+                      : controller.changeQuizIndex(
+                          controller.currentQuizIndex.value + 1,
+                        )
+                : controller.changePage(
+                    controller.currentIndex.value + 1,
+                  ),
             onBackPressed: () => controller.currentIndex.value == 0
                 ? Get.back()
                 : controller.currentQuizIndex.value == 0
-                    ? controller.changePage(
-                        controller.currentIndex.value - 1,
-                      )
-                    : controller.changeQuizIndex(
-                        controller.currentQuizIndex.value - 1,
-                      ),
+                ? controller.changePage(
+                    controller.currentIndex.value - 1,
+                  )
+                : controller.changeQuizIndex(
+                    controller.currentQuizIndex.value - 1,
+                  ),
           );
         },
       ),

@@ -59,7 +59,7 @@ class CustomSubjectCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -83,11 +83,12 @@ class CustomSubjectTitleWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 6.0),
           decoration: BoxDecoration(
-              color: CustomColor.orangeColor,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                bottomLeft: Radius.circular(8.0),
-              )),
+            color: CustomColor.orangeColor,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(8.0),
+              bottomLeft: Radius.circular(8.0),
+            ),
+          ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),

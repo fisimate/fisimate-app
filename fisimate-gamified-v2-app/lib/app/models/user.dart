@@ -30,26 +30,26 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        fullname: json["fullname"],
-        email: json["email"],
-        nis: json["nis"],
-        roleId: json["roleId"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        role: Role.fromJson(json["role"]),
-      );
+    id: json["id"],
+    fullname: json["fullname"],
+    email: json["email"],
+    nis: json["nis"],
+    roleId: json["roleId"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    role: Role.fromJson(json["role"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "fullname": fullname,
-        "email": email,
-        "nis": nis,
-        "roleId": roleId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "role": role?.toJson(),
-      };
+    "id": id,
+    "fullname": fullname,
+    "email": email,
+    "nis": nis,
+    "roleId": roleId,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "role": role?.toJson(),
+  };
 }
 
 class Role {
@@ -62,12 +62,12 @@ class Role {
   });
 
   factory Role.fromJson(Map<String, dynamic> json) => Role(
-        id: json["id"],
-        name: json["name"],
-      );
+    id: json["id"],
+    name: json["name"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
+    "id": id,
+    "name": name,
+  };
 }

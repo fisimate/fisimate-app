@@ -91,7 +91,9 @@ class FormulaBankChapter {
     shortDescription: json['shortDescription'],
     createdAt: DateTime.parse(json['createdAt']),
     updatedAt: DateTime.parse(json['updatedAt']),
-    formulaBankSubChapters: List<FormulaBankSubChapter>.from(json['formulaBanks'].map((x) => FormulaBankSubChapter.fromJson(x))),
+    formulaBankSubChapters: List<FormulaBankSubChapter>.from(
+      json['formulaBanks'].map((x) => FormulaBankSubChapter.fromJson(x)),
+    ),
   );
 
   Map<String, dynamic> toJson() => {

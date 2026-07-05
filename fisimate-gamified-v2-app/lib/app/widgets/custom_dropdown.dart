@@ -67,7 +67,7 @@ class MenuWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(
             color: Colors.black12,
-          )
+          ),
         ),
         shadows: const [
           BoxShadow(
