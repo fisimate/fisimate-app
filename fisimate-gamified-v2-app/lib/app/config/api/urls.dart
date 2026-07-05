@@ -1,6 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 abstract class URLs {
-  // static const String baseUrl = 'https://fisimate-api.rafiadipramana.dev/api/v1/';
-  static const String baseUrl = 'http://localhost:8080/api/v1/';
+  static String get baseUrl => dotenv.env['BASE_URL'] ?? '';
 
   // START - Auth
 
