@@ -1,5 +1,6 @@
 abstract class URLs {
-  static const String baseUrl = 'https://fisimate-api-gg6y243dza-et.a.run.app/api/v1/';
+  // static const String baseUrl = 'https://fisimate-api.rafiadipramana.dev/api/v1/';
+  static const String baseUrl = 'http://localhost:8080/api/v1/';
 
   // START - Auth
 
@@ -40,7 +41,7 @@ abstract class URLs {
 
   // GET - User Profile
   static const String userProfile = 'users/profile';
-  
+
   // PUT - Update User Profile
   static const String updateUserProfile = 'users/update';
 
@@ -48,4 +49,11 @@ abstract class URLs {
   static const String updateUserPicture = 'users/profile/picture';
 
   // END - User Profile
+
+  // START - Chatbot
+
+  // POST - Generate Chatbot Question
+  static const String chatbotGenerate = 'chatbot/generate-question';
+
+  // END - Chatbot
 }

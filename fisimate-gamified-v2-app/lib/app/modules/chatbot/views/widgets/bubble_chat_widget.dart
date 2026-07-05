@@ -30,15 +30,15 @@ class BubbleChatWidget extends StatefulWidget {
     required this.imageUrl,
     required this.isTail,
     required this.isSender,
-  })  : text = '',
-        isGeneratedFromGemini = false,
-        question = null,
-        optionList = null,
-        rightAnswer = null,
-        explanation = null,
-        onTrueAnswer = null,
-        onFalseAnswer = null,
-        isImage = true;
+  }) : text = '',
+       isGeneratedFromGemini = false,
+       question = null,
+       optionList = null,
+       rightAnswer = null,
+       explanation = null,
+       onTrueAnswer = null,
+       onFalseAnswer = null,
+       isImage = true;
 
   // Named constructor for generated messages from Gemini
   const BubbleChatWidget.generated({
@@ -51,10 +51,10 @@ class BubbleChatWidget extends StatefulWidget {
     required this.isSender,
     required this.onTrueAnswer,
     required this.onFalseAnswer,
-  })  : text = "",
-        isImage = false,
-        isGeneratedFromGemini = true,
-        imageUrl = null;
+  }) : text = "",
+       isImage = false,
+       isGeneratedFromGemini = true,
+       imageUrl = null;
 
   final bool isImage;
   final bool isGeneratedFromGemini;
@@ -84,8 +84,7 @@ class _BubbleChatWidgetState extends State<BubbleChatWidget> {
   @override
   void initState() {
     widget.isGeneratedFromGemini
-        ? _answerIndex =
-            widget.optionList!.indexWhere((element) => element.correct == true)
+        ? _answerIndex = widget.optionList!.indexWhere((element) => element.correct == true)
         : _answerIndex = -1;
     super.initState();
   }
@@ -122,8 +121,7 @@ class _BubbleChatWidgetState extends State<BubbleChatWidget> {
   Widget build(BuildContext context) {
     return ChatBubble(
       clipper: ChatBubbleClipper5(
-        type:
-            widget.isSender ? BubbleType.sendBubble : BubbleType.receiverBubble,
+        type: widget.isSender ? BubbleType.sendBubble : BubbleType.receiverBubble,
       ),
       alignment: widget.isSender ? Alignment.topRight : Alignment.topLeft,
       shadowColor: CustomColor.transparentColor,
@@ -133,8 +131,7 @@ class _BubbleChatWidgetState extends State<BubbleChatWidget> {
         right: 20,
         bottom: 5,
       ),
-      backGroundColor:
-          widget.isSender ? CustomColor.bankRumus : CustomColor.backgroundColor,
+      backGroundColor: widget.isSender ? CustomColor.bankRumus : CustomColor.backgroundColor,
       child: widget.isImage
           ? Container(
               padding: EdgeInsets.only(
@@ -160,143 +157,134 @@ class _BubbleChatWidgetState extends State<BubbleChatWidget> {
               ),
             )
           : widget.isGeneratedFromGemini
-              ? Container(
-                  padding: EdgeInsets.only(
-                    right: widget.isSender ? 5 : 0,
-                    left: widget.isSender ? 0 : 5,
+          ? Container(
+              padding: EdgeInsets.only(
+                right: widget.isSender ? 5 : 0,
+                left: widget.isSender ? 0 : 5,
+              ),
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.7,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    widget.question!,
+                    style: subHeadingRegular.copyWith(
+                      color: widget.isSender ? CustomColor.whiteColor : CustomColor.blackColor,
+                    ),
                   ),
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        widget.question!,
-                        style: subHeadingRegular.copyWith(
-                          color: widget.isSender
-                              ? CustomColor.whiteColor
-                              : CustomColor.blackColor,
+                  const SizedBox(height: 10),
+                  for (var option in widget.optionList!)
+                    GestureDetector(
+                      onTap: () {
+                        isSubmitted == false ? _onOptionSelected(widget.optionList!.indexOf(option)) : null;
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          top: 5,
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        constraints: const BoxConstraints(
+                          minWidth: double.infinity,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _selectedIndex == widget.optionList!.indexOf(option)
+                              ? isTrue
+                                    ? CustomColor.lightGreenColor
+                                    : isFalse
+                                    ? CustomColor.lightRedColor
+                                    : CustomColor.seaBlueColor
+                              : CustomColor.whiteColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: CustomColor.bankRumus,
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          option.option,
+                          style: subHeadingRegular.copyWith(
+                            color: CustomColor.blackColor,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      for (var option in widget.optionList!)
-                        GestureDetector(
-                          onTap: () {
-                            isSubmitted == false
-                                ? _onOptionSelected(
-                                    widget.optionList!.indexOf(option))
-                                : null;
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 5,
-                            ),
-                            padding: const EdgeInsets.all(10),
-                            constraints: const BoxConstraints(
-                              minWidth: double.infinity,
-                            ),
-                            decoration: BoxDecoration(
-                              color: _selectedIndex ==
-                                      widget.optionList!.indexOf(option)
-                                  ? isTrue
-                                      ? CustomColor.lightGreenColor
-                                      : isFalse
-                                          ? CustomColor.lightRedColor
-                                          : CustomColor.seaBlueColor
-                                  : CustomColor.whiteColor,
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: CustomColor.bankRumus,
-                                width: 1,
-                              ),
+                    ),
+                  const SizedBox(height: 10),
+                  isSubmitted == false
+                      ? Center(
+                          child: ElevatedButton(
+                            onPressed: _selectedIndex == -1 ? null : _onSubmit,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: CustomColor.bankRumus,
                             ),
                             child: Text(
-                              option.option,
-                              style: subHeadingRegular.copyWith(
-                                color: CustomColor.blackColor,
+                              "Cek Jawaban".toUpperCase(),
+                              style: subHeadingBold.copyWith(
+                                color: CustomColor.whiteColor,
                               ),
                             ),
                           ),
-                        ),
-                      const SizedBox(height: 10),
-                      isSubmitted == false
-                          ? Center(
-                              child: ElevatedButton(
-                                onPressed:
-                                    _selectedIndex == -1 ? null : _onSubmit,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: CustomColor.bankRumus,
+                        )
+                      : const SizedBox.shrink(),
+                  isSubmitted
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Gap(10),
+                            Text(
+                              "Jawaban Benar:",
+                              style: subHeadingMedium,
+                            ),
+                            Text(
+                              widget.rightAnswer!,
+                              style: subHeadingRegular,
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                  isSubmitted
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Gap(10),
+                            Text(
+                              "Pembahasan:",
+                              style: subHeadingMedium,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: '',
+                                style: subHeadingRegular.copyWith(
+                                  color: CustomColor.blackColor,
                                 ),
-                                child: Text(
-                                  "Cek Jawaban".toUpperCase(),
-                                  style: subHeadingBold.copyWith(
-                                    color: CustomColor.whiteColor,
-                                  ),
+                                children: formatText(
+                                  widget.explanation!,
                                 ),
                               ),
-                            )
-                          : const SizedBox.shrink(),
-                      isSubmitted
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                const Gap(10),
-                                Text(
-                                  "Jawaban Benar:",
-                                  style: subHeadingMedium,
-                                ),
-                                Text(
-                                  widget.rightAnswer!,
-                                  style: subHeadingRegular,
-                                ),
-                              ],
-                            )
-                          : const SizedBox.shrink(),
-                      isSubmitted
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                const Gap(10),
-                                Text(
-                                  "Pembahasan:",
-                                  style: subHeadingMedium,
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: '',
-                                    style: subHeadingRegular.copyWith(
-                                      color: CustomColor.blackColor,
-                                    ),
-                                    children: formatText(
-                                      widget.explanation!,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : const SizedBox.shrink(),
-                    ],
-                  ),
-                )
-              : Container(
-                  padding: EdgeInsets.only(
-                    right: widget.isSender ? 5 : 0,
-                    left: widget.isSender ? 0 : 5,
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    widget.text,
-                    style: subHeadingRegular.copyWith(
-                      color: widget.isSender
-                          ? CustomColor.whiteColor
-                          : CustomColor.blackColor,
-                    ),
-                  ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
+            )
+          : Container(
+              padding: EdgeInsets.only(
+                right: widget.isSender ? 5 : 0,
+                left: widget.isSender ? 0 : 5,
+              ),
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.7,
+              ),
+              child: Text(
+                widget.text,
+                style: subHeadingRegular.copyWith(
+                  color: widget.isSender ? CustomColor.whiteColor : CustomColor.blackColor,
                 ),
+              ),
+            ),
     );
   }
 

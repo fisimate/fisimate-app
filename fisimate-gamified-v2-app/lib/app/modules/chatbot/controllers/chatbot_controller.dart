@@ -1,13 +1,10 @@
-import 'dart:convert';
-
 import 'package:fisimate/app/config/services/chapter_api_service.dart';
+import 'package:fisimate/app/config/services/chatbot_api_service.dart';
 import 'package:fisimate/app/config/services/storage_service.dart';
 import 'package:fisimate/app/config/state/result_state.dart';
-import 'package:fisimate/app/domain/services/gemini_api_service.dart';
 import 'package:fisimate/app/models/generated_physics_exam.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:logger/logger.dart';
 
 class ChatbotController extends GetxController {
@@ -30,9 +27,6 @@ class ChatbotController extends GetxController {
 
   RxBool isStartingChatbot = false.obs;
 
-  late final GenerativeModel _model;
-  GenerativeModel get model => _model;
-
   final RxList<dynamic> _chatMessages = [].obs;
   List<dynamic> get chatMessages => _chatMessages;
 
@@ -48,7 +42,7 @@ class ChatbotController extends GetxController {
     focusNode.unfocus();
   }
 
-  void addMessage(String messageText) {
+  void addMessage(String messageText) async {
     _chatMessages.add(
       Message(
         text: messageText,
@@ -64,36 +58,34 @@ class ChatbotController extends GetxController {
     _resultState.value = ResultState.loading;
     update(['sendButton']);
 
-    GeminiApiService.stringFromGemini(
-      prompt: messageText,
-    ).then(
-      (response) {
-        final generatedPhycsicsExam = GeneratedPhycsicsExam.fromJson(
-          json.decode(
-            response ?? '{}',
-          ),
-        );
+    ChatbotApiService()
+        .generateQuestion(
+          chapter: messageText,
+          accessToken: await StorageService.getAccessToken() ?? '',
+        )
+        .then(
+          (generatedPhycsicsExam) {
+            _resultState.value = ResultState.hasData;
+            _chatMessages.add(
+              GeneratedPhycsicsExam(
+                question: generatedPhycsicsExam.question,
+                optionList: generatedPhycsicsExam.optionList,
+                rightAnswer: generatedPhycsicsExam.rightAnswer,
+                explanation: generatedPhycsicsExam.explanation,
+              ),
+            );
 
-        _resultState.value = ResultState.hasData;
-        _chatMessages.add(
-          GeneratedPhycsicsExam(
-            question: generatedPhycsicsExam.question,
-            optionList: generatedPhycsicsExam.optionList,
-            rightAnswer: generatedPhycsicsExam.rightAnswer,
-            explanation: generatedPhycsicsExam.explanation,
-          ),
-        );
+            update(['sendButton']);
 
-        update(['sendButton']);
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          scrollToBottom();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              scrollToBottom();
+            });
+          },
+        )
+        .catchError((error) {
+          _resultState.value = ResultState.error;
+          update(['sendButton']);
         });
-      },
-    ).catchError((error) {
-      _resultState.value = ResultState.error;
-      update(['sendButton']);
-    });
   }
 
   final RxBool _isQuizAnswerAlertDisplayed = false.obs;
@@ -122,7 +114,7 @@ class ChatbotController extends GetxController {
     final ChapterApiService chapterApiService = ChapterApiService();
 
     final dynamic = await chapterApiService.getAllChaptersName(
-      accessToken: await StorageService.getAccessToken(),
+      accessToken: await StorageService.getAccessToken() ?? '',
     );
 
     if (dynamic is List<String>) {

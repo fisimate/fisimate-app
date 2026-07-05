@@ -44,13 +44,13 @@ class ChatbotView extends GetView<ChatbotController> {
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
+                  value: 1,
                   child: Text(
                     'Bersihkan Chat',
                     style: poppinsRegular.copyWith(
                       color: CustomColor.whiteColor,
                     ),
                   ),
-                  value: 1,
                 ),
               ];
             },
@@ -107,7 +107,7 @@ class StartingChatbotView extends StatelessWidget {
             style: subHeadingRegular.copyWith(color: CustomColor.greyColor),
           ),
           const Gap(20.0),
-          CustomFilledButton(onTap: onTap, text: 'Mulai')
+          CustomFilledButton(onTap: onTap, text: 'Mulai'),
         ],
       ),
     );

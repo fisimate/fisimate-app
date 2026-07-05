@@ -54,65 +54,65 @@ class ChatbotDetailView extends StatelessWidget {
                       }
                     },
                     child: GetBuilder<ChatbotController>(
-                        id: 'sendButton',
-                        builder: (controller) {
-                          Color buttonColor;
+                      id: 'sendButton',
+                      builder: (controller) {
+                        Color buttonColor;
 
-                          switch (controller.resultState) {
-                            case ResultState.initial:
-                              buttonColor = CustomColor.bankRumus;
-                              break;
-                            case ResultState.loading:
-                              buttonColor = CustomColor.darkGreyColor;
-                              break;
-                            case ResultState.hasData:
-                              buttonColor = CustomColor.bankRumus;
-                              break;
-                            default:
-                              buttonColor = CustomColor.bankRumus;
-                              break;
-                          }
+                        switch (controller.resultState) {
+                          case ResultState.initial:
+                            buttonColor = CustomColor.bankRumus;
+                            break;
+                          case ResultState.loading:
+                            buttonColor = CustomColor.darkGreyColor;
+                            break;
+                          case ResultState.hasData:
+                            buttonColor = CustomColor.bankRumus;
+                            break;
+                          default:
+                            buttonColor = CustomColor.bankRumus;
+                            break;
+                        }
 
-                          return Ink(
+                        return Ink(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: AnimatedContainer(
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
+                              color: buttonColor,
                             ),
-                            child: AnimatedContainer(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                color: buttonColor,
-                              ),
-                              duration: Durations.medium2,
-                              child: GetBuilder<ChatbotController>(
-                                id: 'sendButton',
-                                builder: (controller) {
-                                  switch (controller.resultState) {
-                                    case ResultState.initial:
-                                      return SvgPicture.asset(
-                                        'assets/icons/send.svg',
-                                      );
-                                    case ResultState.loading:
-                                      return CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          CustomColor.whiteColor,
-                                        ),
-                                      );
-                                    case ResultState.hasData:
-                                      return SvgPicture.asset(
-                                        'assets/icons/send.svg',
-                                      );
-                                    default:
-                                      return SvgPicture.asset(
-                                        'assets/icons/send.svg',
-                                      );
-                                  }
-                                },
-                              ),
+                            duration: Durations.medium2,
+                            child: GetBuilder<ChatbotController>(
+                              id: 'sendButton',
+                              builder: (controller) {
+                                switch (controller.resultState) {
+                                  case ResultState.initial:
+                                    return SvgPicture.asset(
+                                      'assets/icons/send.svg',
+                                    );
+                                  case ResultState.loading:
+                                    return CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        CustomColor.whiteColor,
+                                      ),
+                                    );
+                                  case ResultState.hasData:
+                                    return SvgPicture.asset(
+                                      'assets/icons/send.svg',
+                                    );
+                                  default:
+                                    return SvgPicture.asset(
+                                      'assets/icons/send.svg',
+                                    );
+                                }
+                              },
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -125,13 +125,14 @@ class ChatbotDetailView extends StatelessWidget {
           return Stack(
             children: <Widget>[
               Center(
-                  child: Opacity(
-                opacity: 0.4,
-                child: SvgPicture.asset(
-                  'assets/logos/fisimate_logo.svg',
-                  height: 150,
+                child: Opacity(
+                  opacity: 0.4,
+                  child: SvgPicture.asset(
+                    'assets/logos/fisimate_logo.svg',
+                    height: 150,
+                  ),
                 ),
-              )),
+              ),
               ListView(
                 controller: controller.scrollController,
                 children: [
@@ -172,7 +173,7 @@ class ChatbotDetailView extends StatelessWidget {
                             isAnswerCorrect: false,
                           );
                         },
-                      )
+                      ),
                 ],
               ),
             ],
