@@ -1,16 +1,32 @@
-# fisimate
+# Fisimate
 
-A new Flutter project.
+Aplikasi mobile LMS fisika gamifikasi untuk siswa, dibangun dengan **Flutter**
+(GetX). Seluruh data (materi, soal, rumus, leaderboard, profil) diambil dari
+backend [fisimate-api](../fisimate-api).
 
-## Getting Started
+> Simulasi interaktif **Unity** (mobil, balok — gerak, gaya, gesekan), yang
+> sedianya di-embed lewat `flutter_unity_widget`, **untuk sementara
+> dinonaktifkan** — layar simulasi menampilkan placeholder. Lihat
+> [docs/MIGRATION.md](docs/MIGRATION.md) untuk alasan & cara mengaktifkan
+> lagi.
 
-This project is a starting point for a Flutter application.
+## Quick start
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+cp .env.example .env   # isi GEMINI_API_KEY untuk fitur chatbot
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Detail lengkap ada di [docs/SETUP.md](docs/SETUP.md).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Dokumentasi
+
+- [docs/SETUP.md](docs/SETUP.md) — setup & menjalankan lokal
+- [docs/MIGRATION.md](docs/MIGRATION.md) — catatan revival & modernisasi
+
+## Stack
+
+Flutter 3.44 (AGP 8.11.1 / Gradle 8.14.3 / Kotlin 2.2.20) · GetX (state
+management & routing) · Dio/http (REST client ke fisimate-api) · Gemini AI
+(chatbot) · flutter_secure_storage
